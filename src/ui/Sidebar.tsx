@@ -12,6 +12,7 @@ import { PopulationLayer } from "../modules/layers/population/PopulationLayer";
 import { MatbutikkerCheckbox } from "../modules/layers/foodStores/MatbutikkLayerCheckbox";
 import { ExtraMapLayer } from "./ExtraMapLayer";
 import MobilityLayer from "../modules/layers/mobility/MobilityLayer";
+import TrainLayer from "../modules/layers/trains/TrainLayer";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -203,6 +204,7 @@ function DataLayerContent() {
       <AdresseLayerCheckbox />
       <PopulationLayer />
       <MatbutikkerCheckbox />
+      <TrainLayer />
     </div>
   );
 }
