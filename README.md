@@ -15,7 +15,7 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - [ ] Add interaction (onclick) on the map for different features
 - [ ] Make matbutikklayer images scale better when zooming in close
 - [ ] Vector tile layer with styling
-  - [X] OGCVector layer (VERY basic Vector tyle with styling saved to localstorage)
+  - [x] OGCVector layer (VERY basic Vector tyle with styling saved to localstorage)
 - [ ] Add arctic layer and change projection accordingly
 - [ ] Settings for zoom slider, scale line
 - [ ] Loading icon for between API fetch and result is applied to map (loading spinner)
