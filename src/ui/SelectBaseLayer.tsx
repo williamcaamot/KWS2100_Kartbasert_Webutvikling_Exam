@@ -72,7 +72,7 @@ async function loadKartverketLayer() {
 async function loadPolar() {
   try {
     const res = await fetch(
-      "./kws2100-exam-williamcaamot/layers/polar-sdi.xml",
+      "https://kristiania-kws2100-2024.github.io/kws2100-exam-williamcaamot/layers/polar-sdi.xml",
     );
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`);
