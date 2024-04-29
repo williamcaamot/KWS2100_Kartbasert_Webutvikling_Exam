@@ -2,4 +2,5 @@
 #KWS2100 Exam - Mapzter
 
 ### Deployment
+
 ![example workflow](https://github.com/kristiania-kws2100-2024/kws2100-exam-williamcaamot/actions/workflows/publish.yml/badge.svg)
