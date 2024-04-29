@@ -72,7 +72,6 @@ export function Application() {
     const source = baseLayer.getSource();
     let overviewMapControl;
     if (source instanceof TileSource) {
-      // Check if source is an instance of TileSource
       overviewMapControl = new OverviewMap({
         layers: [
           new TileLayer({
@@ -80,9 +79,8 @@ export function Application() {
           }),
         ],
       });
-      // Do something with overviewMapControl
     } else {
-      console.error("Invalid source for the layer");
+      console.log("Cannot add controls");
     }
     const zoomslider = new ZoomSlider();
     map.addControl(zoomslider); // These also have to be applied every time
