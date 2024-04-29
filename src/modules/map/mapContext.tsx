@@ -29,6 +29,8 @@ export const MapContext = React.createContext<{
       showScaleline: boolean;
     }>
   >;
+  loadingQueue: string[];
+  setLoadingQueue: Dispatch<SetStateAction<string[]>>;
 }>({
   map,
   setVectorLayers: () => {},
@@ -36,4 +38,6 @@ export const MapContext = React.createContext<{
   setBaseLayer: () => {},
   settings: { showZoomSlider: true, showMiniMap: true, showScaleline: false },
   setSettings: () => {},
+  loadingQueue: [],
+  setLoadingQueue: () => {},
 });

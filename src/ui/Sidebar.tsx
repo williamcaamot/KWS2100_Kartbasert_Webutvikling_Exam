@@ -4,7 +4,6 @@ import SearchIcon from "./icons/SearchIcon";
 import Search from "./Search";
 import DataLayerIcon from "./icons/DataLayerIcon";
 import DrawIcon from "../ui/icons/DrawIcon";
-import PointCreateIcon from "../ui/icons/PointCreateIcon";
 import { SelectBaseLayer } from "./SelectBaseLayer";
 import SettingsIcon from "./icons/SettingsIcon";
 import { AdresseLayerCheckbox } from "../modules/layers/adresser/AdresseLayerCheckbox";
@@ -16,8 +15,11 @@ import TrainLayer from "../modules/layers/trains/TrainLayer";
 import Settings from "../modules/userSettings/Settings";
 import useLocalStorageState from "use-local-storage-state";
 import ResetIcon from "./icons/ResetIcon";
+import { LoadingSpinner } from "./LoadingSpinner";
+import { MapContext } from "../modules/map/mapContext";
 
 export default function Sidebar() {
+  const { loadingQueue } = useContext(MapContext);
   const [isOpen, setIsOpen] = useState(false);
   const [activeContent, setActiveContent] = useState(undefined);
 
@@ -41,6 +43,7 @@ export default function Sidebar() {
       fillColor: "#f7f7e9",
     },
   });
+
   function handleContentChange(content: any) {
     if (content === activeContent) {
       setIsOpen(!isOpen);
@@ -50,6 +53,7 @@ export default function Sidebar() {
       setActiveContent(content);
     }
   }
+
   function handleReset() {
     setMobility(false);
     setAddress(false);
@@ -135,6 +139,20 @@ export default function Sidebar() {
           </div>
           <h2 className={"text-xs"}>Reset</h2>
         </div>
+
+        {/*The div below acts as a spacer*/}
+        {loadingQueue.length > 0 && (
+          <>
+            <div className={"h-full"}></div>
+            <div
+              className={`pb-2 pt-2 w-full flex flex-wrap justify-center text-gray-700"}`}
+            >
+              <div className={"w-full p-2 flex justify-center"}>
+                <LoadingSpinner size={"40"} />
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       <div

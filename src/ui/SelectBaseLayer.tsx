@@ -70,16 +70,29 @@ async function loadKartverketLayer() {
 }
 
 async function loadPolar() {
-  const res = await fetch("./kws2100-exam-williamcaamot/layers/polar-sdi.xml");
-  const text = await res.text();
+  try {
+    const res = await fetch(
+      "./kws2100-exam-williamcaamot/layers/polar-sdi.xml",
+    );
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+    const text = await res.text();
+    console.log(text);
 
-  const result = parser.read(text);
-  const options = optionsFromCapabilities(result, {
-    layer: "arctic_cascading",
-    matrixSet: "3575",
-  });
-  // @ts-ignore
-  return new WMTS(options)!;
+    const result = parser.read(text);
+    console.log(result);
+
+    const options = optionsFromCapabilities(result, {
+      layer: "arctic_cascading",
+      matrixSet: "3575",
+    });
+    // @ts-ignore
+    return new WMTS(options)!;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }
 
 export function SelectBaseLayer() {
