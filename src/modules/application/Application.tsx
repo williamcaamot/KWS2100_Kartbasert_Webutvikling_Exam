@@ -17,12 +17,16 @@ import Sidebar from "../../ui/Sidebar";
 import "ol/ol.css";
 import "./application.css";
 import CustomZoomAndLocation from "../../ui/CustomZoomAndLocation";
+import useLocalStorageState from "use-local-storage-state";
 
 export function Application() {
   useGeographic();
   //Heihei
   const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
   const mapInstance = useRef<Map | null>(null);
+  const [settings, setSettings] = useLocalStorageState('settings', { defaultValue: {showZoomSlider: true, showMiniMap: true} });
+
+
 
   if (!mapInstance.current) {
     mapInstance.current = new Map({
@@ -41,8 +45,19 @@ export function Application() {
     [baseLayer, vectorLayers],
   );
 
-  const zoomslider = new ZoomSlider();
-  map.addControl(zoomslider);
+  const zoomsliderRef = useRef<ZoomSlider | null>(null);
+
+  useEffect(() => {
+    if (settings.showZoomSlider) {
+      if (!zoomsliderRef.current) {
+        zoomsliderRef.current = new ZoomSlider();
+        map.addControl(zoomsliderRef.current);
+      }
+    } else if (zoomsliderRef.current) {
+      map.removeControl(zoomsliderRef.current);
+      zoomsliderRef.current = null;
+    }
+  }, [settings.showZoomSlider, map]);
 
   useEffect(() => {
     map.setLayers(allLayers);
@@ -50,9 +65,11 @@ export function Application() {
 
   useEffect(() => map?.setTarget(mapRef.current), []);
 
+
+
   return (
     <MapContext.Provider
-      value={{ map, vectorLayers, setVectorLayers, setBaseLayer }}
+      value={{ map, vectorLayers, setVectorLayers, setBaseLayer, settings, setSettings }}
     >
       <nav>
         <Sidebar />

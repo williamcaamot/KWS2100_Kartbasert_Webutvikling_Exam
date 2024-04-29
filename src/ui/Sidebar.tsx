@@ -13,6 +13,7 @@ import { MatbutikkerCheckbox } from "../modules/layers/foodStores/MatbutikkLayer
 import { ExtraMapLayer } from "./ExtraMapLayer";
 import MobilityLayer from "../modules/layers/mobility/MobilityLayer";
 import TrainLayer from "../modules/layers/trains/TrainLayer";
+import Settings from "../modules/userSettings/Settings";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -201,8 +202,13 @@ function DrawingContent() {
 
 function SettingsContent() {
   return (
-    <div className={"text-gray-800"}>
-      <h2>Innstillinger</h2>
+    <div className={"text-gray-800 flex justify-center flex-wrap"}>
+      <h2
+        className={"text-2xl tracking-tight font-semibold pb-2 text-zinc-800"}
+      >
+        Instillinger
+      </h2>
+      <Settings />
     </div>
   );
 }
