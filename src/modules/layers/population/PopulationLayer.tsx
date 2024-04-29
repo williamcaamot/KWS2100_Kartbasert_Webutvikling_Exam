@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLayer } from "../map/useLayer";
+import { useLayer } from "../../map/useLayer";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { GeoJSON } from "ol/format";
@@ -7,9 +7,9 @@ import { Circle, Fill, Stroke, Style, Text } from "ol/style";
 import { Feature, MapBrowserEvent } from "ol";
 import { MultiPolygon } from "ol/geom";
 import { FeatureLike } from "ol/Feature";
-import { MapContext } from "../map/mapContext";
+import { MapContext } from "../../map/mapContext";
 import useLocalStorageState from "use-local-storage-state";
-import Switch from "../../ui/switch";
+import Switch from "../../../ui/switch";
 
 const populationLayer = new VectorLayer({
   source: new VectorSource({

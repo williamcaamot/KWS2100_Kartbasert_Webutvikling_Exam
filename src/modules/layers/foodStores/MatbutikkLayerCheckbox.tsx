@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Switch from "../../ui/switch";
+import Switch from "../../../ui/switch";
 import { MatbutikkerLayer } from "./MatbutikkLayer";
-import { useLayer } from "../map/useLayer";
+import { useLayer } from "../../map/useLayer";
 
 export function MatbutikkerCheckbox() {
   const [checked, setChecked] = useState(false);

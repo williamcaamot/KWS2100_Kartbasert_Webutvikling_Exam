@@ -8,10 +8,10 @@ import PointCreateIcon from "../ui/icons/PointCreateIcon";
 import { SelectBaseLayer } from "./SelectBaseLayer";
 import SettingsIcon from "./icons/SettingsIcon";
 import { AdresseLayerCheckbox } from "../modules/layers/adresser/AdresseLayerCheckbox";
-import { PopulationLayer } from "../modules/population/PopulationLayer";
-import { MatbutikkerCheckbox } from "../modules/foodStores/MatbutikkLayerCheckbox";
+import { PopulationLayer } from "../modules/layers/population/PopulationLayer";
+import { MatbutikkerCheckbox } from "../modules/layers/foodStores/MatbutikkLayerCheckbox";
 import { ExtraMapLayer } from "./ExtraMapLayer";
-import MobilityLayer from "../modules/mobility/MobilityLayer";
+import MobilityLayer from "../modules/layers/mobility/MobilityLayer";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
