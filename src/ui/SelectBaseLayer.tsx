@@ -39,7 +39,6 @@ const ortoPhotoLayer = new TileLayer();
 const kartverketLayer = new TileLayer();
 const polarLayer = new TileLayer();
 
-// @ts-ignore
 async function loadFlyfotoLayer() {
   const res = await fetch(
     "https://opencache.statkart.no/gatekeeper/gk/gk.open_nib_web_mercator_wmts_v2?SERVICE=WMTS&REQUEST=GetCapabilities",

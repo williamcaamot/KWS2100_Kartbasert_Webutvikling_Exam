@@ -72,7 +72,7 @@ function matbutikkStyleFunction(feature: any, resolution: any): Style {
   return new Style({
     image: new Icon({
       src: logoUrl,
-      scale: 1 / resolution < 0.1 ? 0.08 : 1 / resolution, // Scale the logo size appropriately, adjust as needed
+      scale: 0.15, // Scale the logo size appropriately, adjust as needed
       anchor: [0.5, 0.5], // Center the icon anchor on the feature
       anchorXUnits: "fraction",
       anchorYUnits: "fraction",
