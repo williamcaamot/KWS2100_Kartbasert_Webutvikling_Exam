@@ -77,17 +77,6 @@ export default function Sidebar() {
             <h2 className={"text-xs"}>Tegning</h2>
           </div>
           <div
-            className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "pointContent" && "bg-gray-200 inner-shadow !text-black"}`}
-            onClick={(e) => {
-              handleContentChange("pointContent");
-            }}
-          >
-            <div className={"w-full flex justify-center"}>
-              <PointCreateIcon />
-            </div>
-            <h2 className={"text-xs"}>Punkter</h2>
-          </div>
-          <div
             className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "settingsContent" && "bg-gray-200 inner-shadow !text-black"}`}
             onClick={(e) => {
               handleContentChange("settingsContent");
@@ -133,13 +122,6 @@ export default function Sidebar() {
             }}
           >
             <DrawingContent />
-          </div>
-          <div
-            style={{
-              display: activeContent === "pointContent" ? "block" : "none",
-            }}
-          >
-            <PointContent />
           </div>
           <div
             style={{
@@ -214,14 +196,6 @@ function DrawingContent() {
     <>
       <h2>Tegning</h2>
     </>
-  );
-}
-
-function PointContent() {
-  return (
-    <div className={"text-gray-800"}>
-      <h2>Punkter</h2>
-    </div>
   );
 }
 
