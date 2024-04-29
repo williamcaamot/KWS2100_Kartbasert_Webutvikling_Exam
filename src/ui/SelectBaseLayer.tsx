@@ -198,7 +198,19 @@ export function SelectBaseLayer() {
 
   return (
     <>
-      <div className="w-full h-screen flex flex-col items-center justify-start overflow-y-auto pt-0 pb-24">
+      <div
+        style={{
+          width: "100%",
+          height: "auto",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          overflowY: "scroll",
+          paddingTop: "0",
+          paddingBottom: "100px",
+        }}
+      >
         {baseLayerOptions.map(({ id, name, imageUrl }) => {
           return (
             <div

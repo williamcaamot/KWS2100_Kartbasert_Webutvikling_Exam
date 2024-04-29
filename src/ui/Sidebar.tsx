@@ -10,6 +10,7 @@ import SettingsIcon from "./icons/SettingsIcon";
 import { AdresseLayerCheckbox } from "../modules/layers/adresser/AdresseLayerCheckbox";
 import { PopulationLayer } from "../modules/population/PopulationLayer";
 import { MatbutikkerCheckbox } from "../modules/foodStores/MatbutikkLayerCheckbox";
+import { ExtraMapLayer } from "./ExtraMapLayer";
 import MobilityLayer from "../modules/mobility/MobilityLayer";
 
 export default function Sidebar() {
@@ -163,15 +164,28 @@ function SearchContent() {
 function LayerContent() {
   return (
     <>
-      <div className={"text-gray-800 flex justify-center flex-wrap "}>
-        <h2
-          className={
-            "text-2xl tracking-tight font-semibold pb-2 text-zinc-800 mb-9"
-          }
-        >
-          Background Layers
-        </h2>
-        <SelectBaseLayer />
+      <div className="h-full overflow-y-scroll flex flex-wrap">
+        <div className={"text-gray-800 flex justify-center flex-wrap "}>
+          <h2
+            className={
+              "text-2xl tracking-tight font-semibold pb-2 text-zinc-800 mb-9"
+            }
+          >
+            Background Layers
+          </h2>
+          <SelectBaseLayer />
+        </div>
+
+        <div className={"text-gray-800 flex justify-center flex-wrap "}>
+          <h2
+            className={
+              "text-2xl tracking-tight font-semibold pb-2 text-zinc-800 mb-9"
+            }
+          >
+            Extra Layers
+          </h2>
+          <ExtraMapLayer />
+        </div>
       </div>
     </>
   );
