@@ -13,9 +13,6 @@ import flyfotoLayerImage from "../assets/images/flyfotoLayerImage.png";
 export function ExtraMapLayer() {
   const { map } = useContext(MapContext);
 
-  const ortoPhotoLayer = new TileLayer();
-  const kartverketLayer = new TileLayer();
-
   const extraLayerOptions = [
     {
       id: "osm",
@@ -48,21 +45,6 @@ export function ExtraMapLayer() {
       }),
       imageUrl: stadiaDarkLayerImage,
     },
-    {
-      id: "kartverket",
-      name: "Kartverket",
-      preload: Infinity,
-      layer: kartverketLayer,
-      imageUrl: kartverketLayerImage,
-    },
-    {
-      id: "ortophoto",
-      name: "Flyfoto",
-      preload: Infinity,
-      layer: ortoPhotoLayer,
-      imageUrl: flyfotoLayerImage,
-    },
-
     {
       id: "satellite",
       name: "Satellite",
@@ -161,7 +143,7 @@ export function ExtraMapLayer() {
             type="range"
             min="0"
             max="1"
-            step="0.1"
+            step="0.05"
             value={opacity}
             onChange={(e) => setOpacity(Number(e.target.value))}
           />

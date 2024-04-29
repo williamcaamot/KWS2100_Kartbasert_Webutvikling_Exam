@@ -47,7 +47,6 @@ function populationStyle(f: FeatureLike) {
   }
 
   return new Style({
-    stroke: new Stroke({ color: "black", width: 1 }),
     fill: new Fill({ color: color }),
   });
 }
