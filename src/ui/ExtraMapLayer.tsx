@@ -79,9 +79,9 @@ export function ExtraMapLayer() {
     },
   ];
 
-  const [selectedExtraLayer, setSelectedExtraLayer] = useState(
-    extraLayerOptions[0],
-  );
+  const [selectedExtraLayer, setSelectedExtraLayer] = useState<
+    (typeof extraLayerOptions)[0] | null
+  >(extraLayerOptions[0]);
 
   useEffect(() => {
     if (map && selectedExtraLayer) {
@@ -127,15 +127,18 @@ export function ExtraMapLayer() {
                 justifyContent: "space-between",
                 alignItems: "center",
                 border:
-                  selectedExtraLayer.id === id ? "2px solid #17a2b8" : "none",
+                  selectedExtraLayer && selectedExtraLayer.id === id
+                    ? "2px solid #17a2b8"
+                    : "none",
                 borderRadius: "10px",
               }}
-              onClick={() =>
-                setSelectedExtraLayer(
-                  extraLayerOptions.find((l) => l.id === id) ||
-                    extraLayerOptions[0],
-                )
-              }
+              onClick={() => {
+                setSelectedExtraLayer((currentLayer) =>
+                  currentLayer && currentLayer.id === id
+                    ? null
+                    : extraLayerOptions.find((l) => l.id === id) || null,
+                );
+              }}
             >
               <div style={{ marginRight: "10px" }}>{name}</div>
 
