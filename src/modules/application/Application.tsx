@@ -20,6 +20,7 @@ import CustomZoomAndLocation from "../../ui/CustomZoomAndLocation";
 import useLocalStorageState from "use-local-storage-state";
 import TileSource from "ol/source/Tile";
 import { OverviewMap } from "ol/control";
+import { set } from "ol/transform";
 
 export function Application() {
   useGeographic();
@@ -82,12 +83,14 @@ export function Application() {
     } else {
       console.log("Cannot add controls");
     }
-    const zoomslider = new ZoomSlider();
-    map.addControl(zoomslider); // These also have to be applied every time
-    if (overviewMapControl instanceof OverviewMap) {
+    if (settings.showZoomSlider) {
+      const zoomslider = new ZoomSlider();
+      map.addControl(zoomslider); // These also have to be applied every time
+    }
+    if (overviewMapControl instanceof OverviewMap && settings.showMiniMap) {
       map?.addControl(overviewMapControl);
     }
-  }, [baseLayer]);
+  }, [baseLayer, settings]);
 
   useEffect(() => {
     map.setLayers(allLayers);
