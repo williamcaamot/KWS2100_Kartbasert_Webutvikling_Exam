@@ -11,6 +11,7 @@
 This application is designed to explore neighbourhoods and local offerings. It can be used to explore where you live, where you want to go, or where you want to live.
 
 ## To-do (try have high priority at top of list)
+
 - [ ] Overview map with controls in settings https://openlayers.org/en/latest/examples/overviewmap.html
 - [ ] Add interaction (onclick) on the map for different features
 - [ ] Make matbutikklayer images scale better when zooming in close
@@ -32,6 +33,7 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - Matbutikker (Inserted data from API into postgis database: https://kassal.app/api)
 
 ### Background layers with sources:
+
 - LIST ALL BACKGROUND LAYERS WITH SOURCES HERE
 
 ### Other features
