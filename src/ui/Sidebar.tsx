@@ -10,6 +10,7 @@ import SettingsIcon from "./icons/SettingsIcon";
 import { AdresseLayerCheckbox } from "../modules/layers/adresser/AdresseLayerCheckbox";
 import { PopulationLayer } from "../modules/population/PopulationLayer";
 import { MatbutikkerCheckbox } from "../modules/foodStores/MatbutikkLayerCheckbox";
+import MobilityLayer from "../modules/mobility/MobilityLayer";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -184,6 +185,7 @@ function DataLayerContent() {
       >
         Data layers
       </h2>
+      <MobilityLayer />
       <AdresseLayerCheckbox />
       <PopulationLayer />
       <MatbutikkerCheckbox />
