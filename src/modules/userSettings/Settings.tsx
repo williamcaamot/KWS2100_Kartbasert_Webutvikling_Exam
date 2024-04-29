@@ -18,18 +18,29 @@ const Settings = () => {
       showMiniMap: !prevSettings.showMiniMap,
     }));
   };
+  const toggleScaleline = () => {
+    setSettings((prevSettings) => ({
+      ...prevSettings,
+      showScaleline: !prevSettings.showScaleline,
+    }));
+  };
 
   return (
     <>
-      <div className={"flex w-full justify-around p-1"}>
-        <p>Show zoomslider</p>
+      <div className={"md:flex hidden flex w-full justify-around p-1"}>
+        <p>Vis zoomslider</p>
         <div className={"flex-1"}></div>
         <Switch checked={settings.showZoomSlider} onChange={toggleZoomSlider} />
       </div>
       <div className={"flex w-full justify-around p-1"}>
-        <p>Show minimap</p>
+        <p>Vis map overview map</p>
         <div className={"flex-1"}></div>
         <Switch checked={settings.showMiniMap} onChange={toggleMiniMap} />
+      </div>
+      <div className={"flex w-full justify-around p-1"}>
+        <p>Vis scaleline</p>
+        <div className={"flex-1"}></div>
+        <Switch checked={settings.showScaleline} onChange={toggleScaleline} />
       </div>
     </>
   );

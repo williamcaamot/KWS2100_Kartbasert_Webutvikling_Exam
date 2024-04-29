@@ -19,8 +19,7 @@ import "./application.css";
 import CustomZoomAndLocation from "../../ui/CustomZoomAndLocation";
 import useLocalStorageState from "use-local-storage-state";
 import TileSource from "ol/source/Tile";
-import { OverviewMap } from "ol/control";
-import { set } from "ol/transform";
+import {OverviewMap, ScaleLine} from "ol/control";
 
 export function Application() {
   useGeographic();
@@ -28,7 +27,7 @@ export function Application() {
   const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
   const mapInstance = useRef<Map | null>(null);
   const [settings, setSettings] = useLocalStorageState("settings", {
-    defaultValue: { showZoomSlider: true, showMiniMap: true },
+    defaultValue: { showZoomSlider: true, showMiniMap: true, showScaleline: false},
   });
 
   if (!mapInstance.current) {
@@ -76,6 +75,12 @@ export function Application() {
     if (overviewMapControl instanceof OverviewMap && settings.showMiniMap) {
       map?.addControl(overviewMapControl);
     }
+    if(settings.showScaleline){
+       map?.addControl(new ScaleLine({
+        units: "metric",
+      }));
+    }
+
   }, [baseLayer, settings]);
 
   useEffect(() => {

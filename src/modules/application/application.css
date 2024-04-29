@@ -24,14 +24,16 @@ body {
 }
 
 .ol-zoomslider {
+  display: none;
   bottom: 50px;
   left: auto;
   right: 10px;
   padding: 0;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   .ol-zoomslider {
+    display: block;
     top: auto;
     bottom: 120px;
     left: auto;
