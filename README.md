@@ -11,6 +11,7 @@
 This application is designed to explore neighbourhoods and local offerings. It can be used to explore where you live, where you want to go, or where you want to live.
 
 ## To-do (try have high priority at top of list)
+
 - [ ] Tegning med lagring til localstorage
 - [ ] Add interaction (onclick) on the map for different features
 - - [ ] Generic overlay component to display information when clicking
@@ -22,8 +23,8 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - [ ] Loading icon for between API fetch and result is applied to map (loading spinner)
 - [ ] Add custom zoom component
 - [ ] Style improvmenet for mobility & train
-- [X] Overview map with controls in settings https://openlayers.org/en/latest/examples/overviewmap.html
-- [X] Settings for zoom slider, scale line
+- [x] Overview map with controls in settings https://openlayers.org/en/latest/examples/overviewmap.html
+- [x] Settings for zoom slider, scale line
 
 ## Application Features
 

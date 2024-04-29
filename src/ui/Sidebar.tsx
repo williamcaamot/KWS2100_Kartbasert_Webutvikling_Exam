@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import MapLayerIcon from "./icons/MapLayerIcon";
 import SearchIcon from "./icons/SearchIcon";
 import Search from "./Search";
@@ -14,11 +14,32 @@ import { ExtraMapLayer } from "./ExtraMapLayer";
 import MobilityLayer from "../modules/layers/mobility/MobilityLayer";
 import TrainLayer from "../modules/layers/trains/TrainLayer";
 import Settings from "../modules/userSettings/Settings";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeContent, setActiveContent] = useState(undefined);
 
+  const [, setMobility] = useLocalStorageState("mobility-layer-checked", {
+    defaultValue: false,
+  });
+  const [, setAddress] = useLocalStorageState("adresse-layer-checked", {
+    defaultValue: false,
+  });
+  const [, setPopulation] = useLocalStorageState("population-layer-checked", {
+    defaultValue: false,
+  });
+  const [, setTrain] = useLocalStorageState("train-layer-checked", {
+    defaultValue: false,
+  });
+  const [, setOgcVectorTileColor] = useLocalStorageState("ogc-vector-styles", {
+    defaultValue: {
+      background: "#d1d1d1",
+      strokeWidth: 0.8,
+      strokeColor: "#8c8b8b",
+      fillColor: "#f7f7e9",
+    },
+  });
   function handleContentChange(content: any) {
     if (content === activeContent) {
       setIsOpen(!isOpen);
@@ -27,6 +48,19 @@ export default function Sidebar() {
       setIsOpen(true);
       setActiveContent(content);
     }
+  }
+  function handleReset() {
+    setMobility(false);
+    setAddress(false);
+    setPopulation(false);
+    setTrain(false);
+    setOgcVectorTileColor({
+      background: "#d1d1d1",
+      strokeWidth: 0.8,
+      strokeColor: "#8c8b8b",
+      fillColor: "#f7f7e9",
+    });
+    window.location.reload();
   }
 
   return (
@@ -88,6 +122,17 @@ export default function Sidebar() {
             </div>
             <h2 className={"text-xs"}>Innstillinger</h2>
           </div>
+        </div>
+        <div
+          className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "settingsContent" && "bg-gray-200 inner-shadow !text-black"}`}
+          onClick={() => {
+            handleReset();
+          }}
+        >
+          <div className={"w-full flex justify-center"}>
+            <SettingsIcon />
+          </div>
+          <h2 className={"text-xs"}>Reset</h2>
         </div>
       </div>
 
