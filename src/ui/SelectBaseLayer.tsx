@@ -80,15 +80,17 @@ export function SelectBaseLayer() {
     loadKartverketLayer().then((source) => kartverketLayer.setSource(source));
   }, []);
 
-
-  const [ogcVectorTileColor, setOgcVectorTileColor] = useLocalStorageState("ogc-vector-styles", {
-    defaultValue: {
-      background: "#d1d1d1",
-      strokeWidth: 0.8,
-      strokeColor: "#8c8b8b",
-      fillColor: "#f7f7e9",
-    }
-  });
+  const [ogcVectorTileColor, setOgcVectorTileColor] = useLocalStorageState(
+    "ogc-vector-styles",
+    {
+      defaultValue: {
+        background: "#d1d1d1",
+        strokeWidth: 0.8,
+        strokeColor: "#8c8b8b",
+        fillColor: "#f7f7e9",
+      },
+    },
+  );
 
   const baseLayerOptions = [
     {
@@ -159,14 +161,20 @@ export function SelectBaseLayer() {
           url: "https://maps.gnosis.earth/ogcapi/collections/NaturalEarth:cultural:ne_10m_admin_0_countries/tiles/WebMercatorQuad",
           format: new MVT(),
         }),
-        background: ogcVectorTileColor ? ogcVectorTileColor.background : "D1D1D1",
+        background: ogcVectorTileColor
+          ? ogcVectorTileColor.background
+          : "D1D1D1",
         style: new Style({
           stroke: new Stroke({
-            color: ogcVectorTileColor ? ogcVectorTileColor.strokeColor : "#8c8b8b",
+            color: ogcVectorTileColor
+              ? ogcVectorTileColor.strokeColor
+              : "#8c8b8b",
             width: ogcVectorTileColor ? ogcVectorTileColor.strokeWidth : 0.8,
           }),
           fill: new Fill({
-            color: ogcVectorTileColor ? ogcVectorTileColor.fillColor : "#f7f7e9",
+            color: ogcVectorTileColor
+              ? ogcVectorTileColor.fillColor
+              : "#f7f7e9",
           }),
         }),
       }),

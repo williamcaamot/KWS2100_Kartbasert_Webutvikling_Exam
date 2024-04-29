@@ -11,11 +11,11 @@
 This application is designed to explore neighbourhoods and local offerings. It can be used to explore where you live, where you want to go, or where you want to live.
 
 ## To-do (try have high priority at top of list)
-
+- [ ] Overview map with controls in settings https://openlayers.org/en/latest/examples/overviewmap.html
 - [ ] Add interaction (onclick) on the map for different features
 - [ ] Make matbutikklayer images scale better when zooming in close
 - [ ] Vector tile layer with styling
-  - [X] OGCVector layer (VERY basic Vector tyle with styling saved to localstorage)
+  - [x] OGCVector layer (VERY basic Vector tyle with styling saved to localstorage)
 - [ ] Add arctic layer and change projection accordingly
 - [ ] Settings for zoom slider, scale line
 - [ ] Loading icon for between API fetch and result is applied to map (loading spinner)
@@ -30,6 +30,9 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - Eiendommer / teig (https://kartkatalog.geonorge.no/metadata/matrikkelen-eiendomskart-teig/74340c24-1c8a-4454-b813-bfe498e80f16?search=eiendommer)
 - Forsvaret støy (https://kartkatalog.geonorge.no/metadata/stoeysoner-for-tunge-vaapen-i-forsvarets-skyte--og-vingsfelt/f59e922b-a2b1-4f1a-a13e-efe72bfe7378)
 - Matbutikker (Inserted data from API into postgis database: https://kassal.app/api)
+
+### Background layers with sources:
+- LIST ALL BACKGROUND LAYERS WITH SOURCES HERE
 
 ### Other features
 
