@@ -100,9 +100,7 @@ export function Application() {
 
   useEffect(() => map?.setTarget(mapRef.current), []);
 
-
-  function useSourceLoading(source:any) {
-
+  function useSourceLoading(source: any) {
     useEffect(() => {
       if (!source) return;
 
@@ -111,21 +109,23 @@ export function Application() {
       const loadEnd = () => setLoadingQueue([]);
 
       // Register event listeners
-      source.on('featuresloadstart', loadStart);
-      source.on('featuresloadend', loadEnd);
-      source.on('featuresloaderror', loadEnd);
+      source.on("featuresloadstart", loadStart);
+      source.on("featuresloadend", loadEnd);
+      source.on("featuresloaderror", loadEnd);
 
       // Clean up event listeners
       return () => {
-        source.un('featuresloadstart', loadStart);
-        source.un('featuresloadend', loadEnd);
-        source.un('featuresloaderror', loadEnd);
+        source.un("featuresloadstart", loadStart);
+        source.un("featuresloadend", loadEnd);
+        source.un("featuresloaderror", loadEnd);
       };
     }, [source]);
 
     return loadingQueue;
   }
-  useSourceLoading(vectorLayers[0] ? vectorLayers[0].getSource() : baseLayer.getSource())
+  useSourceLoading(
+    vectorLayers[0] ? vectorLayers[0].getSource() : baseLayer.getSource(),
+  );
 
   return (
     <MapContext.Provider
@@ -137,7 +137,7 @@ export function Application() {
         settings,
         setSettings,
         loadingQueue,
-        setLoadingQueue
+        setLoadingQueue,
       }}
     >
       <nav>
