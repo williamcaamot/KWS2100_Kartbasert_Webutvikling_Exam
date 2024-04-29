@@ -78,38 +78,37 @@ export function ExtraMapLayer() {
       imageUrl: satelliteLayerImage,
     },
   ];
-  const [selectedExtraLayer, setSelectedExtraLayer] = useState(
-    extraLayerOptions[0],
-  );
+
+  const [selectedExtraLayer, setSelectedExtraLayer] = useState<
+    (typeof extraLayerOptions)[0] | null
+  >(extraLayerOptions[0]);
+  const [opacity, setOpacity] = useState(0.3);
+
   useEffect(() => {
-    const extraLayer = new TileLayer({
-      source: new XYZ({
-        url: selectedExtraLayer.imageUrl, // Corrected to imageUrl
-      }),
-      opacity: 0.3,
-      zIndex: 1,
-    });
+    if (map && selectedExtraLayer) {
+      const extraLayer = selectedExtraLayer.layer;
+      extraLayer.setOpacity(opacity);
+      extraLayer.setZIndex(1);
 
-    map.addLayer(extraLayer);
+      map.addLayer(extraLayer);
 
-    return () => {
-      map.removeLayer(extraLayer);
-    };
-  }, [selectedExtraLayer]);
+      return () => {
+        map.removeLayer(extraLayer);
+      };
+    }
+  }, [selectedExtraLayer, map, opacity]);
 
   return (
     <>
       <div
         style={{
           width: "100%",
-          height: "100vh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-start",
           alignItems: "center",
           overflowY: "auto",
-          paddingTop: "0",
-          paddingBottom: "100px",
+          paddingBottom: "40px",
         }}
       >
         {extraLayerOptions.map(({ id, name, imageUrl }) => {
@@ -118,7 +117,7 @@ export function ExtraMapLayer() {
               key={id}
               style={{
                 padding: "15px",
-                width: "100%",
+                width: "90%",
                 height: "80px",
                 display: "flex",
                 flexDirection: "row",
@@ -127,15 +126,18 @@ export function ExtraMapLayer() {
                 justifyContent: "space-between",
                 alignItems: "center",
                 border:
-                  selectedExtraLayer.id === id ? "2px solid #17a2b8" : "none",
+                  selectedExtraLayer && selectedExtraLayer.id === id
+                    ? "2px solid #17a2b8"
+                    : "none",
                 borderRadius: "10px",
               }}
-              onClick={() =>
-                setSelectedExtraLayer(
-                  extraLayerOptions.find((l) => l.id === id) ||
-                    extraLayerOptions[0],
-                )
-              }
+              onClick={() => {
+                setSelectedExtraLayer((currentLayer) =>
+                  currentLayer && currentLayer.id === id
+                    ? null
+                    : extraLayerOptions.find((l) => l.id === id) || null,
+                );
+              }}
             >
               <div style={{ marginRight: "10px" }}>{name}</div>
 
@@ -153,6 +155,17 @@ export function ExtraMapLayer() {
             </div>
           );
         })}
+        <div>
+          <h3>Change the opacity</h3>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.1"
+            value={opacity}
+            onChange={(e) => setOpacity(Number(e.target.value))}
+          />
+        </div>
       </div>
     </>
   );

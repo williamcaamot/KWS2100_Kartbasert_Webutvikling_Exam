@@ -200,15 +200,14 @@ export function SelectBaseLayer() {
     <>
       <div
         style={{
-          width: "100%",
+          width: "90%",
           height: "auto",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-start",
           alignItems: "center",
           overflowY: "scroll",
-          paddingTop: "0",
-          paddingBottom: "100px",
+          paddingBottom: "50px",
         }}
       >
         {baseLayerOptions.map(({ id, name, imageUrl }) => {

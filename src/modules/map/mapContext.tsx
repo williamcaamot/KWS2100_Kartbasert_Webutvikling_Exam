@@ -17,9 +17,15 @@ export const MapContext = React.createContext<{
   setVectorLayers: Dispatch<SetStateAction<Layer[]>>;
   vectorLayers: Layer[];
   setBaseLayer: (layer: Layer) => void;
+  settings: { showZoomSlider: boolean; showMiniMap: boolean };
+  setSettings: Dispatch<
+    SetStateAction<{ showZoomSlider: boolean; showMiniMap: boolean }>
+  >;
 }>({
   map,
   setVectorLayers: () => {},
   vectorLayers: [],
   setBaseLayer: () => {},
+  settings: { showZoomSlider: true, showMiniMap: true },
+  setSettings: () => {},
 });

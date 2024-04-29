@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import TileLayer from "ol/layer/Tile";
-import { OSM, Source } from "ol/source";
+import { OSM } from "ol/source";
 import { useGeographic } from "ol/proj";
 import { Map, View } from "ol";
 import { ZoomSlider } from "ol/control.js";
@@ -17,17 +17,16 @@ import Sidebar from "../../ui/Sidebar";
 import "ol/ol.css";
 import "./application.css";
 import CustomZoomAndLocation from "../../ui/CustomZoomAndLocation";
-import { OverviewMap } from "ol/control";
-import ol from "ol/dist/ol";
-import source = ol.source;
-import TileSource from "ol/source/Tile";
-import VectorSource from "ol/source/Vector";
+import useLocalStorageState from "use-local-storage-state";
 
 export function Application() {
   useGeographic();
   //Heihei
   const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
   const mapInstance = useRef<Map | null>(null);
+  const [settings, setSettings] = useLocalStorageState("settings", {
+    defaultValue: { showZoomSlider: true, showMiniMap: true },
+  });
 
   if (!mapInstance.current) {
     mapInstance.current = new Map({
@@ -46,35 +45,19 @@ export function Application() {
     [baseLayer, vectorLayers],
   );
 
-  useEffect(() => {
-    // Removing all controls and adding new was the only way I could get to work to change the source of the overview map... -W
-    // Probably not ideal for performance, will have to try to fix this later if enough time
-    const controls = map.getControls().getArray();
-    controls.slice().forEach((control) => {
-      map.removeControl(control);
-    });
+  const zoomsliderRef = useRef<ZoomSlider | null>(null);
 
-    const source = baseLayer.getSource();
-    let overviewMapControl;
-    if (source instanceof TileSource) {
-      // Check if source is an instance of TileSource
-      overviewMapControl = new OverviewMap({
-        layers: [
-          new TileLayer({
-            source: source,
-          }),
-        ],
-      });
-      // Do something with overviewMapControl
-    } else {
-      console.error("Invalid source for the layer");
+  useEffect(() => {
+    if (settings.showZoomSlider) {
+      if (!zoomsliderRef.current) {
+        zoomsliderRef.current = new ZoomSlider();
+        map.addControl(zoomsliderRef.current);
+      }
+    } else if (zoomsliderRef.current) {
+      map.removeControl(zoomsliderRef.current);
+      zoomsliderRef.current = null;
     }
-    const zoomslider = new ZoomSlider();
-    map.addControl(zoomslider); // These also have to be applied every time
-    if (overviewMapControl instanceof OverviewMap) {
-      map?.addControl(overviewMapControl);
-    }
-  }, [baseLayer]);
+  }, [settings.showZoomSlider, map]);
 
   useEffect(() => {
     map.setLayers(allLayers);
@@ -84,7 +67,14 @@ export function Application() {
 
   return (
     <MapContext.Provider
-      value={{ map, vectorLayers, setVectorLayers, setBaseLayer }}
+      value={{
+        map,
+        vectorLayers,
+        setVectorLayers,
+        setBaseLayer,
+        settings,
+        setSettings,
+      }}
     >
       <nav>
         <Sidebar />

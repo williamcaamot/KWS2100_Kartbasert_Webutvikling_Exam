@@ -8,10 +8,12 @@ import PointCreateIcon from "../ui/icons/PointCreateIcon";
 import { SelectBaseLayer } from "./SelectBaseLayer";
 import SettingsIcon from "./icons/SettingsIcon";
 import { AdresseLayerCheckbox } from "../modules/layers/adresser/AdresseLayerCheckbox";
-import { PopulationLayer } from "../modules/population/PopulationLayer";
-import { MatbutikkerCheckbox } from "../modules/foodStores/MatbutikkLayerCheckbox";
+import { PopulationLayer } from "../modules/layers/population/PopulationLayer";
+import { MatbutikkerCheckbox } from "../modules/layers/foodStores/MatbutikkLayerCheckbox";
 import { ExtraMapLayer } from "./ExtraMapLayer";
-import MobilityLayer from "../modules/mobility/MobilityLayer";
+import MobilityLayer from "../modules/layers/mobility/MobilityLayer";
+import TrainLayer from "../modules/layers/trains/TrainLayer";
+import Settings from "../modules/userSettings/Settings";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,17 +78,6 @@ export default function Sidebar() {
             <h2 className={"text-xs"}>Tegning</h2>
           </div>
           <div
-            className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "pointContent" && "bg-gray-200 inner-shadow !text-black"}`}
-            onClick={(e) => {
-              handleContentChange("pointContent");
-            }}
-          >
-            <div className={"w-full flex justify-center"}>
-              <PointCreateIcon />
-            </div>
-            <h2 className={"text-xs"}>Punkter</h2>
-          </div>
-          <div
             className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "settingsContent" && "bg-gray-200 inner-shadow !text-black"}`}
             onClick={(e) => {
               handleContentChange("settingsContent");
@@ -132,13 +123,6 @@ export default function Sidebar() {
             }}
           >
             <DrawingContent />
-          </div>
-          <div
-            style={{
-              display: activeContent === "pointContent" ? "block" : "none",
-            }}
-          >
-            <PointContent />
           </div>
           <div
             style={{
@@ -203,6 +187,7 @@ function DataLayerContent() {
       <AdresseLayerCheckbox />
       <PopulationLayer />
       <MatbutikkerCheckbox />
+      <TrainLayer />
     </div>
   );
 }
@@ -215,18 +200,15 @@ function DrawingContent() {
   );
 }
 
-function PointContent() {
-  return (
-    <div className={"text-gray-800"}>
-      <h2>Punkter</h2>
-    </div>
-  );
-}
-
 function SettingsContent() {
   return (
-    <div className={"text-gray-800"}>
-      <h2>Innstillinger</h2>
+    <div className={"text-gray-800 flex justify-center flex-wrap"}>
+      <h2
+        className={"text-2xl tracking-tight font-semibold pb-2 text-zinc-800"}
+      >
+        Instillinger
+      </h2>
+      <Settings />
     </div>
   );
 }

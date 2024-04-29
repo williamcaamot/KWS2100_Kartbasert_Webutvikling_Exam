@@ -10,14 +10,14 @@ import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { Feature } from "ol";
 import * as ol from "ol";
-import { useLayer } from "../map/useLayer";
+import { useLayer } from "../../map/useLayer";
 import { FeatureLike } from "ol/Feature";
 import useLocalStorageState from "use-local-storage-state";
-import Switch from "../../ui/switch";
+import Switch from "../../../ui/switch";
 import { set } from "ol/transform";
 import { Spinner } from "@intility/bifrost-react";
 import { fromLonLat } from "ol/proj";
-import { MapContext } from "../map/mapContext";
+import { MapContext } from "../../map/mapContext";
 
 const MOBILITY_QUERY = gql`
   query MobilityQuery(
