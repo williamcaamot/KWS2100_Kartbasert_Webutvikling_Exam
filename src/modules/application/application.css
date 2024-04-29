@@ -41,3 +41,11 @@ body {
     padding: 0;
   }
 }
+
+
+.ol-scale-line {
+  position: absolute;
+  bottom: 10px;  /* Distance from the bottom of the map container */
+  left: 200px;   /* Distance from the right side of the map container */
+  right: auto;    /* Overrides the default positioning */
+}

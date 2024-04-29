@@ -11,16 +11,19 @@
 This application is designed to explore neighbourhoods and local offerings. It can be used to explore where you live, where you want to go, or where you want to live.
 
 ## To-do (try have high priority at top of list)
-
-- [ ] Overview map with controls in settings https://openlayers.org/en/latest/examples/overviewmap.html
+- [ ] Tegning med lagring til localstorage
 - [ ] Add interaction (onclick) on the map for different features
-- [ ] Make matbutikklayer images scale better when zooming in close
+- - [ ] Generic overlay component to display information when clicking
 - [ ] Vector tile layer with styling
-  - [x] OGCVector layer (VERY basic Vector tyle with styling saved to localstorage)
-- [ ] Add arctic layer and change projection accordingly
-- [ ] Settings for zoom slider, scale line
+- - [x] OGCVector layer (VERY basic Vector tyle with styling saved to localstorage)
+- [ ] Polar layer with correct projection
+- [ ] Fix reset button in navigation, create icon with chatgpt for this
+- [ ] Make matbutikklayer images scale better when zooming in close
 - [ ] Loading icon for between API fetch and result is applied to map (loading spinner)
 - [ ] Add custom zoom component
+- [ ] Style improvmenet for mobility & train
+- [X] Overview map with controls in settings https://openlayers.org/en/latest/examples/overviewmap.html
+- [X] Settings for zoom slider, scale line
 
 ## Application Features
 
