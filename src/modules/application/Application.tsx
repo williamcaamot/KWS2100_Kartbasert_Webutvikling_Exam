@@ -19,7 +19,7 @@ import "./application.css";
 import CustomZoomAndLocation from "../../ui/CustomZoomAndLocation";
 import useLocalStorageState from "use-local-storage-state";
 import TileSource from "ol/source/Tile";
-import {OverviewMap} from "ol/control";
+import { OverviewMap } from "ol/control";
 
 export function Application() {
   useGeographic();
@@ -71,7 +71,8 @@ export function Application() {
 
     const source = baseLayer.getSource();
     let overviewMapControl;
-    if (source instanceof TileSource) { // Check if source is an instance of TileSource
+    if (source instanceof TileSource) {
+      // Check if source is an instance of TileSource
       overviewMapControl = new OverviewMap({
         layers: [
           new TileLayer({
