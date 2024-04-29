@@ -18,6 +18,8 @@ import "ol/ol.css";
 import "./application.css";
 import CustomZoomAndLocation from "../../ui/CustomZoomAndLocation";
 import useLocalStorageState from "use-local-storage-state";
+import TileSource from "ol/source/Tile";
+import {OverviewMap} from "ol/control";
 
 export function Application() {
   useGeographic();
@@ -58,6 +60,35 @@ export function Application() {
       zoomsliderRef.current = null;
     }
   }, [settings.showZoomSlider, map]);
+
+  useEffect(() => {
+    // Removing all controls and adding new was the only way I could get to work to change the source of the overview map... -W
+    // Probably not ideal for performance, will have to try to fix this later if enough time
+    const controls = map.getControls().getArray();
+    controls.slice().forEach((control) => {
+      map.removeControl(control);
+    });
+
+    const source = baseLayer.getSource();
+    let overviewMapControl;
+    if (source instanceof TileSource) { // Check if source is an instance of TileSource
+      overviewMapControl = new OverviewMap({
+        layers: [
+          new TileLayer({
+            source: source,
+          }),
+        ],
+      });
+      // Do something with overviewMapControl
+    } else {
+      console.error("Invalid source for the layer");
+    }
+    const zoomslider = new ZoomSlider();
+    map.addControl(zoomslider); // These also have to be applied every time
+    if (overviewMapControl instanceof OverviewMap) {
+      map?.addControl(overviewMapControl);
+    }
+  }, [baseLayer]);
 
   useEffect(() => {
     map.setLayers(allLayers);
