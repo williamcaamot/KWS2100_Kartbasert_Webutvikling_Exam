@@ -7,7 +7,7 @@ import DrawIcon from "../ui/icons/DrawIcon";
 import PointCreateIcon from "../ui/icons/PointCreateIcon";
 import { SelectBaseLayer } from "./SelectBaseLayer";
 import SettingsIcon from "./icons/SettingsIcon";
-import {AdresseLayerCheckbox} from "../modules/layers/adresser/AdresseLayerCheckbox";
+import { AdresseLayerCheckbox } from "../modules/layers/adresser/AdresseLayerCheckbox";
 import { PopulationLayer } from "../modules/population/PopulationLayer";
 import { MatbutikkerCheckbox } from "../modules/foodStores/MatbutikkLayerCheckbox";
 
@@ -184,7 +184,7 @@ function DataLayerContent() {
       >
         Data layers
       </h2>
-      <AdresseLayerCheckbox/>
+      <AdresseLayerCheckbox />
       <PopulationLayer />
       <MatbutikkerCheckbox />
     </div>
