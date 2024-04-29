@@ -8,6 +8,8 @@ import PointCreateIcon from "../ui/icons/PointCreateIcon";
 import { SelectBaseLayer } from "./SelectBaseLayer";
 import SettingsIcon from "./icons/SettingsIcon";
 import {AdresseLayerCheckbox} from "../modules/layers/adresser/AdresseLayerCheckbox";
+import { PopulationLayer } from "../modules/population/PopulationLayer";
+import { MatbutikkerCheckbox } from "../modules/foodStores/MatbutikkLayerCheckbox";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -183,6 +185,8 @@ function DataLayerContent() {
         Data layers
       </h2>
       <AdresseLayerCheckbox/>
+      <PopulationLayer />
+      <MatbutikkerCheckbox />
     </div>
   );
 }
