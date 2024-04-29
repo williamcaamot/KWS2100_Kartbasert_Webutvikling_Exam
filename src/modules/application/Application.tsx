@@ -21,6 +21,7 @@ import CustomZoomAndLocation from "../../ui/CustomZoomAndLocation";
 import useLocalStorageState from "use-local-storage-state";
 import TileSource from "ol/source/Tile";
 import { OverviewMap, ScaleLine } from "ol/control";
+import ol from "ol/dist/ol";
 
 export function Application() {
   useGeographic();
@@ -42,6 +43,7 @@ export function Application() {
   }
 
   const map = mapInstance.current;
+  const [loadingQueue, setLoadingQueue] = useState<string[]>([]);
   const [vectorLayers, setVectorLayers] = useState<Layer[]>([]);
   const [baseLayer, setBaseLayer] = useState<Layer>(
     () => new TileLayer({ source: new OSM(), preload: Infinity }),
@@ -98,6 +100,33 @@ export function Application() {
 
   useEffect(() => map?.setTarget(mapRef.current), []);
 
+
+  function useSourceLoading(source:any) {
+
+    useEffect(() => {
+      if (!source) return;
+
+      // Functions to handle the events
+      const loadStart = () => setLoadingQueue(["true"]);
+      const loadEnd = () => setLoadingQueue([]);
+
+      // Register event listeners
+      source.on('featuresloadstart', loadStart);
+      source.on('featuresloadend', loadEnd);
+      source.on('featuresloaderror', loadEnd);
+
+      // Clean up event listeners
+      return () => {
+        source.un('featuresloadstart', loadStart);
+        source.un('featuresloadend', loadEnd);
+        source.un('featuresloaderror', loadEnd);
+      };
+    }, [source]);
+
+    return loadingQueue;
+  }
+  useSourceLoading(vectorLayers[0] ? vectorLayers[0].getSource() : baseLayer.getSource())
+
   return (
     <MapContext.Provider
       value={{
@@ -107,6 +136,8 @@ export function Application() {
         setBaseLayer,
         settings,
         setSettings,
+        loadingQueue,
+        setLoadingQueue
       }}
     >
       <nav>

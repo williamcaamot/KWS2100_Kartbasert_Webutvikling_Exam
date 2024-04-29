@@ -1,101 +1,104 @@
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-import { GeoJSON } from "ol/format";
-import { Feature, VectorTile } from "ol";
-import { Geometry, Polygon } from "ol/geom";
-import { Icon } from "ol/style";
-import { Style } from "ol/style.js";
-import { Extent } from "ol/extent";
-import { Projection } from "ol/proj";
+import {GeoJSON} from "ol/format";
+import {Feature, VectorTile} from "ol";
+import {Geometry, Polygon} from "ol/geom";
+import {Icon} from "ol/style";
+import {Style} from "ol/style.js";
+import {Extent} from "ol/extent";
+import {Projection} from "ol/proj";
 
-import { useActiveFeatures } from "../../map/useActiveFeatures";
+import {useActiveFeatures} from "../../map/useActiveFeatures";
+import {useContext} from "react";
+import {MapContext} from "../../map/mapContext";
 
 export type MatbutikkLayerType = VectorLayer<VectorSource<MatbutikkFeature>>;
 export type MatbutikkFeature = {
-  getProperties(): MatbutikkProperties;
+    getProperties(): MatbutikkProperties;
 } & Feature<Polygon>;
 
 export interface MatbutikkProperties {
-  id: string;
-  group_name: string;
-  name: string;
-  address: string;
-  phone: string;
-  email: string;
-  fax: string;
-  logo: string;
-  website: string;
-  detail_url: string;
-  opening_hours: Object; //TODO create openin hours interface
+    id: string;
+    group_name: string;
+    name: string;
+    address: string;
+    phone: string;
+    email: string;
+    fax: string;
+    logo: string;
+    website: string;
+    detail_url: string;
+    opening_hours: Object; //TODO create openin hours interface
 }
 
 export const MatbutikkerLayer = new VectorLayer({
-  className: "MatbutikkerLayer",
-  source: new VectorSource({
-    strategy: (extent, resolution) => [extent],
-    loader: function (extent, resolution, projection) {
-      loadEiendomDataLayer(this, extent, resolution, projection);
-    },
-  }),
-  style: matbutikkStyleFunction,
+    className: "MatbutikkerLayer",
+    source: new VectorSource({
+        strategy: (extent, resolution) => [extent],
+        loader: function (extent, resolution, projection) {
+            loadEiendomDataLayer(this, extent, resolution, projection);
+        },
+    }),
+    style: matbutikkStyleFunction,
 });
 
 async function loadEiendomDataLayer(
-  source: VectorSource<Feature<Geometry>> | VectorTile,
-  extent: Extent,
-  resolution: number,
-  projection: Projection,
+    source: VectorSource<Feature<Geometry>> | VectorTile,
+    extent: Extent,
+    resolution: number,
+    projection: Projection,
 ) {
-  const url = `https://kartbasert-f2ca5a90ebbf.herokuapp.com/api/v1/datalayers/matbutikker?extent=${JSON.stringify(extent)}&resolution=${resolution}`;
-  const response = await fetch(url);
-  if (!response.ok) {
-    console.error("Failed to load data");
-    return;
-  }
-  if (!(source instanceof VectorTile)) {
-    source.clear();
-  }
-  const data = await response.json();
-  console.log(data);
-  const features = new GeoJSON().readFeatures(data, {
-    dataProjection: "EPSG:4326",
-    featureProjection: projection.getCode(),
-  });
+    console.log("fethcing food stores")
+    const url = `https://kartbasert-f2ca5a90ebbf.herokuapp.com/api/v1/datalayers/matbutikker?extent=${JSON.stringify(extent)}&resolution=${resolution}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+        console.error("Failed to load data");
+        return;
+    }
+    if (!(source instanceof VectorTile)) {
+        source.clear();
+    }
+    const data = await response.json();
+    console.log(data);
+    const features = new GeoJSON().readFeatures(data, {
+        dataProjection: "EPSG:4326",
+        featureProjection: projection.getCode(),
+    });
 
-  if (!(source instanceof VectorTile)) {
-    source.addFeatures(features);
-  }
+    if (!(source instanceof VectorTile)) {
+        source.addFeatures(features);
+    }
 }
 
 export function matbutikkStyleFunction(feature: any, resolution: any): Style {
-  const properties = feature.getProperties();
-  const logoUrl = properties.logo;
+    const properties = feature.getProperties();
+    const logoUrl = properties.logo;
 
-  return new Style({
-    image: new Icon({
-      src: logoUrl,
-      scale: 0.15,
-      anchor: [0.5, 0.5],
-      anchorXUnits: "fraction",
-      anchorYUnits: "fraction",
-    }),
-  });
+    return new Style({
+        image: new Icon({
+            src: logoUrl,
+            scale: 0.15,
+            anchor: [0.5, 0.5],
+            anchorXUnits: "fraction",
+            anchorYUnits: "fraction",
+        }),
+    });
 }
 
 export function hoverMatbutikkStyleFunction(
-  feature: any,
-  resolution: any,
+    feature: any,
+    resolution: any,
 ): Style {
-  const properties = feature.getProperties();
-  const logoUrl = properties.logo;
+    const properties = feature.getProperties();
+    const logoUrl = properties.logo;
 
-  return new Style({
-    image: new Icon({
-      src: logoUrl,
-      scale: 1.3,
-      anchor: [0.5, 0.5],
-      anchorXUnits: "fraction",
-      anchorYUnits: "fraction",
-    }),
-  });
+    return new Style({
+        image: new Icon({
+            src: logoUrl,
+            scale: 1.3,
+            anchor: [0.5, 0.5],
+            anchorXUnits: "fraction",
+            anchorYUnits: "fraction",
+        }),
+    });
 }

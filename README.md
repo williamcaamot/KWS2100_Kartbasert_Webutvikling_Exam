@@ -20,8 +20,8 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - [x] Polar layer with correct projection
 - [x] Fix reset button in navigation, create icon with chatgpt for this
 - [ ] Make matbutikklayer images scale better when zooming in close
-- [ ] Loading icon for between API fetch and result is applied to map (loading spinner)
-- [ ] Add custom zoom component
+- [X] Loading icon for between API fetch and result is applied to map (loading spinner)
+- [X] Add custom zoom component
 - [ ] Style improvmenet for mobility & train
 - [x] Overview map with controls in settings https://openlayers.org/en/latest/examples/overviewmap.html
 - [x] Settings for zoom slider, scale line
