@@ -82,11 +82,12 @@ export function ExtraMapLayer() {
   const [selectedExtraLayer, setSelectedExtraLayer] = useState<
     (typeof extraLayerOptions)[0] | null
   >(extraLayerOptions[0]);
+  const [opacity, setOpacity] = useState(0.3);
 
   useEffect(() => {
     if (map && selectedExtraLayer) {
       const extraLayer = selectedExtraLayer.layer;
-      extraLayer.setOpacity(0.3);
+      extraLayer.setOpacity(opacity);
       extraLayer.setZIndex(1);
 
       map.addLayer(extraLayer);
@@ -95,21 +96,19 @@ export function ExtraMapLayer() {
         map.removeLayer(extraLayer);
       };
     }
-  }, [selectedExtraLayer, map]);
+  }, [selectedExtraLayer, map, opacity]);
 
   return (
     <>
       <div
         style={{
           width: "100%",
-          height: "100vh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-start",
           alignItems: "center",
           overflowY: "auto",
-          paddingTop: "0",
-          paddingBottom: "100px",
+          paddingBottom: "40px",
         }}
       >
         {extraLayerOptions.map(({ id, name, imageUrl }) => {
@@ -118,7 +117,7 @@ export function ExtraMapLayer() {
               key={id}
               style={{
                 padding: "15px",
-                width: "100%",
+                width: "90%",
                 height: "80px",
                 display: "flex",
                 flexDirection: "row",
@@ -156,6 +155,17 @@ export function ExtraMapLayer() {
             </div>
           );
         })}
+        <div>
+          <h3>Change the opacity</h3>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.1"
+            value={opacity}
+            onChange={(e) => setOpacity(Number(e.target.value))}
+          />
+        </div>
       </div>
     </>
   );
