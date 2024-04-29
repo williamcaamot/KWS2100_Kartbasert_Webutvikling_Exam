@@ -78,24 +78,24 @@ export function ExtraMapLayer() {
       imageUrl: satelliteLayerImage,
     },
   ];
+
   const [selectedExtraLayer, setSelectedExtraLayer] = useState(
     extraLayerOptions[0],
   );
+
   useEffect(() => {
-    const extraLayer = new TileLayer({
-      source: new XYZ({
-        url: selectedExtraLayer.imageUrl, // Corrected to imageUrl
-      }),
-      opacity: 0.3,
-      zIndex: 1,
-    });
+    if (map && selectedExtraLayer) {
+      const extraLayer = selectedExtraLayer.layer;
+      extraLayer.setOpacity(0.3);
+      extraLayer.setZIndex(1);
 
-    map.addLayer(extraLayer);
+      map.addLayer(extraLayer);
 
-    return () => {
-      map.removeLayer(extraLayer);
-    };
-  }, [selectedExtraLayer]);
+      return () => {
+        map.removeLayer(extraLayer);
+      };
+    }
+  }, [selectedExtraLayer, map]);
 
   return (
     <>
