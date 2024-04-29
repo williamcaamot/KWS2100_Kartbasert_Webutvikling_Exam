@@ -8,6 +8,8 @@ import { Style } from "ol/style.js";
 import { Extent } from "ol/extent";
 import { Projection } from "ol/proj";
 
+import { useActiveFeatures } from "../../map/useActiveFeatures";
+
 export type MatbutikkLayerType = VectorLayer<VectorSource<MatbutikkFeature>>;
 export type MatbutikkFeature = {
   getProperties(): MatbutikkProperties;
@@ -65,15 +67,33 @@ async function loadEiendomDataLayer(
   }
 }
 
-function matbutikkStyleFunction(feature: any, resolution: any): Style {
+export function matbutikkStyleFunction(feature: any, resolution: any): Style {
   const properties = feature.getProperties();
-  const logoUrl = properties.logo; // Assuming 'logo' is the URL to the image
+  const logoUrl = properties.logo;
 
   return new Style({
     image: new Icon({
       src: logoUrl,
-      scale: 0.15, // Scale the logo size appropriately, adjust as needed
-      anchor: [0.5, 0.5], // Center the icon anchor on the feature
+      scale: 0.15,
+      anchor: [0.5, 0.5],
+      anchorXUnits: "fraction",
+      anchorYUnits: "fraction",
+    }),
+  });
+}
+
+export function hoverMatbutikkStyleFunction(
+  feature: any,
+  resolution: any,
+): Style {
+  const properties = feature.getProperties();
+  const logoUrl = properties.logo;
+
+  return new Style({
+    image: new Icon({
+      src: logoUrl,
+      scale: 1.3,
+      anchor: [0.5, 0.5],
       anchorXUnits: "fraction",
       anchorYUnits: "fraction",
     }),

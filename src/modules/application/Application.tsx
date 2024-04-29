@@ -11,6 +11,7 @@ import { useGeographic } from "ol/proj";
 import { Map, View } from "ol";
 import { ZoomSlider } from "ol/control.js";
 import { Layer } from "ol/layer";
+import { useActiveFeatures } from "../map/useActiveFeatures";
 
 import { MapContext } from "../map/mapContext";
 import Sidebar from "../../ui/Sidebar";
@@ -50,6 +51,9 @@ export function Application() {
     () => [baseLayer, ...vectorLayers],
     [baseLayer, vectorLayers],
   );
+
+  const predicate = (l: Layer) => vectorLayers.includes(l);
+  const { activeFeatures, setActiveFeatures } = useActiveFeatures(predicate);
 
   useEffect(() => {
     // Removing all controls and adding new was the only way I could get to work to change the source of the overview map... -W
