@@ -12,6 +12,7 @@ import stadiaDarkLayerImage from "../assets/images/stadiaDarkLayerImage.png";
 import kartverketLayerImage from "../assets/images/kartverketLayerImage.png";
 import flyfotoLayerImage from "../assets/images/flyfotoLayerImage.png";
 import OGCVectorTileLayerImage from "../assets/images/OGCVectorTileLayerImage.png";
+import arcticImage from "../assets/images/arcticLayerImage.png";
 
 import proj4 from "proj4";
 import { register } from "ol/proj/proj4";
@@ -32,9 +33,11 @@ proj4.defs([
 ]);
 register(proj4);
 
-//test
-
 const parser = new WMTSCapabilities();
+
+const ortoPhotoLayer = new TileLayer();
+const kartverketLayer = new TileLayer();
+const polarLayer = new TileLayer();
 
 // @ts-ignore
 async function loadFlyfotoLayer() {
@@ -79,10 +82,6 @@ async function loadPolar() {
   // @ts-ignore
   return new WMTS(options)!;
 }
-
-const ortoPhotoLayer = new TileLayer();
-const kartverketLayer = new TileLayer();
-const polarLayer = new TileLayer();
 
 export function SelectBaseLayer() {
   const { setBaseLayer, map } = useContext(MapContext);
@@ -171,7 +170,9 @@ export function SelectBaseLayer() {
     {
       id: "polar",
       name: "Arctic",
+      preload: Infinity,
       layer: polarLayer,
+      imageUrl: arcticImage,
     },
     {
       id: "ogcVectorTile",
