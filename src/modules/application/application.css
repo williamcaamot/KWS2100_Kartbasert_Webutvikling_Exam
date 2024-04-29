@@ -20,14 +20,11 @@ body {
 
 /*Move OL zoom to bottom right corner*/
 .ol-zoom {
-  top: auto;
-  bottom: 30px;
-  right: 10px;
-  left: auto;
+  display: none;
 }
 
 .ol-zoomslider {
-  bottom: 10px;
+  bottom: 50px;
   left: auto;
   right: 10px;
   padding: 0;
@@ -36,7 +33,7 @@ body {
 @media (min-width: 640px) {
   .ol-zoomslider {
     top: auto;
-    bottom: 100px;
+    bottom: 120px;
     left: auto;
     right: 10px;
     padding: 0;

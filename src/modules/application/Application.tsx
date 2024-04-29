@@ -16,6 +16,7 @@ import { MapContext } from "../map/mapContext";
 import Sidebar from "../../ui/Sidebar";
 import "ol/ol.css";
 import "./application.css";
+import CustomZoomAndLocation from "../../ui/CustomZoomAndLocation";
 
 export function Application() {
   useGeographic();
@@ -55,6 +56,7 @@ export function Application() {
     >
       <nav>
         <Sidebar />
+        <CustomZoomAndLocation/>
       </nav>
       <main style={{ display: "flex", width: "100%", height: "100%" }}>
         <div
