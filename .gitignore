@@ -1,0 +1,11 @@
+.idea
+*.iml
+node_modules
+dist/
+/Backend.iml
+/Frontend.iml
+/Lecture7.iml
+/Lecture8APIDB.iml
+/Backend/package-lock.json
+/Backend/util/ca-certificate.crt
+*.env
