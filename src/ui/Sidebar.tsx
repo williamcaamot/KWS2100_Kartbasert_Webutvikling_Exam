@@ -15,6 +15,7 @@ import MobilityLayer from "../modules/layers/mobility/MobilityLayer";
 import TrainLayer from "../modules/layers/trains/TrainLayer";
 import Settings from "../modules/userSettings/Settings";
 import useLocalStorageState from "use-local-storage-state";
+import ResetIcon from "./icons/ResetIcon";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -130,7 +131,7 @@ export default function Sidebar() {
           }}
         >
           <div className={"w-full flex justify-center"}>
-            <SettingsIcon />
+            <ResetIcon />
           </div>
           <h2 className={"text-xs"}>Reset</h2>
         </div>
