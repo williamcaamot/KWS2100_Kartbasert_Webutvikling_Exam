@@ -36,10 +36,6 @@ register(proj4);
 
 const parser = new WMTSCapabilities();
 
-const ortoPhotoLayer = new TileLayer();
-const kartverketLayer = new TileLayer();
-const polarLayer = new TileLayer();
-
 // @ts-ignore
 async function loadFlyfotoLayer() {
   const res = await fetch(
@@ -71,6 +67,23 @@ async function loadKartverketLayer() {
   return new WMTS(options)!;
 }
 
+async function loadPolar() {
+  const res = await fetch("./kws2100-exam-williamcaamot/layers/polar-sdi.xml");
+  const text = await res.text();
+
+  const result = parser.read(text);
+  const options = optionsFromCapabilities(result, {
+    layer: "arctic_cascading",
+    matrixSet: "3575",
+  });
+  // @ts-ignore
+  return new WMTS(options)!;
+}
+
+const ortoPhotoLayer = new TileLayer();
+const kartverketLayer = new TileLayer();
+const polarLayer = new TileLayer();
+
 export function SelectBaseLayer() {
   const { setBaseLayer, map } = useContext(MapContext);
 
@@ -78,6 +91,8 @@ export function SelectBaseLayer() {
     loadFlyfotoLayer().then((source) => ortoPhotoLayer.setSource(source));
 
     loadKartverketLayer().then((source) => kartverketLayer.setSource(source));
+
+    loadPolar().then((source) => polarLayer.setSource(source));
   }, []);
 
   const [ogcVectorTileColor, setOgcVectorTileColor] = useLocalStorageState(
@@ -152,6 +167,11 @@ export function SelectBaseLayer() {
         preload: Infinity,
       }),
       imageUrl: satelliteLayerImage,
+    },
+    {
+      id: "polar",
+      name: "Arctic",
+      layer: polarLayer,
     },
     {
       id: "ogcVectorTile",
