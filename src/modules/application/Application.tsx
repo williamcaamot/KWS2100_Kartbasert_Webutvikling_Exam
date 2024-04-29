@@ -24,9 +24,9 @@ export function Application() {
   //Heihei
   const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
   const mapInstance = useRef<Map | null>(null);
-  const [settings, setSettings] = useLocalStorageState('settings', { defaultValue: {showZoomSlider: true, showMiniMap: true} });
-
-
+  const [settings, setSettings] = useLocalStorageState("settings", {
+    defaultValue: { showZoomSlider: true, showMiniMap: true },
+  });
 
   if (!mapInstance.current) {
     mapInstance.current = new Map({
@@ -65,11 +65,16 @@ export function Application() {
 
   useEffect(() => map?.setTarget(mapRef.current), []);
 
-
-
   return (
     <MapContext.Provider
-      value={{ map, vectorLayers, setVectorLayers, setBaseLayer, settings, setSettings }}
+      value={{
+        map,
+        vectorLayers,
+        setVectorLayers,
+        setBaseLayer,
+        settings,
+        setSettings,
+      }}
     >
       <nav>
         <Sidebar />
