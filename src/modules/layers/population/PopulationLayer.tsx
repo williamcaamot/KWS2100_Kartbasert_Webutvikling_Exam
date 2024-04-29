@@ -90,10 +90,10 @@ export function PopulationLayer() {
   }, [checked]);
 
   return (
-      <div className={"flex w-full justify-around p-1"}>
-        <p>Show population</p>
-        <div className={"flex-1"}></div>
-        <Switch checked={checked} onChange={setChecked} />
-      </div>
+    <div className={"flex w-full justify-around p-1"}>
+      <p>Show population</p>
+      <div className={"flex-1"}></div>
+      <Switch checked={checked} onChange={setChecked} />
+    </div>
   );
 }
