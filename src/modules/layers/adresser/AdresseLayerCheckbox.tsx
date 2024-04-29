@@ -7,6 +7,7 @@ import Switch from "../../../ui/switch";
 import useLocalStorageState from "use-local-storage-state";
 
 export function AdresseLayerCheckbox() {
+
   const [checked, setChecked] = useLocalStorageState("adresse-layer-checked", {
     defaultValue: false,
   });
