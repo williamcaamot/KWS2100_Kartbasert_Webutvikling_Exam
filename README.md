@@ -43,3 +43,9 @@ This application is designed to explore neighbourhoods and local offerings. It c
 ## Other information
 
 - Since everyone on the group already was familiar with Tailwind CSS and prefer this over normal CSS we decided to use this because we work faster with it.
+
+## Features for A:
+
+- [x] Display moving data on a map using GraphQL data source.
+- [x] Display a clustered vector data source with open layers. Both size and color of the cluster is based on the size of it. This is adresse layer.
+- [x] Deploy your own GIS API to a hosted service and display a huge dataset from PostGIS database to a map. This is hosted on Heroku. Displaying both teig(eiendommer) & addresses, as well as foodstores in Norway.

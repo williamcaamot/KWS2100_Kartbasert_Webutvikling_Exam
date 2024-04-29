@@ -75,19 +75,14 @@ export const AdresseLayer = new VectorLayer({
 
 //more info on colors: https://www.w3schools.com/html/html_colors_rgb.asp
 function styleFill(featureLength: number) {
-  console.log(`Feature length: ${featureLength / 20}`);
-  if (featureLength / 10 < 0.7)
-    return new Fill({
-      color: `rgba(95, 207, 103, ${0.8} )`,
-    });
   return new Fill({
-    color: `rgba(95, 207, 103, ${featureLength / 40} )`,
+    color: `rgba(95, 207, ${255 - featureLength / 2}, 1 )`,
   });
 }
 
 function styleRadius(featureLength: number) {
   if (featureLength < 12) return 12;
-  if (12 + featureLength * 0.1 > 20) return 20;
+  if (12 + featureLength * 0.2 > 20) return 20;
   return 12 + featureLength * 0.2;
 }
 
