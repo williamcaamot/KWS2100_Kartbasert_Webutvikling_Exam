@@ -77,7 +77,7 @@ export function matbutikkStyleFunction(feature: any, resolution: any): Style {
   return new Style({
     image: new Icon({
       src: logoUrl,
-      scale: 0.15,
+      scale: 0.19,
       anchor: [0.5, 0.5],
       anchorXUnits: "fraction",
       anchorYUnits: "fraction",

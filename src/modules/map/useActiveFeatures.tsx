@@ -28,6 +28,7 @@ export function useActiveFeatures<FEATURE extends Feature>(
       ?.getSource()
       ?.getFeaturesAtCoordinate(e.coordinate) as FEATURE[];
 
+    //Added this, just remove if not needed
     layer
       ?.getSource()
       ?.getFeatures()
@@ -48,14 +49,13 @@ export function useActiveFeatures<FEATURE extends Feature>(
     });
   }
   useEffect(() => {
+    //Console logging to see if the event is registered for
     console.log("map");
-
     console.log(layer);
     if (layer) {
       console.log("registering pointermove event");
       map.on("pointermove", handlePointerMove);
     }
-
     return () => {
       console.log("unregistering pointermove event");
       map.un("pointermove", handlePointerMove);
