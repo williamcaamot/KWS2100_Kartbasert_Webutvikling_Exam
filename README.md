@@ -11,7 +11,8 @@
 This application is designed to explore neighbourhoods and local offerings. It can be used to explore where you live, where you want to go, or where you want to live.
 
 ## To-do (try have high priority at top of list)
-
+- [ ] Add interaction (onclick) on the map for different features
+- [ ] Make matbutikklayer images scale better when zooming in close
 - [ ] Vector tile layer with styling
 - [ ] Add arctic layer and change projection accordingly
 - [ ] Settings for zoom slider, scale line

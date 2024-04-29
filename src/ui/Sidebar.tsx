@@ -7,6 +7,7 @@ import DrawIcon from "../ui/icons/DrawIcon";
 import PointCreateIcon from "../ui/icons/PointCreateIcon";
 import { SelectBaseLayer } from "./SelectBaseLayer";
 import SettingsIcon from "./icons/SettingsIcon";
+import {AdresseLayerCheckbox} from "../modules/layers/adresser/AdresseLayerCheckbox";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -181,6 +182,7 @@ function DataLayerContent() {
       >
         Data layers
       </h2>
+      <AdresseLayerCheckbox/>
     </div>
   );
 }
