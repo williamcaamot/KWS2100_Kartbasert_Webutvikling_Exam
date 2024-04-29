@@ -5,6 +5,13 @@ import ZoomInIcon from "./icons/ZoomInIcon";
 import ZoomOutIcon from "./icons/ZoomOutIcon";
 import { MapContext } from "../modules/map/mapContext";
 
+import Feature from "ol/Feature";
+import Point from "ol/geom/Point";
+import { Circle, Fill, Stroke, Style, Text } from "ol/style";
+import VectorSource from "ol/source/Vector";
+import VectorLayer from "ol/layer/Vector";
+import { fromLonLat } from "ol/proj";
+
 export default function CustomZoomAndLocation() {
   const { map } = useContext(MapContext);
 
@@ -27,8 +34,38 @@ export default function CustomZoomAndLocation() {
       const { latitude, longitude } = pos.coords;
       map.getView().animate({
         center: [longitude, latitude],
-        zoom: 12,
+        zoom: 18,
       });
+
+      const marker = new Feature({
+        geometry: new Point([longitude, latitude]),
+      });
+
+      marker.setStyle(
+        new Style({
+          image: new Circle({
+            radius: 14,
+            fill: new Fill({ color: "rgba(0, 0, 230, 0.7)" }),
+            stroke: new Stroke({
+              color: "white",
+              width: 4,
+            }),
+          }),
+          text: new Text({
+            text: "Your Position",
+            offsetY: -30,
+            fill: new Fill({ color: "black" }),
+            stroke: new Stroke({ color: "white", width: 5 }),
+          }),
+        }),
+      );
+
+      const vectorLayer = new VectorLayer({
+        source: new VectorSource({
+          features: [marker],
+        }),
+      });
+      map.addLayer(vectorLayer);
     });
   }
 
