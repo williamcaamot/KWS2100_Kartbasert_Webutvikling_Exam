@@ -21,31 +21,25 @@ export default function Sidebar() {
   const [activeContent, setActiveContent] = useState(undefined);
 
   const [, setMobility] = useLocalStorageState("mobility-layer-checked", {
-      defaultValue: false,
-    });
-    const [, setAddress] = useLocalStorageState("adresse-layer-checked", {
-      defaultValue: false,
-    });
-    const [, setPopulation] = useLocalStorageState(
-      "population-layer-checked",
-      {
-        defaultValue: false,
-      },
-    );
-    const [, setTrain] = useLocalStorageState("train-layer-checked", {
-      defaultValue: false,
-    });
-    const [, setOgcVectorTileColor] = useLocalStorageState(
-      "ogc-vector-styles",
-      {
-        defaultValue: {
-          background: "#d1d1d1",
-          strokeWidth: 0.8,
-          strokeColor: "#8c8b8b",
-          fillColor: "#f7f7e9",
-        },
-      },
-    );
+    defaultValue: false,
+  });
+  const [, setAddress] = useLocalStorageState("adresse-layer-checked", {
+    defaultValue: false,
+  });
+  const [, setPopulation] = useLocalStorageState("population-layer-checked", {
+    defaultValue: false,
+  });
+  const [, setTrain] = useLocalStorageState("train-layer-checked", {
+    defaultValue: false,
+  });
+  const [, setOgcVectorTileColor] = useLocalStorageState("ogc-vector-styles", {
+    defaultValue: {
+      background: "#d1d1d1",
+      strokeWidth: 0.8,
+      strokeColor: "#8c8b8b",
+      fillColor: "#f7f7e9",
+    },
+  });
   function handleContentChange(content: any) {
     if (content === activeContent) {
       setIsOpen(!isOpen);
@@ -56,17 +50,17 @@ export default function Sidebar() {
     }
   }
   function handleReset() {
-      setMobility(false);
-        setAddress(false);
-        setPopulation(false);
-        setTrain(false);
-        setOgcVectorTileColor({
-          background: "#d1d1d1",
-          strokeWidth: 0.8,
-          strokeColor: "#8c8b8b",
-          fillColor: "#f7f7e9",
-        });
-        window.location.reload();
+    setMobility(false);
+    setAddress(false);
+    setPopulation(false);
+    setTrain(false);
+    setOgcVectorTileColor({
+      background: "#d1d1d1",
+      strokeWidth: 0.8,
+      strokeColor: "#8c8b8b",
+      fillColor: "#f7f7e9",
+    });
+    window.location.reload();
   }
 
   return (
@@ -129,19 +123,18 @@ export default function Sidebar() {
             <h2 className={"text-xs"}>Innstillinger</h2>
           </div>
         </div>
-          <div
-            className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "settingsContent" && "bg-gray-200 inner-shadow !text-black"}`}
-            onClick={() => {
-              handleReset();
-            }}
-          >
-            <div className={"w-full flex justify-center"}>
-              <SettingsIcon />
-            </div>
-            <h2 className={"text-xs"}>Reset</h2>
+        <div
+          className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "settingsContent" && "bg-gray-200 inner-shadow !text-black"}`}
+          onClick={() => {
+            handleReset();
+          }}
+        >
+          <div className={"w-full flex justify-center"}>
+            <SettingsIcon />
           </div>
+          <h2 className={"text-xs"}>Reset</h2>
         </div>
-    
+      </div>
 
       <div
         className={`flex h-full fixed top-0 z-20 transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-80"}`}
