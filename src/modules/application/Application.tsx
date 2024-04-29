@@ -48,20 +48,6 @@ export function Application() {
     [baseLayer, vectorLayers],
   );
 
-  const zoomsliderRef = useRef<ZoomSlider | null>(null);
-
-  useEffect(() => {
-    if (settings.showZoomSlider) {
-      if (!zoomsliderRef.current) {
-        zoomsliderRef.current = new ZoomSlider();
-        map.addControl(zoomsliderRef.current);
-      }
-    } else if (zoomsliderRef.current) {
-      map.removeControl(zoomsliderRef.current);
-      zoomsliderRef.current = null;
-    }
-  }, [settings.showZoomSlider, map]);
-
   useEffect(() => {
     // Removing all controls and adding new was the only way I could get to work to change the source of the overview map... -W
     // Probably not ideal for performance, will have to try to fix this later if enough time
