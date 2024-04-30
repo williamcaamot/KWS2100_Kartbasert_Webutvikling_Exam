@@ -22,6 +22,7 @@ import useLocalStorageState from "use-local-storage-state";
 import TileSource from "ol/source/Tile";
 import { OverviewMap, ScaleLine } from "ol/control";
 
+// TODO: Fikse at kart lastes inn umiddelbart slik man slipper å "dra" på kartet litt før det laster
 export function Application() {
   useGeographic();
   //Heihei
@@ -34,6 +35,30 @@ export function Application() {
       showScaleline: false,
     },
   });
+
+  // UseEffect som sjekker om brukeren har satt dark mode som preferanse og om systemet er satt til dark mode
+  // TODO: Fikse at den huker av riktig knapp i settings ut ifra hvilken theme som er satt i localstorage når man laster inn siden
+  useEffect(() => {
+    if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (e) => {
+        const newColorScheme = e.matches ? "dark" : "light";
+        if (newColorScheme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      });
+    map?.setTarget(mapRef.current);
+  }, []);
 
   const [view, setView] = useState(new View({ center: [10, 59], zoom: 8 }));
   useEffect(() => map.setView(view), [view]);
