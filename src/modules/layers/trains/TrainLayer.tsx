@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-import { GeoJSON } from "ol/format";
 import { request } from "graphql-request";
 import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
@@ -25,7 +24,6 @@ import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { SubscriptionClient } from "subscriptions-transport-ws";
 import { useSubscription } from "@apollo/client";
-import { Subscription } from "zen-observable-ts";
 import { Geometry } from "ol/geom";
 import { MapContext } from "../../map/mapContext";
 import { useLayer } from "../../map/useLayer";

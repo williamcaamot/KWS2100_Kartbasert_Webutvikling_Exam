@@ -20,7 +20,6 @@ import { MapContext } from "../modules/map/mapContext";
 import { EiendomCheckbox } from "../modules/layers/eiendommer/EiendomLayerCheckbox";
 
 export default function Sidebar() {
-  const { loadingQueue } = useContext(MapContext);
   const [isOpen, setIsOpen] = useState(false);
   const [activeContent, setActiveContent] = useState(undefined);
 
@@ -140,20 +139,6 @@ export default function Sidebar() {
           </div>
           <h2 className={"text-xs"}>Reset</h2>
         </div>
-
-        {/*The div below acts as a spacer*/}
-        {loadingQueue.length > 0 && (
-          <>
-            <div className={"h-full"}></div>
-            <div
-              className={`pb-2 pt-2 w-full flex flex-wrap justify-center text-gray-700"}`}
-            >
-              <div className={"w-full p-2 flex justify-center"}>
-                <LoadingSpinner size={"40"} />
-              </div>
-            </div>
-          </>
-        )}
       </div>
 
       <div
