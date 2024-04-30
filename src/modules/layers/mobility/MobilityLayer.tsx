@@ -2,6 +2,7 @@ import request, { gql } from "graphql-request";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   MobilityVehicle,
+  MobilityVehiclesFeature,
   MobilityVehiclesResponse,
   mobilityActiveStyle,
   mobilityStyle,
@@ -17,7 +18,6 @@ import useLocalStorageState from "use-local-storage-state";
 import Switch from "../../../ui/switch";
 import { MapContext } from "../../map/mapContext";
 import { Circle, Fill, Stroke, Style, Text } from "ol/style";
-import CircleStyle from "ol/style/Circle";
 
 const MOBILITY_QUERY = gql`
   query MobilityQuery(
@@ -79,12 +79,12 @@ const mobilityLayer = new VectorLayer({
 });
 
 const mobilityCitiesOptions = [
+  { value: { lat: "0", lon: "0" }, label: "My location" },
   { value: { lat: "59.9139", lon: "10.7522" }, label: "Oslo" },
   { value: { lat: "60.3913", lon: "5.3221" }, label: "Bergen" },
   { value: { lat: "63.4305", lon: "10.3951" }, label: "Trondheim" },
   { value: { lat: "58.9700", lon: "5.7331" }, label: "Stavanger" },
   { value: { lat: "58.1599", lon: "8.0182" }, label: "Kristiansand" },
-  { value: { lat: "0", lon: "0" }, label: "My location" },
 ];
 
 function FetchUserLocation(map: ol.Map) {
@@ -162,6 +162,9 @@ const MobilityLayer = () => {
     lon: string;
   }>({ lat: "59.9139", lon: "10.7522" });
 
+  const [selectedFeature, setSelectedFeature] =
+    useState<MobilityVehiclesFeature>();
+
   const fetchMobility = () => {
     request<MobilityVehiclesResponse>(
       "https://api.entur.io/mobility/v2/graphql",
@@ -214,42 +217,6 @@ const MobilityLayer = () => {
       setActiveFeature(undefined);
     }
   }
-
-  const overlayContainerRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const overlay = new Overlay({
-      element: overlayContainerRef.current!,
-      autoPan: true,
-    });
-    map.addOverlay(overlay);
-  }, [map]);
-
-  function handleSingleClick(e: ol.MapBrowserEvent<MouseEvent>) {
-    const features: FeatureLike[] = [];
-    map.forEachFeatureAtPixel(e.pixel, (f) => features.push(f), {
-      hitTolerance: 5,
-      layerFilter: (l) => l === mobilityLayer,
-    });
-    if (features.length === 1) {
-      const feature = features[0] as ol.Feature;
-      // Update the content of the overlay
-      if (overlayContainerRef.current) {
-        overlayContainerRef.current.innerHTML = JSON.stringify(
-          feature.getProperties(),
-        );
-      }
-      // Set the position of the overlay to the coordinate of the clicked feature
-      map.getOverlays().item(0).setPosition(e.coordinate);
-    }
-  }
-
-  useEffect(() => {
-    if (checked) {
-      map?.on("singleclick", handleSingleClick);
-    }
-    return () => map?.un("singleclick", handleSingleClick);
-  }, [checked]);
 
   useEffect(() => {
     if (checked) {
@@ -308,6 +275,51 @@ const MobilityLayer = () => {
     };
   }, [activeFeature]);
 
+  // Popup showing the position the user clicked
+  const popupElement = document.createElement("div");
+  popupElement.style.backgroundColor = "white";
+  popupElement.style.padding = "10px";
+  popupElement.style.borderRadius = "5px";
+  popupElement.style.border = "1px solid black";
+  popupElement.style.display = "none";
+  document.body.appendChild(popupElement);
+
+  const popup = new Overlay({
+    element: popupElement,
+  });
+  map.addOverlay(popup);
+
+  map.on("click", function (evt) {
+    const resolution = map.getView().getResolution();
+    if (!checked || !resolution || resolution > 100) {
+      return;
+    }
+    var feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
+      return feature as MobilityVehiclesFeature;
+    });
+
+    if (feature?.getProperties().id) {
+      setSelectedFeature(feature);
+      // Show the popup here
+      const coordinate = evt.coordinate;
+      popup.setPosition(coordinate);
+      const currentRangeKm = feature.getProperties().currentRangeMeters / 1000;
+      popupElement.innerHTML = `
+          <span>
+            <h2>${feature.getProperties().system.name.translation[0].value}</h2>
+            <p>Status: ${feature.getProperties().isDisabled ? "Disabled" : "Not disabled"}</p>
+            <p>Availability: ${feature.getProperties().isReserved ? "Reserved" : "Available"}</p>
+            <p>Pricing Plan: ${feature.getProperties().pricingPlan.description.translation[0].value}</p>
+            <p>Current Range (Kilometers): ${currentRangeKm}</p>
+          </span>
+        `;
+      popupElement.style.display = "block";
+    }
+  });
+
+  map.on("pointermove", function () {
+    popupElement.style.display = "none";
+  });
   useLayer(mobilityLayer, true);
 
   return (
@@ -324,15 +336,6 @@ const MobilityLayer = () => {
         <div className={"flex-1"}></div>
         <Switch checked={checked} onChange={setChecked} />
       </div>
-      <div
-        ref={overlayContainerRef}
-        style={{
-          display: "flex",
-          backgroundColor: "white",
-          padding: "10px",
-          maxWidth: "200px",
-        }}
-      ></div>
       <div
         style={{
           display: "flex",
@@ -352,7 +355,7 @@ const MobilityLayer = () => {
               }
               defaultValue="none"
             >
-              <option value="none">Choose a country</option>
+              <option value="none">Choose a location</option>
               {mobilityCitiesOptions.map((option) => (
                 <option
                   key={option.value.lat + option.value.lon}

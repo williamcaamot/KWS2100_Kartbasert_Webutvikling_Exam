@@ -71,10 +71,10 @@ export default function Sidebar() {
 
   return (
     <>
-      <div className="h-full w-[80px] fixed top-0 z-30 flex flex-col items-center bg-white border-r">
+      <div className="dark:bg-slate-900 h-full w-[80px] fixed top-0 z-30 flex flex-col items-center bg-white border-r">
         <div className="w-full flex flex-col">
           <div
-            className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "search" && "bg-gray-200 inner-shadow !text-black"}`}
+            className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 dark:text-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "search" && "bg-gray-200 inner-shadow !text-black"}`}
             onClick={(e) => {
               handleContentChange("search");
             }}
@@ -85,7 +85,7 @@ export default function Sidebar() {
             <h2 className={"text-xs"}>Søk</h2>
           </div>
           <div
-            className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "layers" && "bg-gray-200 inner-shadow !text-black"}`}
+            className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 dark:text-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "layers" && "bg-gray-200 inner-shadow !text-black"}`}
             onClick={(e) => {
               handleContentChange("layers");
             }}
@@ -96,7 +96,7 @@ export default function Sidebar() {
             <h2 className={"text-xs"}>Kart</h2>
           </div>
           <div
-            className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "dataLayers" && "bg-gray-200 inner-shadow !text-black"}`}
+            className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 dark:text-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "dataLayers" && "bg-gray-200 inner-shadow !text-black"}`}
             onClick={(e) => {
               handleContentChange("dataLayers");
             }}
@@ -107,7 +107,7 @@ export default function Sidebar() {
             <h2 className={"text-xs"}>Data</h2>
           </div>
           <div
-            className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "drawingContent" && "bg-gray-200 inner-shadow !text-black"}`}
+            className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 dark:text-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "drawingContent" && "bg-gray-200 inner-shadow !text-black"}`}
             onClick={(e) => {
               handleContentChange("drawingContent");
             }}
@@ -118,7 +118,7 @@ export default function Sidebar() {
             <h2 className={"text-xs"}>Tegning</h2>
           </div>
           <div
-            className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "settingsContent" && "bg-gray-200 inner-shadow !text-black"}`}
+            className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 dark:text-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "settingsContent" && "bg-gray-200 inner-shadow !text-black"}`}
             onClick={(e) => {
               handleContentChange("settingsContent");
             }}
@@ -130,7 +130,7 @@ export default function Sidebar() {
           </div>
         </div>
         <div
-          className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 text-gray-700 hover:text-black transition duration-300`}
+          className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 dark:text-gray-200 text-gray-700 hover:text-black transition duration-300`}
           onClick={() => {
             handleReset();
           }}
@@ -146,7 +146,7 @@ export default function Sidebar() {
         className={`flex h-full fixed top-0 z-20 transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-80"}`}
       >
         <div className="shadow-sm w-[80px] flex-shrink-0" />
-        <div className="border-r shadow-lg w-64 md:w-80 p-3 bg-gray-50">
+        <div className="border-r shadow-lg w-64 md:w-80 p-3 dark:bg-slate-900 bg-gray-50">
           <div
             style={{
               display: activeContent === "search" ? "block" : "none",
@@ -200,19 +200,23 @@ function LayerContent() {
   return (
     <>
       <div className="h-full overflow-y-scroll flex flex-wrap">
-        <div className={"text-gray-800 flex justify-center flex-wrap "}>
-          <h2
-            className={
-              "text-2xl tracking-tight font-semibold pb-1 text-zinc-800"
-            }
-          >
+        <div
+          className={
+            "dark:text-gray-200 text-gray-800 flex justify-center flex-wrap "
+          }
+        >
+          <h2 className={"text-2xl tracking-tight font-semibold pb-1"}>
             Background Layers
           </h2>
           <SelectBaseLayer />
         </div>
 
-        <div className={"text-gray-800 flex justify-center flex-wrap "}>
-          <h2 className={"text-2xl tracking-tight font-semibold text-zinc-800"}>
+        <div
+          className={
+            "dark:text-gray-200 text-gray-800 flex justify-center flex-wrap "
+          }
+        >
+          <h2 className={"text-2xl tracking-tight font-semibold"}>
             Overlay layer (optional)
           </h2>
           <ExtraMapLayer />
@@ -224,10 +228,12 @@ function LayerContent() {
 
 function DataLayerContent() {
   return (
-    <div className={"text-gray-800 flex justify-center flex-wrap"}>
-      <h2
-        className={"text-2xl tracking-tight font-semibold pb-2 text-zinc-800"}
-      >
+    <div
+      className={
+        "dark:text-gray-200 text-gray-800 flex justify-center flex-wrap"
+      }
+    >
+      <h2 className={"text-2xl tracking-tight font-semibold pb-2"}>
         Data layers
       </h2>
       <PopulationLayer />
@@ -242,12 +248,12 @@ function DataLayerContent() {
 
 function DrawingContent() {
   return (
-    <div className={"text-gray-800 h-fullflex justify-center flex-wrap"}>
-      <h2
-        className={"text-2xl tracking-tight font-semibold pb-2 text-zinc-800"}
-      >
-        Tegning
-      </h2>
+    <div
+      className={
+        "dark:text-gray-200 text-gray-800 flex justify-center flex-wrap"
+      }
+    >
+      <h2 className={"text-2xl tracking-tight font-semibold pb-2"}>Tegning</h2>
       <Drawing />
     </div>
   );
@@ -255,10 +261,12 @@ function DrawingContent() {
 
 function SettingsContent() {
   return (
-    <div className={"text-gray-800 flex justify-center flex-wrap"}>
-      <h2
-        className={"text-2xl tracking-tight font-semibold pb-2 text-zinc-800"}
-      >
+    <div
+      className={
+        "dark:text-gray-200 text-gray-800 flex justify-center flex-wrap"
+      }
+    >
+      <h2 className={"text-2xl tracking-tight font-semibold pb-2"}>
         Instillinger
       </h2>
       <Settings />

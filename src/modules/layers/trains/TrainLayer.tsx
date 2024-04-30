@@ -6,7 +6,7 @@ import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
 import * as ol from "ol";
 import { FeatureLike } from "ol/Feature";
-import { MapBrowserEvent } from "ol";
+import { MapBrowserEvent, Overlay } from "ol";
 import {
   TrainFeature,
   TrainProperties,
@@ -130,6 +130,11 @@ const trainLayer = new VectorLayer({
   style: trainStyle,
 });
 
+const trainVendorOptions = [
+  { value: "NSB", label: "VY" },
+  { value: "GOA", label: "GoAhead" },
+];
+
 // Function to create a feature from a vehicle
 function createFeatureFromVehicle(vehicle: TrainProperties): ol.Feature {
   const feature = new ol.Feature({
@@ -237,6 +242,52 @@ export function TrainLayer() {
     }
   }
 
+  // Popup showing the position the user clicked
+  const popupElement = document.createElement("div");
+  popupElement.style.backgroundColor = "white";
+  popupElement.style.padding = "10px";
+  popupElement.style.borderRadius = "5px";
+  popupElement.style.border = "1px solid black";
+  popupElement.style.display = "none";
+  document.body.appendChild(popupElement);
+
+  const popup = new Overlay({
+    element: popupElement,
+  });
+  map.addOverlay(popup);
+
+  map.on("click", function (evt) {
+    const resolution = map.getView().getResolution();
+    if (!checked || !resolution || resolution > 100) {
+      return;
+    }
+    var feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
+      return feature as TrainFeature;
+    });
+
+    if (feature?.getProperties().vehicleId) {
+      // Show the popup here
+      const coordinate = evt.coordinate;
+      popup.setPosition(coordinate);
+      const lastUpdated = new Date(feature.getProperties().lastUpdated);
+      const formattedDate = `${lastUpdated.toLocaleDateString("en-GB")}, ${lastUpdated.toLocaleTimeString("no-NB")}`;
+      popupElement.innerHTML = `
+          <span>
+            <p>Line: ${feature.getProperties().line.lineRef}</p>
+            <p>Last updated: ${formattedDate}</p>
+            <p>Bearing: ${!feature.getProperties().bearing ? "Unknown" : feature.getProperties().bearing}</p>
+            <p>Vehicle status: ${!feature.getProperties().vehicleStatus ? "Unknown" : feature.getProperties().vehicleStatus}</p>
+            <p>Current speed: ${!feature.getProperties().speed ? "Unknown" : feature.getProperties().speed}</p>
+          </span>
+        `;
+      popupElement.style.display = "block";
+    }
+  });
+
+  map.on("pointermove", function () {
+    popupElement.style.display = "none";
+  });
+
   useEffect(() => {
     if (activeFeature) {
       activeFeature.setStyle(activeTrainStyle);
@@ -281,10 +332,48 @@ export function TrainLayer() {
   useLayer(trainLayer, checked);
 
   return (
-    <div className={"flex w-full justify-around p-1"}>
-      <p>Vis tog (live)</p>
-      <div className={"flex-1"}></div>
-      <Switch checked={checked} onChange={setChecked} />
+    <div className={"flex w-full justify-around p-1 flex-col"}>
+      <div
+        style={{
+          display: "flex",
+          gap: "4px",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <p>Vis tog (live)</p>
+        <div className={"flex-1"}></div>
+        <Switch checked={checked} onChange={setChecked} />
+      </div>
+      <div
+        style={{
+          display: "flex",
+          gap: "4px",
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: "100%",
+        }}
+      >
+        {checked && (
+          <form className="max-w-sm">
+            <select
+              id="countries"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              onChange={(e) =>
+                setCodespaceId(JSON.parse(e.currentTarget.value))
+              }
+              defaultValue="none"
+            >
+              <option value="none">Choose a vendor</option>
+              {trainVendorOptions.map((option) => (
+                <option key={option.value} value={JSON.stringify(option.value)}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </form>
+        )}
+      </div>
     </div>
   );
 }
