@@ -54,7 +54,7 @@ export const mobilityStyle = (feature: FeatureLike) => {
       ),
       fill: new Fill(
         mobilityVehicle.system.name.translation[0].value === "Voi Technology AB"
-          ? { color: "blue" }
+          ? { color: "black" }
           : { color: "purple" },
       ),
       radius: 8, // adjust this as needed
@@ -68,12 +68,12 @@ export const mobilityActiveStyle = (feature: FeatureLike) => {
     image: new Circle({
       stroke: new Stroke(
         mobilityVehicle.system.name.translation[0].value === "Voi Technology AB"
-          ? { color: "blue" }
+          ? { color: "black" }
           : { color: "purple" },
       ),
       fill: new Fill(
         mobilityVehicle.system.name.translation[0].value === "Voi Technology AB"
-          ? { color: "blue" }
+          ? { color: "black" }
           : { color: "purple" },
       ),
       radius: 7, // adjust this as needed

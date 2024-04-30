@@ -79,12 +79,12 @@ const mobilityLayer = new VectorLayer({
 });
 
 const mobilityCitiesOptions = [
+  { value: { lat: "0", lon: "0" }, label: "My location" },
   { value: { lat: "59.9139", lon: "10.7522" }, label: "Oslo" },
   { value: { lat: "60.3913", lon: "5.3221" }, label: "Bergen" },
   { value: { lat: "63.4305", lon: "10.3951" }, label: "Trondheim" },
   { value: { lat: "58.9700", lon: "5.7331" }, label: "Stavanger" },
   { value: { lat: "58.1599", lon: "8.0182" }, label: "Kristiansand" },
-  { value: { lat: "0", lon: "0" }, label: "My location" },
 ];
 
 function FetchUserLocation(map: ol.Map) {
@@ -355,7 +355,7 @@ const MobilityLayer = () => {
               }
               defaultValue="none"
             >
-              <option value="none">Choose a city</option>
+              <option value="none">Choose a location</option>
               {mobilityCitiesOptions.map((option) => (
                 <option
                   key={option.value.lat + option.value.lon}
