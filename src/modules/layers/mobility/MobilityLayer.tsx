@@ -97,45 +97,48 @@ function FetchUserLocation(map: ol.Map) {
               latitude: position.coords.latitude,
               longitude: position.coords.longitude,
             });
-              // Create a point geometry at your location
-  const point = new Point([position.coords.longitude, position.coords.latitude]);
+            // Create a point geometry at your location
+            const point = new Point([
+              position.coords.longitude,
+              position.coords.latitude,
+            ]);
 
-  // Create a feature with the point geometry
-  const feature = new Feature(point);
+            // Create a feature with the point geometry
+            const feature = new Feature(point);
 
-  // Create a style for the feature
-  const style = new Style({
-    image: new Circle({
-      radius: 14,
-      fill: new Fill({ color: "rgba(0, 0, 230, 0.7)" }),
-      stroke: new Stroke({
-        color: "white",
-        width: 4,
-      }),
-    }),
-    text: new Text({
-      text: "Your Position",
-      offsetY: -30,
-      fill: new Fill({ color: "black" }),
-      stroke: new Stroke({ color: "white", width: 5 }),
-    }),
-  });
+            // Create a style for the feature
+            const style = new Style({
+              image: new Circle({
+                radius: 14,
+                fill: new Fill({ color: "rgba(0, 0, 230, 0.7)" }),
+                stroke: new Stroke({
+                  color: "white",
+                  width: 4,
+                }),
+              }),
+              text: new Text({
+                text: "Your Position",
+                offsetY: -30,
+                fill: new Fill({ color: "black" }),
+                stroke: new Stroke({ color: "white", width: 5 }),
+              }),
+            });
 
-  // Set the style of the feature
-  feature.setStyle(style);
+            // Set the style of the feature
+            feature.setStyle(style);
 
-  // Create a vector source and add the feature to it
-  const source = new VectorSource({
-    features: [feature],
-  });
+            // Create a vector source and add the feature to it
+            const source = new VectorSource({
+              features: [feature],
+            });
 
-  // Create a vector layer with the vector source
-  const layer = new VectorLayer({
-    source: source,
-  });
+            // Create a vector layer with the vector source
+            const layer = new VectorLayer({
+              source: source,
+            });
 
-  // Add the layer to the map
-  map.addLayer(layer);
+            // Add the layer to the map
+            map.addLayer(layer);
           },
           (error) => {
             reject(error);
