@@ -1,10 +1,40 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import Switch from "../../ui/switch";
 import { MapContext } from "../map/mapContext";
 
 const Settings = () => {
   const { settings, setSettings } = useContext(MapContext);
+  const [isDarkMode, setIsDarkMode] = useState(localStorage.theme === "dark");
+
+  function switchToLightMode() {
+    localStorage.theme = "light";
+    document.documentElement.classList.remove("dark");
+    setIsDarkMode(false);
+  }
+
+  function switchToDarkMode() {
+    localStorage.theme = "dark";
+    document.documentElement.classList.add("dark");
+    setIsDarkMode(true);
+  }
+
+  const toggleTheme = () => {
+    if (isDarkMode) {
+      switchToLightMode();
+    } else {
+      switchToDarkMode();
+    }
+  };
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setIsDarkMode(localStorage.theme === "dark");
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
 
   const toggleZoomSlider = () => {
     setSettings((prevSettings) => ({
@@ -41,6 +71,11 @@ const Settings = () => {
         <p>Vis scaleline</p>
         <div className={"flex-1"}></div>
         <Switch checked={settings.showScaleline} onChange={toggleScaleline} />
+      </div>
+      <div className={"flex w-full justify-around p-1"}>
+        <p>Dark mode</p>
+        <div className={"flex-1"}></div>
+        <Switch checked={isDarkMode} onChange={toggleTheme} />
       </div>
     </>
   );
