@@ -226,7 +226,11 @@ export function SelectBaseLayer() {
 
   return (
     <>
-      <div className={"w-[90%] h-auto flex flex-col justify-start overflow-y-scroll pb-4"}>
+      <div
+        className={
+          "w-[90%] h-auto flex flex-col justify-start overflow-y-scroll pb-4"
+        }
+      >
         {baseLayerOptions.map(({ id, name, imageUrl }) => {
           return (
             <div

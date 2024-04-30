@@ -82,22 +82,24 @@ export function OverlayLayer() {
 
   return (
     <>
-        <div className={"w-[90%] h-auto flex flex-col justify-start overflow-y-scroll pb-4"}>
+      <div
+        className={
+          "w-[90%] h-auto flex flex-col justify-start overflow-y-scroll pb-4"
+        }
+      >
         {extraLayerOptions.map(({ id, name, imageUrl }) => {
           return (
-
-              <div
-                  key={id}
-                  className={`dark:bg-slate-800 flex flex-row items-center justify-between py-1 px-4 my-1 w-full h-16 shadow ${selectedExtraLayer?.id === id ? "border-2 border-teal-600" : ""} rounded-lg`}
-                  onClick={() => {
-                    setSelectedExtraLayer((currentLayer) =>
-                        currentLayer && currentLayer.id === id
-                            ? null
-                            : extraLayerOptions.find((l) => l.id === id) || null,
-                    );
-                  }}
-              >
-
+            <div
+              key={id}
+              className={`dark:bg-slate-800 flex flex-row items-center justify-between py-1 px-4 my-1 w-full h-16 shadow ${selectedExtraLayer?.id === id ? "border-2 border-teal-600" : ""} rounded-lg`}
+              onClick={() => {
+                setSelectedExtraLayer((currentLayer) =>
+                  currentLayer && currentLayer.id === id
+                    ? null
+                    : extraLayerOptions.find((l) => l.id === id) || null,
+                );
+              }}
+            >
               <div style={{ marginRight: "10px" }}>{name}</div>
 
               <img

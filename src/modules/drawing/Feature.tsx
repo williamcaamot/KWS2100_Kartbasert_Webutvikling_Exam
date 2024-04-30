@@ -31,7 +31,7 @@ export function Feature({ feature, handleDeleteFeature }: FeatureProps) {
         <div className={"py-1"}>
           Tekst:{" "}
           <input
-              className={"dark:bg-slate-600 dark:text-white"}
+            className={"dark:bg-slate-600 dark:text-white"}
             type={"text"}
             value={featureText}
             onChange={(e) => setFeatureText(e.target.value)}

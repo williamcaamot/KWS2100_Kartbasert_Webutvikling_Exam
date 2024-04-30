@@ -152,8 +152,10 @@ export default function Drawing() {
           return (
             <>
               <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                <div className="flex items-center ps-3"
-                onClick={() => setDrawingType(type.type)}>
+                <div
+                  className="flex items-center ps-3"
+                  onClick={() => setDrawingType(type.type)}
+                >
                   <input
                     onChange={() => setDrawingType(type.type)}
                     id={type.type}
