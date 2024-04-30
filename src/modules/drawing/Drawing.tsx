@@ -6,8 +6,6 @@ import VectorLayer from "ol/layer/Vector";
 import { useLayer } from "../map/useLayer";
 import { Draw, Modify, Snap } from "ol/interaction";
 import { GeoJSON } from "ol/format";
-import { Feature } from "ol";
-import { Geometry } from "ol/geom";
 
 //BUG Circles doesn't save to localstorage
 
@@ -87,6 +85,7 @@ export default function Drawing() {
       const features = vector.getSource()?.getFeatures();
       const geojsonFormat = new GeoJSON();
       if (features && features.length > 0) {
+
         const featuresJSON = geojsonFormat.writeFeatures(features);
         window.localStorage.setItem("drawing-features", featuresJSON);
       }

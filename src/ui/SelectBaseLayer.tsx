@@ -41,6 +41,16 @@ const ortoPhotoLayer = new TileLayer();
 const kartverketLayer = new TileLayer();
 const polarLayer = new TileLayer();
 
+async function loadWtmsSource(
+    url: string,
+    config: { matrixSet: string; layer: string },
+) {
+  const res = await fetch(url);
+  const text = await res.text();
+  const result = parser.read(text);
+  return new WMTS(optionsFromCapabilities(result, config)!);
+}
+
 async function loadFlyfotoLayer() {
   const res = await fetch(
     "https://opencache.statkart.no/gatekeeper/gk/gk.open_nib_web_mercator_wmts_v2?SERVICE=WMTS&REQUEST=GetCapabilities",
@@ -72,27 +82,10 @@ async function loadKartverketLayer() {
 }
 
 async function loadPolar() {
-  try {
-    const res = await fetch(
-      "https://kristiania-kws2100-2024.github.io/kws2100-exam-williamcaamot/layers/polar-sdi.xml",
-    );
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    const text = await res.text();
-
-    const result = parser.read(text);
-
-    const options = optionsFromCapabilities(result, {
-      layer: "arctic_cascading",
-      matrixSet: "3575",
-    });
-    // @ts-ignore
-    return new WMTS(options)!;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+  return await loadWtmsSource("https://kristiania-kws2100-2024.github.io/kws2100-exam-williamcaamot/layers/polar-sdi.xml", {
+    layer: "arctic_cascading",
+    matrixSet: "3575",
+  });
 }
 
 export function SelectBaseLayer() {
@@ -105,6 +98,8 @@ export function SelectBaseLayer() {
 
     loadPolar().then((source) => polarLayer.setSource(source));
   }, []);
+
+
 
   const [ogcVectorTileColor, setOgcVectorTileColor] = useLocalStorageState(
     "ogc-vector-styles",
@@ -267,6 +262,15 @@ export function SelectBaseLayer() {
       setSelectedLayer(foundLayer || baseLayerOptions[0]);
     }
   }, [mapTilerStreetsColor]);
+
+  useEffect(() => setBaseLayer(selectedLayer.layer), [selectedLayer]);
+
+  const mapProjection = map.getView().getProjection().getCode();
+  const selectedLayerProjection = selectedLayer.layer
+      .getSource()
+      ?.getProjection()
+      ?.getCode();
+
   return (
     <>
       <div

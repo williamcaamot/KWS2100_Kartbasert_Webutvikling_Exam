@@ -35,17 +35,36 @@ export function Application() {
     },
   });
 
+  const [view, setView] = useState(new View({ center: [10, 59], zoom: 8 }));
+  useEffect(() => map.setView(view), [view]);
+
   if (!mapInstance.current) {
     mapInstance.current = new Map({
-      view: new View({ center: [11, 60], zoom: 10 }),
+      view: view,
     });
   }
-
   const map = mapInstance.current;
+
   const [vectorLayers, setVectorLayers] = useState<Layer[]>([]);
   const [baseLayer, setBaseLayer] = useState<Layer>(
-    () => new TileLayer({ source: new OSM(), preload: Infinity }),
+      () => new TileLayer({ source: new OSM(), preload: Infinity }),
   );
+
+  useEffect(() => {
+    const projection = baseLayer?.getSource()?.getProjection();
+    if (projection) {
+      setView(
+          (oldView) =>
+              new View({
+                center: oldView.getCenter(),
+                zoom: oldView.getZoom(),
+                projection,
+              }),
+      );
+    }
+  }, [baseLayer]);
+
+
 
   const allLayers = useMemo(
     () => [baseLayer, ...vectorLayers],

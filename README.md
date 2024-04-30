@@ -14,13 +14,16 @@ This application is designed to explore neighbourhoods and local offerings. It c
 
 ## To-do (try have high priority at top of list)
 
-- [ ] Tegning med lagring til localstorage
+- [X] Tegning med lagring til localstorage
+- [ ] Fix bug for circles not saving to localstorage
+- [ ] Add color selection for drawing
+- [ ] Add button reactivity for when saving to localstorage
 - [ ] Add interaction (onclick) on the map for different features
 - - [ ] Generic overlay component to display information when clicking
 - [ ] Vector tile layer with styling
 - - [x] OGCVector layer (VERY basic Vector tyle with styling saved to localstorage)
 - [x] Polar layer with correct projection
-- [x] Fix reset button in navigation, create icon with chatgpt for this
+- [x] Fix reset button in navigation
 - [ ] Make matbutikklayer images scale better when zooming in close
 - [x] Loading icon for between API fetch and result is applied to map (loading spinner)
 - [x] Add custom zoom component
