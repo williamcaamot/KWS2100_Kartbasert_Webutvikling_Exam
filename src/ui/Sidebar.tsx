@@ -17,6 +17,7 @@ import useLocalStorageState from "use-local-storage-state";
 import ResetIcon from "./icons/ResetIcon";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { MapContext } from "../modules/map/mapContext";
+import {EiendomCheckbox} from "../modules/layers/eiendommer/EiendomLayerCheckbox";
 
 export default function Sidebar() {
   const { loadingQueue } = useContext(MapContext);
@@ -252,6 +253,7 @@ function DataLayerContent() {
       <PopulationLayer />
       <MatbutikkerCheckbox />
       <TrainLayer />
+      <EiendomCheckbox/>
     </div>
   );
 }
