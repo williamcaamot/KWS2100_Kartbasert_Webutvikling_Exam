@@ -226,11 +226,7 @@ function LayerContent() {
         </div>
 
         <div className={"text-gray-800 flex justify-center flex-wrap "}>
-          <h2
-            className={
-              "text-2xl tracking-tight font-semibold text-zinc-800"
-            }
-          >
+          <h2 className={"text-2xl tracking-tight font-semibold text-zinc-800"}>
             Overlay layer (optional)
           </h2>
           <ExtraMapLayer />
