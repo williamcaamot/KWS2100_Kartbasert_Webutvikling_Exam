@@ -85,7 +85,6 @@ export default function Drawing() {
       const features = vector.getSource()?.getFeatures();
       const geojsonFormat = new GeoJSON();
       if (features && features.length > 0) {
-
         const featuresJSON = geojsonFormat.writeFeatures(features);
         window.localStorage.setItem("drawing-features", featuresJSON);
       }

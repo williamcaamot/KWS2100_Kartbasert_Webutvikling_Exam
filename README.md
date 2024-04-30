@@ -14,7 +14,7 @@ This application is designed to explore neighbourhoods and local offerings. It c
 
 ## To-do (try have high priority at top of list)
 
-- [X] Tegning med lagring til localstorage
+- [x] Tegning med lagring til localstorage
 - [ ] Fix bug for circles not saving to localstorage
 - [ ] Add color selection for drawing
 - [ ] Add button reactivity for when saving to localstorage

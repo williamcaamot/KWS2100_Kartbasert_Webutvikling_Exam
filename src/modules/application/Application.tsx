@@ -47,24 +47,22 @@ export function Application() {
 
   const [vectorLayers, setVectorLayers] = useState<Layer[]>([]);
   const [baseLayer, setBaseLayer] = useState<Layer>(
-      () => new TileLayer({ source: new OSM(), preload: Infinity }),
+    () => new TileLayer({ source: new OSM(), preload: Infinity }),
   );
 
   useEffect(() => {
     const projection = baseLayer?.getSource()?.getProjection();
     if (projection) {
       setView(
-          (oldView) =>
-              new View({
-                center: oldView.getCenter(),
-                zoom: oldView.getZoom(),
-                projection,
-              }),
+        (oldView) =>
+          new View({
+            center: oldView.getCenter(),
+            zoom: oldView.getZoom(),
+            projection,
+          }),
       );
     }
   }, [baseLayer]);
-
-
 
   const allLayers = useMemo(
     () => [baseLayer, ...vectorLayers],

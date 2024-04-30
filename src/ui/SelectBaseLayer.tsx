@@ -42,8 +42,8 @@ const kartverketLayer = new TileLayer();
 const polarLayer = new TileLayer();
 
 async function loadWtmsSource(
-    url: string,
-    config: { matrixSet: string; layer: string },
+  url: string,
+  config: { matrixSet: string; layer: string },
 ) {
   const res = await fetch(url);
   const text = await res.text();
@@ -82,10 +82,13 @@ async function loadKartverketLayer() {
 }
 
 async function loadPolar() {
-  return await loadWtmsSource("https://kristiania-kws2100-2024.github.io/kws2100-exam-williamcaamot/layers/polar-sdi.xml", {
-    layer: "arctic_cascading",
-    matrixSet: "3575",
-  });
+  return await loadWtmsSource(
+    "https://kristiania-kws2100-2024.github.io/kws2100-exam-williamcaamot/layers/polar-sdi.xml",
+    {
+      layer: "arctic_cascading",
+      matrixSet: "3575",
+    },
+  );
 }
 
 export function SelectBaseLayer() {
@@ -98,8 +101,6 @@ export function SelectBaseLayer() {
 
     loadPolar().then((source) => polarLayer.setSource(source));
   }, []);
-
-
 
   const [ogcVectorTileColor, setOgcVectorTileColor] = useLocalStorageState(
     "ogc-vector-styles",
@@ -267,9 +268,9 @@ export function SelectBaseLayer() {
 
   const mapProjection = map.getView().getProjection().getCode();
   const selectedLayerProjection = selectedLayer.layer
-      .getSource()
-      ?.getProjection()
-      ?.getCode();
+    .getSource()
+    ?.getProjection()
+    ?.getCode();
 
   return (
     <>
