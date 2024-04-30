@@ -1,4 +1,5 @@
-import { FeatureLike } from "ol/Feature";
+import Feature, { FeatureLike } from "ol/Feature";
+import { Point } from "ol/geom";
 import { Circle, Fill, Stroke, Style, Text } from "ol/style";
 
 interface Translation {
@@ -38,13 +39,18 @@ export interface MobilityVehiclesResponse {
   vehicles: MobilityVehicle[];
 }
 
+export type MobilityVehiclesFeature = {
+    getProperties(): MobilityVehicle;
+  } & Feature<Point>;
+  
+
 export const mobilityStyle = (feature: FeatureLike) => {
   const mobilityVehicle = feature.getProperties() as MobilityVehicle;
   return new Style({
     image: new Circle({
-      stroke: new Stroke({ color: "black", width: 2 }),
-      fill: new Fill({ color: "green" }),
-      radius: 6, // adjust this as needed
+      stroke: new Stroke(!mobilityVehicle.isReserved ? { color: "lightGreen", width: 4 } : { color: "red", width: 4 }),
+      fill: new Fill(mobilityVehicle.system.name.translation[0].value === "Voi Technology AB" ? { color: "blue" } : {color: "purple"}),
+      radius: 8, // adjust this as needed
     }),
   });
 };
@@ -53,8 +59,8 @@ export const mobilityActiveStyle = (feature: FeatureLike) => {
   const mobilityVehicle = feature.getProperties() as MobilityVehicle;
   return new Style({
     image: new Circle({
-      stroke: new Stroke({ color: "red", width: 3 }),
-      fill: new Fill({ color: "black" }),
+      stroke: new Stroke(mobilityVehicle.system.name.translation[0].value === "Voi Technology AB" ? { color: "blue" } : {color: "purple"}),
+      fill: new Fill(mobilityVehicle.system.name.translation[0].value === "Voi Technology AB" ? { color: "blue" } : {color: "purple"}),
       radius: 7, // adjust this as needed
     }),
     text: new Text({

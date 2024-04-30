@@ -6,7 +6,7 @@ import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
 import * as ol from "ol";
 import { FeatureLike } from "ol/Feature";
-import { MapBrowserEvent } from "ol";
+import { MapBrowserEvent, Overlay } from "ol";
 import {
   TrainFeature,
   TrainProperties,
@@ -236,6 +236,52 @@ export function TrainLayer() {
       setActiveFeature(undefined);
     }
   }
+
+  // Popup showing the position the user clicked
+const popupElement = document.createElement('div');
+popupElement.style.backgroundColor = 'white';
+popupElement.style.padding = '10px';
+popupElement.style.borderRadius = '5px';
+popupElement.style.border = '1px solid black';
+popupElement.style.display = 'none';
+document.body.appendChild(popupElement);
+
+const popup = new Overlay({
+  element: popupElement,
+});
+map.addOverlay(popup);
+
+map.on("click", function (evt) {
+    const resolution = map.getView().getResolution();
+    if (!checked || !resolution || resolution > 100) {
+      return;
+    }
+    var feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
+      return feature as TrainFeature;
+    });
+
+    if (feature?.getProperties().vehicleId) {
+        // Show the popup here
+        const coordinate = evt.coordinate;
+        popup.setPosition(coordinate);
+        const lastUpdated = new Date(feature.getProperties().lastUpdated);
+        const formattedDate = `${lastUpdated.toLocaleDateString('en-GB')}, ${lastUpdated.toLocaleTimeString('no-NB')}`;
+        popupElement.innerHTML = `
+          <span>
+            <p>Line: ${feature.getProperties().line.lineRef}</p>
+            <p>Last updated: ${formattedDate}</p>
+            <p>Bearing: ${!feature.getProperties().bearing ? 'Unknown' : feature.getProperties().bearing}</p>
+            <p>Vehicle status: ${!feature.getProperties().vehicleStatus ? 'Unknown' : feature.getProperties().vehicleStatus}</p>
+            <p>Current speed: ${!feature.getProperties().speed ? 'Unknown' : feature.getProperties().speed}</p>
+          </span>
+        `;
+        popupElement.style.display = 'block';
+      }
+  });
+  
+  map.on('pointermove', function () {
+    popupElement.style.display = 'none';
+  });
 
   useEffect(() => {
     if (activeFeature) {
