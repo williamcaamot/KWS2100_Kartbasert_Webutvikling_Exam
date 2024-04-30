@@ -46,6 +46,6 @@ body {
   position: absolute;
   top: 10px;
   bottom: auto; /* Distance from the bottom of the map container */
-  left: 10px; /* Distance from the right side of the map container */
+  left: 2px; /* Distance from the right side of the map container */
   right: auto; /* Overrides the default positioning */
 }

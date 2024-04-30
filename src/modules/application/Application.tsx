@@ -132,7 +132,7 @@ export function Application() {
       </nav>
       <main style={{ display: "flex", width: "100%", height: "100%" }}>
         <div
-          style={{ width: "64px", height: "100%", backgroundColor: "red" }}
+          style={{ width: "86px", height: "100%", backgroundColor: "red" }}
         />
         <div ref={mapRef} style={{ height: "100%", width: "100%" }}></div>
       </main>
