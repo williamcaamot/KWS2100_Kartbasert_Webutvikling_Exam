@@ -4,16 +4,14 @@ import { OGCVectorTile, OSM, StadiaMaps, WMTS, XYZ } from "ol/source";
 import { MapContext } from "../modules/map/mapContext";
 import { MVT } from "ol/format";
 import {
-    loadFlyfotoLayer,
-    loadWtmsSource,
-    loadKartverketLayer,
-    loadPolar,
-    ortoPhotoLayer,
-    kartverketLayer,
-    polarLayer,
+  loadFlyfotoLayer,
+  loadWtmsSource,
+  loadKartverketLayer,
+  loadPolar,
+  ortoPhotoLayer,
+  kartverketLayer,
+  polarLayer,
 } from "./LoadLayers";
-
-
 
 import mapTilerStreets from "../assets/images/maptilerStreets.png";
 import satelliteLayerImage from "../assets/images/satelliteLayerImage.png";
