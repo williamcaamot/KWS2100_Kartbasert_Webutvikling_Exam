@@ -156,7 +156,7 @@ const MobilityLayer = () => {
 
   function handlePointerMove(e: ol.MapBrowserEvent<MouseEvent>) {
     const resolution = map.getView().getResolution();
-    if (!resolution || resolution > 100) {
+    if (!resolution || resolution > 6) {
       return;
     }
     const features: FeatureLike[] = [];

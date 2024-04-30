@@ -23,7 +23,6 @@ export function useActiveFeatures<FEATURE extends Feature>(
   const [activeFeatures, setActiveFeatures] = useState<FEATURE[]>([]);
 
   function handlePointerMove(e: MapBrowserEvent<MouseEvent>) {
-    console.log("handlePointerMove");
     const features = layer
       ?.getSource()
       ?.getFeaturesAtCoordinate(e.coordinate) as FEATURE[];
@@ -50,8 +49,6 @@ export function useActiveFeatures<FEATURE extends Feature>(
   }
   useEffect(() => {
     //Console logging to see if the event is registered for
-    console.log("map");
-    console.log(layer);
     if (layer) {
       console.log("registering pointermove event");
       map.on("pointermove", handlePointerMove);
