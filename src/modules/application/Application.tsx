@@ -39,24 +39,32 @@ export function Application() {
   // UseEffect som sjekker om brukeren har satt dark mode som preferanse og om systemet er satt til dark mode
   // TODO: Fikse at den huker av riktig knapp i settings ut ifra hvilken theme som er satt i localstorage når man laster inn siden
   useEffect(() => {
+    // Check if the user has a dark mode preference and it's set to dark
     if (
       window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches
     ) {
+      // Add the 'dark' class to the root element
       document.documentElement.classList.add("dark");
     } else {
+      // Remove the 'dark' class from the root element
       document.documentElement.classList.remove("dark");
     }
+
+    // Listen for changes to the user's dark mode preference
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", (e) => {
         const newColorScheme = e.matches ? "dark" : "light";
+
+        // Add or remove the 'dark' class based on the new color scheme
         if (newColorScheme === "dark") {
           document.documentElement.classList.add("dark");
         } else {
           document.documentElement.classList.remove("dark");
         }
       });
+
     map?.setTarget(mapRef.current);
   }, []);
 
