@@ -284,7 +284,7 @@ export function TrainLayer() {
 
   return (
     <div className={"flex w-full justify-around p-1"}>
-      <p>Vis tog (subscription)</p>
+      <p>Vis tog (live)</p>
       <div className={"flex-1"}></div>
       <Switch checked={checked} onChange={setChecked} />
     </div>

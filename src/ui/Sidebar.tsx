@@ -217,7 +217,7 @@ function LayerContent() {
         <div className={"text-gray-800 flex justify-center flex-wrap "}>
           <h2
             className={
-              "text-2xl tracking-tight font-semibold pb-2 text-zinc-800 mb-9"
+              "text-2xl tracking-tight font-semibold pb-1 text-zinc-800"
             }
           >
             Background Layers
@@ -228,10 +228,10 @@ function LayerContent() {
         <div className={"text-gray-800 flex justify-center flex-wrap "}>
           <h2
             className={
-              "text-2xl tracking-tight font-semibold pb-2 text-zinc-800 mb-9"
+              "text-2xl tracking-tight font-semibold text-zinc-800"
             }
           >
-            Extra Layers
+            Overlay layer (optional)
           </h2>
           <ExtraMapLayer />
         </div>
@@ -248,12 +248,12 @@ function DataLayerContent() {
       >
         Data layers
       </h2>
-      <MobilityLayer />
-      <AdresseLayerCheckbox />
       <PopulationLayer />
-      <MatbutikkerCheckbox />
-      <TrainLayer />
       <EiendomCheckbox />
+      <AdresseLayerCheckbox />
+      <MatbutikkerCheckbox />
+      <MobilityLayer />
+      <TrainLayer />
     </div>
   );
 }

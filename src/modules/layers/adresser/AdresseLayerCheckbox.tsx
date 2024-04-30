@@ -63,7 +63,7 @@ export function AdresseLayerCheckbox() {
 
   return (
     <div className={"flex w-full justify-around p-1"}>
-      <p>Vis adresser (from API)</p>
+      <p>Vis adresser</p>
       <div className={"flex-1"}></div>
       <Switch checked={checked} onChange={setChecked}></Switch>
     </div>

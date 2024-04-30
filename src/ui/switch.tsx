@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 interface SwitchProperties {
-  onChange: (checked: boolean) => void; // Function that takes a boolean and returns void
-  checked: boolean; // Initial checked state of the switch
+  onChange: (checked: boolean) => void;
+  checked: boolean;
 }
 
 export default function Switch({ onChange, checked }: SwitchProperties) {
@@ -22,7 +22,7 @@ export default function Switch({ onChange, checked }: SwitchProperties) {
     >
       <div
         className={`absolute top-1 left-1 w-5 h-5 bg-white rounded-full shadow-md transform duration-300 ease-in-out ${
-          isEnabled ? "translate-x-6" : "translate-x-0"
+          isEnabled ? "translate-x-7" : "translate-x-0"
         }`}
       />
     </div>
