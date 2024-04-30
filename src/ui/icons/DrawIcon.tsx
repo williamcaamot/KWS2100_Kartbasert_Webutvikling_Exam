@@ -1,5 +1,7 @@
 import React from "react";
 
+//Source: https://reactsvgicons.com/search?q=layer (draw icon)
+
 interface DrawingIconProps {
   size?: number;
   color?: string;
@@ -20,17 +22,7 @@ const DrawingIcon: React.FC<DrawingIconProps> = ({
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      {/* Pencil Tip */}
-      <path d="M12 2l-2 2 5 5 2-2-5-5z" />
-      {/* Pencil Body */}
-      <path d="M12 2l5 5 5-5-5-5-5 5z" fill={color} />
-      {/* Drawing Line */}
-      <path d="M17 7l5 5-5-5z" fill={color} />
-      {/* Dotted Grid Background */}
-      <path
-        d="M2 22h2v-2H2v2zm4 0h2v-2H6v2zm4 0h2v-2h-2v2zm4 0h2v-2h-2v2zm4 0h2v-2h-2v2z"
-        fill={color}
-      />
+      <path d="M8.5 3A5.5 5.5 0 0114 8.5c0 1.33-.47 2.55-1.26 3.5H21v9h-9v-8.26c-.95.79-2.17 1.26-3.5 1.26A5.5 5.5 0 013 8.5 5.5 5.5 0 018.5 3z" />
     </svg>
   );
 };

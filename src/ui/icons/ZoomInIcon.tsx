@@ -1,4 +1,6 @@
 import React from "react";
+
+// Source https://reactsvgicons.com/search?q=plus
 const ZoomInIcon: React.FC<{ size?: number; color?: string }> = ({
   size = 38,
   color = "currentColor",
@@ -15,8 +17,7 @@ const ZoomInIcon: React.FC<{ size?: number; color?: string }> = ({
       strokeLinejoin="round"
     >
       <rect x="4.5" y="11" width="14" height="0.5"></rect>{" "}
-      {/* Horizontal Line */}
-      <rect x="11" y="4.5" width="0.5" height="14"></rect> {/* Vertical Line */}
+      <rect x="11" y="4.5" width="0.5" height="14"></rect>
     </svg>
   );
 };

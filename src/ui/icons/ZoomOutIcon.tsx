@@ -1,4 +1,6 @@
 import React from "react";
+
+//Source https://reactsvgicons.com/search?q=plus
 const ZoomOutIcon: React.FC<{ size?: number; color?: string }> = ({
   size = 38,
   color = "currentColor",

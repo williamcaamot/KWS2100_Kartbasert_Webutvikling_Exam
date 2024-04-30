@@ -91,7 +91,7 @@ export default function Search() {
                   }}
                 >
                   <div className="mr-2">
-                    <MapResultIcon size={16} color="#4B5563" />{" "}
+                    <MapResultIcon size={20} color="#4B5563" />{" "}
                     {/* Replace LocationIcon with your actual icon component */}
                   </div>
                   <p className="m-0 text-gray-800 font-medium">

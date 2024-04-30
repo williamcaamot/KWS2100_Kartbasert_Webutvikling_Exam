@@ -1,5 +1,5 @@
 import React from "react";
-
+// Source: https://reactsvgicons.com/search?q=layer (reset icon)
 interface ResetIconProps {
   size?: number;
   color?: string;
@@ -20,10 +20,15 @@ const ResetIcon: React.FC<ResetIconProps> = ({
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M1 4v6h6" />
-      <path d="M23 20v-6h-6" />
-      <path d="M20.49 9A9 9 0 0 0 5 5l-1 1" />
-      <path d="M3.51 15A9 9 0 0 0 19 19l1-1" />
+      <g
+          fill="none"
+          fillRule="evenodd"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+      >
+        <path d="M3.578 6.487A8 8 0 112.5 10.5M7.5 6.5h-4v-4" />
+      </g>
     </svg>
   );
 };

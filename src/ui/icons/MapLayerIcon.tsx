@@ -1,10 +1,9 @@
 import React from "react";
 // Source: https://reactsvgicons.com/search?q=layer
-// Define the props for the component, if any
 
 interface MapLayerIconProps {
-  size?: number; // Optional size prop to customize the icon size
-  color?: string; // Optional color prop to customize the icon color
+  size?: number;
+  color?: string;
 }
 
 const MapLayerIcon: React.FC<MapLayerIconProps> = ({
