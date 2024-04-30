@@ -23,6 +23,7 @@ interface System {
 }
 
 export interface MobilityVehicle {
+  setStyle(activeTrainStyle: any): unknown;
   id: string;
   lat: number;
   lon: number;

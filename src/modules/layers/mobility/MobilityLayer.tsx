@@ -3,20 +3,18 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   MobilityVehicle,
   MobilityVehiclesResponse,
+  mobilityActiveStyle,
   mobilityStyle,
 } from "./MobilityFeature";
 import { Geometry, Point } from "ol/geom";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-import { Feature } from "ol";
+import { Feature, Overlay } from "ol";
 import * as ol from "ol";
 import { useLayer } from "../../map/useLayer";
 import { FeatureLike } from "ol/Feature";
 import useLocalStorageState from "use-local-storage-state";
 import Switch from "../../../ui/switch";
-import { set } from "ol/transform";
-import { Spinner } from "@intility/bifrost-react";
-import { fromLonLat } from "ol/proj";
 import { MapContext } from "../../map/mapContext";
 
 const MOBILITY_QUERY = gql`
@@ -119,10 +117,8 @@ const MobilityLayer = () => {
     lat: string;
     lon: string;
   }>({ lat: "59.9139", lon: "10.7522" });
-  const [loading, setLoading] = useState(false);
 
   const fetchMobility = () => {
-    setLoading(true);
     request<MobilityVehiclesResponse>(
       "https://api.entur.io/mobility/v2/graphql",
       MOBILITY_QUERY,
@@ -152,11 +148,9 @@ const MobilityLayer = () => {
             });
           }
         }
-        setLoading(false);
       })
       .catch((error) => {
         console.error(error);
-        setLoading(false);
       });
   };
 
@@ -177,7 +171,41 @@ const MobilityLayer = () => {
     }
   }
 
-  useLayer(mobilityLayer, true);
+  const overlayContainerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const overlay = new Overlay({
+      element: overlayContainerRef.current!,
+      autoPan: true,
+    });
+    map.addOverlay(overlay);
+  }, [map]);
+
+  function handleSingleClick(e: ol.MapBrowserEvent<MouseEvent>) {
+    const features: FeatureLike[] = [];
+    map.forEachFeatureAtPixel(e.pixel, (f) => features.push(f), {
+      hitTolerance: 5,
+      layerFilter: (l) => l === mobilityLayer,
+    });
+    if (features.length === 1) {
+      const feature = features[0] as ol.Feature;
+      // Update the content of the overlay
+      if (overlayContainerRef.current) {
+        overlayContainerRef.current.innerHTML = JSON.stringify(
+          feature.getProperties(),
+        );
+      }
+      // Set the position of the overlay to the coordinate of the clicked feature
+      map.getOverlays().item(0).setPosition(e.coordinate);
+    }
+  }
+
+  useEffect(() => {
+    if (checked) {
+      map?.on("singleclick", handleSingleClick);
+    }
+    return () => map?.un("singleclick", handleSingleClick);
+  }, [checked]);
 
   useEffect(() => {
     if (checked) {
@@ -201,18 +229,15 @@ const MobilityLayer = () => {
 
   useEffect(() => {
     if (selectedCity.lat === "0" && selectedCity.lon === "0") {
-      setLoading(true);
       FetchUserLocation()
         .then((userLocation) => {
           setSelectedCity({
             lat: userLocation.latitude.toString(),
             lon: userLocation.longitude.toString(),
           });
-          setLoading(false);
         })
         .catch((error) => {
           console.error(error);
-          setLoading(false);
         });
     }
   }, [selectedCity]);
@@ -228,6 +253,19 @@ const MobilityLayer = () => {
     map.getView().animate({ center: [longitude, latitude], zoom: 14 });
   }, [selectedCity, map]);
 
+  useEffect(() => {
+    if (activeFeature) {
+      activeFeature.setStyle(mobilityActiveStyle);
+    }
+    return () => {
+      if (activeFeature) {
+        activeFeature.setStyle(mobilityStyle);
+      }
+    };
+  }, [activeFeature]);
+
+  useLayer(mobilityLayer, true);
+
   return (
     <div className={"flex w-full justify-around p-1 flex-col"}>
       <div
@@ -242,6 +280,15 @@ const MobilityLayer = () => {
         <div className={"flex-1"}></div>
         <Switch checked={checked} onChange={setChecked} />
       </div>
+      <div
+        ref={overlayContainerRef}
+        style={{
+          display: "flex",
+          backgroundColor: "white",
+          padding: "10px",
+          maxWidth: "200px",
+        }}
+      ></div>
       <div
         style={{
           display: "flex",
@@ -273,7 +320,6 @@ const MobilityLayer = () => {
             </select>
           </form>
         )}
-        {loading && <Spinner size={25} />}
       </div>
     </div>
   );

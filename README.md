@@ -6,6 +6,8 @@
 
 [![publish](https://github.com/kristiania-kws2100-2024/kws2100-exam-williamcaamot/actions/workflows/publish.yaml/badge.svg)](https://github.com/kristiania-kws2100-2024/kws2100-exam-williamcaamot/actions)
 
+URL: https://kristiania-kws2100-2024.github.io/kws2100-exam-williamcaamot/
+
 ## About this application
 
 This application is designed to explore neighbourhoods and local offerings. It can be used to explore where you live, where you want to go, or where you want to live.

@@ -5,6 +5,7 @@ import { MapContext } from "../modules/map/mapContext";
 import { MVT, WMTSCapabilities } from "ol/format";
 import { optionsFromCapabilities } from "ol/source/WMTS";
 
+import mapTilerStreets from "../assets/images/maptilerStreets.png";
 import satelliteLayerImage from "../assets/images/satelliteLayerImage.png";
 import osmLayerImage from "../assets/images/openLayerstreetMapImage.png";
 import stadiaLayerImage from "../assets/images/stadiaLayerImage.png";
@@ -13,6 +14,7 @@ import kartverketLayerImage from "../assets/images/kartverketLayerImage.png";
 import flyfotoLayerImage from "../assets/images/flyfotoLayerImage.png";
 import OGCVectorTileLayerImage from "../assets/images/OGCVectorTileLayerImage.png";
 import arcticImage from "../assets/images/arcticLayerImage.png";
+import VectorTileSource from "ol/source/VectorTile";
 
 import proj4 from "proj4";
 import { register } from "ol/proj/proj4";
@@ -118,6 +120,13 @@ export function SelectBaseLayer() {
     },
   );
 
+  const [mapTilerStreetsColor, setMapTilerStreetsColor] = useState({
+    background: "#D1D1D1",
+    fillColor: "#ffffff",
+    strokeColor: "#8c8b8b",
+    strokeWidth: 0.8,
+  });
+
   const baseLayerOptions = [
     {
       id: "osm",
@@ -187,6 +196,29 @@ export function SelectBaseLayer() {
       imageUrl: arcticImage,
     },
     {
+      id: "maptiler_streets",
+      name: "MapTiler Streets",
+      layer: new VectorTileLayer({
+        source: new VectorTileSource({
+          format: new MVT(),
+          url: "https://api.maptiler.com/tiles/v3/{z}/{x}/{y}.pbf?key=TnrB96NpsTO149dXrCgI",
+          maxZoom: 14,
+        }),
+        style: (feature) => {
+          return new Style({
+            stroke: new Stroke({
+              color: mapTilerStreetsColor.strokeColor,
+              width: mapTilerStreetsColor.strokeWidth,
+            }),
+            fill: new Fill({
+              color: mapTilerStreetsColor.fillColor,
+            }),
+          });
+        },
+      }),
+      imageUrl: mapTilerStreets,
+    },
+    {
       id: "ogcVectorTile",
       name: "ogcVectorTile",
       layer: new VectorTileLayer({
@@ -225,10 +257,18 @@ export function SelectBaseLayer() {
       const foundLayer = baseLayerOptions.find(
         (layer) => layer.id === "ogcVectorTile",
       );
-      setSelectedLayer(foundLayer || baseLayerOptions[0]); // fallback to the first item if not found
+      setSelectedLayer(foundLayer || baseLayerOptions[0]);
     }
   }, [ogcVectorTileColor]);
 
+  useEffect(() => {
+    if (selectedLayer) {
+      const foundLayer = baseLayerOptions.find(
+        (layer) => layer.id === selectedLayer.id,
+      );
+      setSelectedLayer(foundLayer || baseLayerOptions[0]);
+    }
+  }, [mapTilerStreetsColor]);
   return (
     <>
       <div
@@ -264,12 +304,47 @@ export function SelectBaseLayer() {
             </div>
           );
         })}
+        {selectedLayer.id === "maptiler_streets" && (
+          <>
+            <h3 className={"font-bold text-2xl"}>Tilpass</h3>
+            <div className={"flex flex-wrap"}>
+              <div className={"w-full flex justify-between p-2"}>
+                <span>Roads</span>
+                <input
+                  className={"mx-2"}
+                  type={"color"}
+                  value={mapTilerStreetsColor.strokeColor}
+                  onChange={(e) => {
+                    setMapTilerStreetsColor({
+                      ...mapTilerStreetsColor,
+                      strokeColor: e.target.value,
+                    });
+                  }}
+                />
+              </div>
+              <div className={"w-full flex justify-between p-2"}>
+                <span>Background</span>
+                <input
+                  className={"mx-2"}
+                  type={"color"}
+                  value={mapTilerStreetsColor.fillColor}
+                  onChange={(e) => {
+                    setMapTilerStreetsColor({
+                      ...mapTilerStreetsColor,
+                      fillColor: e.target.value,
+                    });
+                  }}
+                />
+              </div>
+            </div>
+          </>
+        )}
 
         {selectedLayer.id === "ogcVectorTile" && (
           <>
             <h3 className={"font-bold text-2xl"}>Tilpass</h3>
             <div className={"flex flex-wrap"}>
-              <div className={"w-full flex justify-center p-2"}>
+              <div className={"w-full flex justify-between p-2"}>
                 <span>Bakgrunn</span>
                 <input
                   className={"mx-2"}
@@ -283,7 +358,7 @@ export function SelectBaseLayer() {
                   }}
                 />
               </div>
-              <div className={"w-full flex justify-center p-2"}>
+              <div className={"w-full flex justify-between p-2"}>
                 <span>Fyll farge</span>
                 <input
                   className={"mx-2"}
@@ -297,7 +372,7 @@ export function SelectBaseLayer() {
                   }}
                 />
               </div>
-              <div className={"w-full flex justify-center p-2"}>
+              <div className={"w-full flex justify-between p-2"}>
                 <span>Linje farge</span>
                 <input
                   className={"mx-2"}
