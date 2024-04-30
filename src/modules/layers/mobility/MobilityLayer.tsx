@@ -355,7 +355,7 @@ const MobilityLayer = () => {
               }
               defaultValue="none"
             >
-              <option value="none">Choose a country</option>
+              <option value="none">Choose a city</option>
               {mobilityCitiesOptions.map((option) => (
                 <option
                   key={option.value.lat + option.value.lon}
