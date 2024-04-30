@@ -9,6 +9,16 @@ export const ortoPhotoLayer = new TileLayer();
 export const kartverketLayer = new TileLayer();
 export const polarLayer = new TileLayer();
 
+export async function loadWtmsSource(
+  url: string,
+  config: { matrixSet: string; layer: string },
+) {
+  const res = await fetch(url);
+  const text = await res.text();
+  const result = parser.read(text);
+  return new WMTS(optionsFromCapabilities(result, config)!);
+}
+
 export async function loadFlyfotoLayer() {
   const res = await fetch(
     "https://opencache.statkart.no/gatekeeper/gk/gk.open_nib_web_mercator_wmts_v2?SERVICE=WMTS&REQUEST=GetCapabilities",

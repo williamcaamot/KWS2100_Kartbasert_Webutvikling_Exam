@@ -2,8 +2,18 @@ import React, { useContext, useEffect, useState } from "react";
 import TileLayer from "ol/layer/Tile";
 import { OGCVectorTile, OSM, StadiaMaps, WMTS, XYZ } from "ol/source";
 import { MapContext } from "../modules/map/mapContext";
-import { MVT, WMTSCapabilities } from "ol/format";
-import { optionsFromCapabilities } from "ol/source/WMTS";
+import { MVT } from "ol/format";
+import {
+    loadFlyfotoLayer,
+    loadWtmsSource,
+    loadKartverketLayer,
+    loadPolar,
+    ortoPhotoLayer,
+    kartverketLayer,
+    polarLayer,
+} from "./LoadLayers";
+
+
 
 import mapTilerStreets from "../assets/images/maptilerStreets.png";
 import satelliteLayerImage from "../assets/images/satelliteLayerImage.png";
@@ -34,62 +44,6 @@ proj4.defs([
   ],
 ]);
 register(proj4);
-
-const parser = new WMTSCapabilities();
-
-const ortoPhotoLayer = new TileLayer();
-const kartverketLayer = new TileLayer();
-const polarLayer = new TileLayer();
-
-async function loadWtmsSource(
-  url: string,
-  config: { matrixSet: string; layer: string },
-) {
-  const res = await fetch(url);
-  const text = await res.text();
-  const result = parser.read(text);
-  return new WMTS(optionsFromCapabilities(result, config)!);
-}
-
-async function loadFlyfotoLayer() {
-  const res = await fetch(
-    "https://opencache.statkart.no/gatekeeper/gk/gk.open_nib_web_mercator_wmts_v2?SERVICE=WMTS&REQUEST=GetCapabilities",
-  );
-  const text = await res.text();
-
-  const result = parser.read(text);
-  const options = optionsFromCapabilities(result, {
-    layer: "Nibcache_web_mercator_v2",
-    matrixSet: "default028mm",
-  });
-  // @ts-ignore
-  return new WMTS(options)!;
-}
-
-async function loadKartverketLayer() {
-  const res = await fetch(
-    "https://opencache.statkart.no/gatekeeper/gk/gk.open_wmts?request=GetCapabilities&service=WMS",
-  );
-  const text = await res.text();
-
-  const result = parser.read(text);
-  const options = optionsFromCapabilities(result, {
-    layer: "norgeskart_bakgrunn",
-    matrixSet: "EPSG:3857",
-  });
-  // @ts-ignore
-  return new WMTS(options)!;
-}
-
-async function loadPolar() {
-  return await loadWtmsSource(
-    "https://kristiania-kws2100-2024.github.io/kws2100-exam-williamcaamot/layers/polar-sdi.xml",
-    {
-      layer: "arctic_cascading",
-      matrixSet: "3575",
-    },
-  );
-}
 
 export function SelectBaseLayer() {
   const { setBaseLayer, map } = useContext(MapContext);
