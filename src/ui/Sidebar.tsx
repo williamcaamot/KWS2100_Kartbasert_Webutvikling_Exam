@@ -17,6 +17,7 @@ import useLocalStorageState from "use-local-storage-state";
 import ResetIcon from "./icons/ResetIcon";
 import { EiendomCheckbox } from "../modules/layers/eiendommer/EiendomLayerCheckbox";
 import Drawing from "../modules/drawing/Drawing";
+import {KommuneLayerCheckbox} from "../modules/layers/kommuner/KommuneLayerCheckbox";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,6 +33,12 @@ export default function Sidebar() {
     defaultValue: false,
   });
   const [, setTrain] = useLocalStorageState("train-layer-checked", {
+    defaultValue: false,
+  });
+  const [, setMatbutikker] = useLocalStorageState("matbutikk-layer-checked", {
+    defaultValue: false,
+  });
+  const [, setKommuner] = useLocalStorageState("kommuner-layer-checked", {
     defaultValue: false,
   });
   const [, setOgcVectorTileColor] = useLocalStorageState("ogc-vector-styles", {
@@ -58,6 +65,9 @@ export default function Sidebar() {
     setAddress(false);
     setPopulation(false);
     setTrain(false);
+    setMatbutikker(false);
+    setKommuner(false);
+
     setOgcVectorTileColor({
       background: "#d1d1d1",
       strokeWidth: 0.8,
@@ -225,6 +235,7 @@ function DataLayerContent() {
       <MatbutikkerCheckbox />
       <MobilityLayer />
       <TrainLayer />
+      <KommuneLayerCheckbox/>
     </div>
   );
 }
