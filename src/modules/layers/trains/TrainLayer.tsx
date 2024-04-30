@@ -130,6 +130,11 @@ const trainLayer = new VectorLayer({
   style: trainStyle,
 });
 
+const trainVendorOptions = [
+  { value: "NSB", label: "VY" },
+  { value: "GOA", label: "GoAhead" },
+];
+
 // Function to create a feature from a vehicle
 function createFeatureFromVehicle(vehicle: TrainProperties): ol.Feature {
   const feature = new ol.Feature({
@@ -327,10 +332,48 @@ export function TrainLayer() {
   useLayer(trainLayer, checked);
 
   return (
-    <div className={"flex w-full justify-around p-1"}>
-      <p>Vis tog (live)</p>
-      <div className={"flex-1"}></div>
-      <Switch checked={checked} onChange={setChecked} />
+    <div className={"flex w-full justify-around p-1 flex-col"}>
+      <div
+        style={{
+          display: "flex",
+          gap: "4px",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <p>Vis tog (live)</p>
+        <div className={"flex-1"}></div>
+        <Switch checked={checked} onChange={setChecked} />
+      </div>
+      <div
+        style={{
+          display: "flex",
+          gap: "4px",
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: "100%",
+        }}
+      >
+        {checked && (
+          <form className="max-w-sm">
+            <select
+              id="countries"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              onChange={(e) =>
+                setCodespaceId(JSON.parse(e.currentTarget.value))
+              }
+              defaultValue="none"
+            >
+              <option value="none">Choose a vendor</option>
+              {trainVendorOptions.map((option) => (
+                <option key={option.value} value={JSON.stringify(option.value)}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </form>
+        )}
+      </div>
     </div>
   );
 }
