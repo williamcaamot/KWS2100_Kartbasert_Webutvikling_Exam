@@ -17,7 +17,7 @@ import useLocalStorageState from "use-local-storage-state";
 import ResetIcon from "./icons/ResetIcon";
 import { EiendomCheckbox } from "../modules/layers/eiendommer/EiendomLayerCheckbox";
 import Drawing from "../modules/drawing/Drawing";
-import {KommuneLayerCheckbox} from "../modules/layers/kommuner/KommuneLayerCheckbox";
+import { KommuneLayerCheckbox } from "../modules/layers/kommuner/KommuneLayerCheckbox";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -235,7 +235,7 @@ function DataLayerContent() {
       <MatbutikkerCheckbox />
       <MobilityLayer />
       <TrainLayer />
-      <KommuneLayerCheckbox/>
+      <KommuneLayerCheckbox />
     </div>
   );
 }

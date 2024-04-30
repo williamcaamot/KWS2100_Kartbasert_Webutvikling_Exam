@@ -5,11 +5,12 @@ import { useLayer } from "../../map/useLayer";
 import useLocalStorageState from "use-local-storage-state";
 
 export function MatbutikkerCheckbox() {
-    const [checked, setMatbutikker] = useLocalStorageState("matbutikk-layer-checked", {
-        defaultValue: false,
-    });
-
-
+  const [checked, setMatbutikker] = useLocalStorageState(
+    "matbutikk-layer-checked",
+    {
+      defaultValue: false,
+    },
+  );
 
   useLayer(MatbutikkerLayer, checked);
   return (
