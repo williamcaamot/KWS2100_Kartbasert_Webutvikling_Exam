@@ -16,7 +16,7 @@ export default function Switch({ onChange, checked }: SwitchProperties) {
   return (
     <div
       className={`relative w-14 h-7 rounded-full p-1 cursor-pointe transition-colors cursor-pointer ${
-        isEnabled ? "bg-teal-600" : "bg-gray-300"
+        isEnabled ? "bg-teal-600" : "bg-gray-300 dark:bg-zinc-600"
       }`}
       onClick={toggleSwitch}
     >

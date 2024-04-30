@@ -102,7 +102,7 @@ export default function Drawing() {
         const featuresJSON = geojsonFormat.writeFeatures(features);
         window.localStorage.setItem("drawing-features", featuresJSON);
         features.forEach((feature) => {
-          console.log(feature.getProperties());
+          //console.log(feature.getProperties());
         });
         setUpdatedCounter(0);
         alert("Endringene ble lagret!");
@@ -152,10 +152,11 @@ export default function Drawing() {
           return (
             <>
               <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                <div className="flex items-center ps-3">
+                <div className="flex items-center ps-3"
+                onClick={() => setDrawingType(type.type)}>
                   <input
                     onChange={() => setDrawingType(type.type)}
-                    id="list-radio-license"
+                    id={type.type}
                     type="radio"
                     checked={type.type === drawingType && true}
                     value={type.type}
@@ -163,7 +164,7 @@ export default function Drawing() {
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                   />
                   <label
-                    htmlFor="list-radio-license"
+                    htmlFor={type.type}
                     className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >
                     {type.name}

@@ -22,14 +22,14 @@ export default function Search() {
         );
 
         const { adresser, metadata } = await res.json();
-        console.log(adresser);
+        //console.log(adresser);
         setResults(adresser);
       }
     } catch (e) {}
   }
 
   function handleFocusSearchResult(item: any) {
-    console.log(item);
+    //console.log(item);
     map.getView().animate({
       center: [item.representasjonspunkt.lon, item.representasjonspunkt.lat],
       zoom: 18,

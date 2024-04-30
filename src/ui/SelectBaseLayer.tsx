@@ -226,23 +226,12 @@ export function SelectBaseLayer() {
 
   return (
     <>
-      <div
-        style={{
-          width: "90%",
-          height: "auto",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          alignItems: "center",
-          overflowY: "scroll",
-          paddingBottom: "50px",
-        }}
-      >
+      <div className={"w-[90%] h-auto flex flex-col justify-start overflow-y-scroll pb-4"}>
         {baseLayerOptions.map(({ id, name, imageUrl }) => {
           return (
             <div
               key={id}
-              className={`flex flex-row items-center justify-between p-4 my-1 w-full h-20 shadow ${selectedLayer.id === id ? "border-2 border-teal-600" : ""} rounded-lg`}
+              className={`dark:bg-slate-800 flex flex-row items-center justify-between py-1 px-4 my-1 w-full h-16 shadow ${selectedLayer.id === id ? "border-2 border-teal-600" : ""} rounded-lg`}
               onClick={() =>
                 setSelectedLayer(
                   baseLayerOptions.find((l) => l.id === id) ||

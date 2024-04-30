@@ -59,7 +59,7 @@ async function loadEiendomDataLayer(
     source.clear();
   }
   const data = await response.json();
-  console.log(data);
+
   const features = new GeoJSON().readFeatures(data, {
     dataProjection: "EPSG:4326",
     featureProjection: projection.getCode(),

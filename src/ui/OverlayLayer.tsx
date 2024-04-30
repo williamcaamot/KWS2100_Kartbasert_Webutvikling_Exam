@@ -82,45 +82,22 @@ export function OverlayLayer() {
 
   return (
     <>
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          alignItems: "center",
-          overflowY: "auto",
-          paddingBottom: "40px",
-        }}
-      >
+        <div className={"w-[90%] h-auto flex flex-col justify-start overflow-y-scroll pb-4"}>
         {extraLayerOptions.map(({ id, name, imageUrl }) => {
           return (
-            <div
-              key={id}
-              style={{
-                padding: "15px",
-                width: "90%",
-                height: "80px",
-                display: "flex",
-                flexDirection: "row",
-                margin: "5px",
-                boxShadow: "0 0 5px rgba(0,0,0,0.15)",
-                justifyContent: "space-between",
-                alignItems: "center",
-                border:
-                  selectedExtraLayer && selectedExtraLayer.id === id
-                    ? "2px solid #17a2b8"
-                    : "none",
-                borderRadius: "10px",
-              }}
-              onClick={() => {
-                setSelectedExtraLayer((currentLayer) =>
-                  currentLayer && currentLayer.id === id
-                    ? null
-                    : extraLayerOptions.find((l) => l.id === id) || null,
-                );
-              }}
-            >
+
+              <div
+                  key={id}
+                  className={`dark:bg-slate-800 flex flex-row items-center justify-between py-1 px-4 my-1 w-full h-16 shadow ${selectedExtraLayer?.id === id ? "border-2 border-teal-600" : ""} rounded-lg`}
+                  onClick={() => {
+                    setSelectedExtraLayer((currentLayer) =>
+                        currentLayer && currentLayer.id === id
+                            ? null
+                            : extraLayerOptions.find((l) => l.id === id) || null,
+                    );
+                  }}
+              >
+
               <div style={{ marginRight: "10px" }}>{name}</div>
 
               <img

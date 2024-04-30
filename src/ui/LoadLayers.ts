@@ -58,10 +58,10 @@ export async function loadPolar() {
       throw new Error(`HTTP error! status: ${res.status}`);
     }
     const text = await res.text();
-    console.log(text);
+    //console.log(text);
 
     const result = parser.read(text);
-    console.log(result);
+    //console.log(result);
 
     const options = optionsFromCapabilities(result, {
       layer: "arctic_cascading",

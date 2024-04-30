@@ -36,7 +36,7 @@ async function loadEiendomDataLayer(
   resolution: number,
   projection: Projection,
 ) {
-  console.log("fetching data");
+  //console.log("fetching data");
   const url = `https://kartbasert-f2ca5a90ebbf.herokuapp.com/api/v1/datalayers/teig?extent=${JSON.stringify(extent)}&resolution=${resolution}`;
   const response = await fetch(url);
   if (!response.ok) {
