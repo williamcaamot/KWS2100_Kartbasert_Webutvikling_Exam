@@ -10,7 +10,7 @@ import stadiaDarkLayerImage from "../assets/images/stadiaDarkLayerImage.png";
 import kartverketLayerImage from "../assets/images/kartverketLayerImage.png";
 import flyfotoLayerImage from "../assets/images/flyfotoLayerImage.png";
 
-export function ExtraMapLayer() {
+export function OverlayLayer() {
   const { map } = useContext(MapContext);
 
   const extraLayerOptions = [

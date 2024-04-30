@@ -131,8 +131,8 @@ export function Application() {
         <CustomZoomAndLocation />
       </nav>
       <main style={{ display: "flex", width: "100%", height: "100%" }}>
-        <div
-          style={{ width: "86px", height: "100%", backgroundColor: "red" }}
+        {/*This div works as a block beneath the menu, since the menu is actually an overlay...*/}<div
+          style={{ width: "83px", height: "100%", backgroundColor:"white"}}
         />
         <div ref={mapRef} style={{ height: "100%", width: "100%" }}></div>
       </main>

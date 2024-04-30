@@ -9,14 +9,12 @@ import SettingsIcon from "./icons/SettingsIcon";
 import { AdresseLayerCheckbox } from "../modules/layers/adresser/AdresseLayerCheckbox";
 import { PopulationLayer } from "../modules/layers/population/PopulationLayer";
 import { MatbutikkerCheckbox } from "../modules/layers/foodStores/MatbutikkLayerCheckbox";
-import { ExtraMapLayer } from "./ExtraMapLayer";
+import { OverlayLayer } from "./OverlayLayer";
 import MobilityLayer from "../modules/layers/mobility/MobilityLayer";
 import TrainLayer from "../modules/layers/trains/TrainLayer";
 import Settings from "../modules/userSettings/Settings";
 import useLocalStorageState from "use-local-storage-state";
 import ResetIcon from "./icons/ResetIcon";
-import { LoadingSpinner } from "./LoadingSpinner";
-import { MapContext } from "../modules/map/mapContext";
 import { EiendomCheckbox } from "../modules/layers/eiendommer/EiendomLayerCheckbox";
 import Drawing from "../modules/drawing/Drawing";
 
@@ -68,78 +66,56 @@ export default function Sidebar() {
     });
     window.location.reload();
   }
+  const menuItems = [{
+    id: "search",
+    handleOnClick: (() => handleContentChange("search")),
+    icon: <SearchIcon/>,
+    text: "Søk",
+  },{
+    id: "layers",
+    handleOnClick: (() => handleContentChange("layers")),
+    icon: <MapLayerIcon />,
+    text: "Kart",
+  },{
+    id: "dataLayers",
+    handleOnClick: (() => handleContentChange("dataLayers")),
+    icon: <DataLayerIcon />,
+    text: "Data",
+  },{
+    id: "drawingContent",
+    handleOnClick: (() => handleContentChange("drawingContent")),
+    icon: <DrawIcon />,
+    text: "Tegning",
+  },{
+    id: "settingsContent",
+    handleOnClick: (() => handleContentChange("settingsContent")),
+    icon: <SettingsIcon />,
+    text: "Innstillinger",
+  },{
+    id: "reset",
+    handleOnClick: (() => handleReset()),
+    icon: <ResetIcon />,
+    text: "Reset",
+  }]
+
 
   return (
     <>
+
       <div className="dark:bg-slate-900 h-full w-[80px] fixed top-0 z-30 flex flex-col items-center bg-white border-r">
-        <div className="w-full flex flex-col">
-          <div
-            className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 dark:text-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "search" && "bg-gray-200 inner-shadow !text-black"}`}
-            onClick={(e) => {
-              handleContentChange("search");
-            }}
-          >
-            <div className={"w-full flex justify-center"}>
-              <SearchIcon />
-            </div>
-            <h2 className={"text-xs"}>Søk</h2>
-          </div>
-          <div
-            className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 dark:text-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "layers" && "bg-gray-200 inner-shadow !text-black"}`}
-            onClick={(e) => {
-              handleContentChange("layers");
-            }}
-          >
-            <div className={"w-full flex justify-center"}>
-              <MapLayerIcon />
-            </div>
-            <h2 className={"text-xs"}>Kart</h2>
-          </div>
-          <div
-            className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 dark:text-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "dataLayers" && "bg-gray-200 inner-shadow !text-black"}`}
-            onClick={(e) => {
-              handleContentChange("dataLayers");
-            }}
-          >
-            <div className={"w-full flex justify-center"}>
-              <DataLayerIcon />
-            </div>
-            <h2 className={"text-xs"}>Data</h2>
-          </div>
-          <div
-            className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 dark:text-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "drawingContent" && "bg-gray-200 inner-shadow !text-black"}`}
-            onClick={(e) => {
-              handleContentChange("drawingContent");
-            }}
-          >
-            <div className={"w-full flex justify-center"}>
-              <DrawIcon />
-            </div>
-            <h2 className={"text-xs"}>Tegning</h2>
-          </div>
-          <div
-            className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 dark:text-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "settingsContent" && "bg-gray-200 inner-shadow !text-black"}`}
-            onClick={(e) => {
-              handleContentChange("settingsContent");
-            }}
-          >
-            <div className={"w-full flex justify-center"}>
-              <SettingsIcon />
-            </div>
-            <h2 className={"text-xs"}>Innstillinger</h2>
-          </div>
-        </div>
-        <div
-          className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 dark:text-gray-200 text-gray-700 hover:text-black transition duration-300`}
-          onClick={() => {
-            handleReset();
-          }}
-        >
-          <div className={"w-full flex justify-center"}>
-            <ResetIcon />
-          </div>
-          <h2 className={"text-xs"}>Reset</h2>
-        </div>
+          {menuItems.map((menuItem) => {
+            return<>
+              <div
+                  className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 dark:text-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === menuItem.id && "bg-gray-200 shadow-inner !text-black"}`}
+                  onClick={menuItem.handleOnClick}
+              >
+                <div className={"w-full flex justify-center"}>
+                  {menuItem.icon}
+                </div>
+                <h2 className={"text-xs"}>{menuItem.text}</h2>
+              </div>
+            </>
+          })}
       </div>
 
       <div
@@ -219,7 +195,7 @@ function LayerContent() {
           <h2 className={"text-2xl tracking-tight font-semibold"}>
             Overlay layer (optional)
           </h2>
-          <ExtraMapLayer />
+          <OverlayLayer />
         </div>
       </div>
     </>
@@ -250,7 +226,7 @@ function DrawingContent() {
   return (
     <div
       className={
-        "dark:text-gray-200 text-gray-800 flex justify-center flex-wrap"
+        "dark:text-gray-200 text-gray-800 flex justify-center flex-wrap h-full overflow-y-scroll"
       }
     >
       <h2 className={"text-2xl tracking-tight font-semibold pb-2"}>Tegning</h2>
