@@ -16,7 +16,7 @@ This application is designed to explore neighbourhoods and local offerings. It c
 
 - [x] Tegning med lagring til localstorage
 - [ ] Fix bug for circles not saving to localstorage
-- [X] Add color selection for drawing
+- [x] Add color selection for drawing
 - [ ] Add interaction (onclick) on the map for different features
 - - [ ] Generic overlay component to display information when clicking
 - [ ] Vector tile layer with styling
@@ -33,6 +33,7 @@ This application is designed to explore neighbourhoods and local offerings. It c
 ## Application Features
 
 #### Adresser with clustering:
+
 - Cluster color and size is based of the amount of addresses inside of it.
 - Single point addresses inside kommuner of Oslo, Asker and Bærum has different colors, as per the requirement to have "single-feature cluster with a seperatre style using icons that vary based on a property of the feature."
 

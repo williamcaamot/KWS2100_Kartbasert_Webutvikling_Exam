@@ -66,48 +66,54 @@ export default function Sidebar() {
     });
     window.location.reload();
   }
-  const menuItems = [{
-    id: "search",
-    handleOnClick: (() => handleContentChange("search")),
-    icon: <SearchIcon/>,
-    text: "Søk",
-  },{
-    id: "layers",
-    handleOnClick: (() => handleContentChange("layers")),
-    icon: <MapLayerIcon />,
-    text: "Kart",
-  },{
-    id: "dataLayers",
-    handleOnClick: (() => handleContentChange("dataLayers")),
-    icon: <DataLayerIcon />,
-    text: "Data",
-  },{
-    id: "drawingContent",
-    handleOnClick: (() => handleContentChange("drawingContent")),
-    icon: <DrawIcon />,
-    text: "Tegning",
-  },{
-    id: "settingsContent",
-    handleOnClick: (() => handleContentChange("settingsContent")),
-    icon: <SettingsIcon />,
-    text: "Innstillinger",
-  },{
-    id: "reset",
-    handleOnClick: (() => handleReset()),
-    icon: <ResetIcon />,
-    text: "Reset",
-  }]
-
+  const menuItems = [
+    {
+      id: "search",
+      handleOnClick: () => handleContentChange("search"),
+      icon: <SearchIcon />,
+      text: "Søk",
+    },
+    {
+      id: "layers",
+      handleOnClick: () => handleContentChange("layers"),
+      icon: <MapLayerIcon />,
+      text: "Kart",
+    },
+    {
+      id: "dataLayers",
+      handleOnClick: () => handleContentChange("dataLayers"),
+      icon: <DataLayerIcon />,
+      text: "Data",
+    },
+    {
+      id: "drawingContent",
+      handleOnClick: () => handleContentChange("drawingContent"),
+      icon: <DrawIcon />,
+      text: "Tegning",
+    },
+    {
+      id: "settingsContent",
+      handleOnClick: () => handleContentChange("settingsContent"),
+      icon: <SettingsIcon />,
+      text: "Innstillinger",
+    },
+    {
+      id: "reset",
+      handleOnClick: () => handleReset(),
+      icon: <ResetIcon />,
+      text: "Reset",
+    },
+  ];
 
   return (
     <>
-
       <div className="dark:bg-slate-900 h-full w-[80px] fixed top-0 z-30 flex flex-col items-center bg-white border-r">
-          {menuItems.map((menuItem) => {
-            return<>
+        {menuItems.map((menuItem) => {
+          return (
+            <>
               <div
-                  className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 dark:text-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === menuItem.id && "bg-gray-200 shadow-inner !text-black"}`}
-                  onClick={menuItem.handleOnClick}
+                className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 dark:text-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === menuItem.id && "bg-gray-200 shadow-inner !text-black"}`}
+                onClick={menuItem.handleOnClick}
               >
                 <div className={"w-full flex justify-center"}>
                   {menuItem.icon}
@@ -115,7 +121,8 @@ export default function Sidebar() {
                 <h2 className={"text-xs"}>{menuItem.text}</h2>
               </div>
             </>
-          })}
+          );
+        })}
       </div>
 
       <div
