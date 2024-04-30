@@ -242,7 +242,7 @@ function DataLayerContent() {
 
 function DrawingContent() {
   return (
-    <div className={"text-gray-800 flex justify-center flex-wrap"}>
+    <div className={"text-gray-800 h-fullflex justify-center flex-wrap"}>
       <h2
         className={"text-2xl tracking-tight font-semibold pb-2 text-zinc-800"}
       >
