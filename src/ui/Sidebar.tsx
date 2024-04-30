@@ -72,8 +72,7 @@ export default function Sidebar() {
   return (
     <>
       <div
-        className="h-full fixed top-0 z-30 flex flex-col items-center bg-white border-r"
-        style={{ width: "80px" }}
+        className="h-full w-[80px] fixed top-0 z-30 flex flex-col items-center bg-white border-r"
       >
         <div className="w-full flex flex-col">
           <div
@@ -148,7 +147,7 @@ export default function Sidebar() {
       <div
         className={`flex h-full fixed top-0 z-20 transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-80"}`}
       >
-        <div className="shadow-sm w-16 flex-shrink-0" />
+        <div className="shadow-sm w-[80px] flex-shrink-0" />
         <div className="border-r shadow-lg w-64 md:w-80 p-3 bg-gray-50">
           <div
             style={{
