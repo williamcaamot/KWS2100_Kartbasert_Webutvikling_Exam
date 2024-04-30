@@ -16,6 +16,8 @@ import { FeatureLike } from "ol/Feature";
 import useLocalStorageState from "use-local-storage-state";
 import Switch from "../../../ui/switch";
 import { MapContext } from "../../map/mapContext";
+import { Circle, Fill, Stroke, Style, Text } from "ol/style";
+import CircleStyle from "ol/style/Circle";
 
 const MOBILITY_QUERY = gql`
   query MobilityQuery(
@@ -85,7 +87,7 @@ const mobilityCitiesOptions = [
   { value: { lat: "0", lon: "0" }, label: "My location" },
 ];
 
-function FetchUserLocation() {
+function FetchUserLocation(map: ol.Map) {
   return new Promise<{ latitude: number; longitude: number }>(
     (resolve, reject) => {
       if (navigator.geolocation) {
@@ -95,6 +97,48 @@ function FetchUserLocation() {
               latitude: position.coords.latitude,
               longitude: position.coords.longitude,
             });
+            // Create a point geometry at your location
+            const point = new Point([
+              position.coords.longitude,
+              position.coords.latitude,
+            ]);
+
+            // Create a feature with the point geometry
+            const feature = new Feature(point);
+
+            // Create a style for the feature
+            const style = new Style({
+              image: new Circle({
+                radius: 14,
+                fill: new Fill({ color: "rgba(0, 0, 230, 0.7)" }),
+                stroke: new Stroke({
+                  color: "white",
+                  width: 4,
+                }),
+              }),
+              text: new Text({
+                text: "Your Position",
+                offsetY: -30,
+                fill: new Fill({ color: "black" }),
+                stroke: new Stroke({ color: "white", width: 5 }),
+              }),
+            });
+
+            // Set the style of the feature
+            feature.setStyle(style);
+
+            // Create a vector source and add the feature to it
+            const source = new VectorSource({
+              features: [feature],
+            });
+
+            // Create a vector layer with the vector source
+            const layer = new VectorLayer({
+              source: source,
+            });
+
+            // Add the layer to the map
+            map.addLayer(layer);
           },
           (error) => {
             reject(error);
@@ -229,7 +273,7 @@ const MobilityLayer = () => {
 
   useEffect(() => {
     if (selectedCity.lat === "0" && selectedCity.lon === "0") {
-      FetchUserLocation()
+      FetchUserLocation(map)
         .then((userLocation) => {
           setSelectedCity({
             lat: userLocation.latitude.toString(),
@@ -250,7 +294,7 @@ const MobilityLayer = () => {
       return;
     }
 
-    map.getView().animate({ center: [longitude, latitude], zoom: 14 });
+    map.getView().animate({ center: [longitude, latitude], zoom: 17 });
   }, [selectedCity, map]);
 
   useEffect(() => {
