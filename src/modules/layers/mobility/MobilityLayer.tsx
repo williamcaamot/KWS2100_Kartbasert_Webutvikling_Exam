@@ -162,7 +162,8 @@ const MobilityLayer = () => {
     lon: string;
   }>({ lat: "59.9139", lon: "10.7522" });
 
-  const [selectedFeature, setSelectedFeature] = useState<MobilityVehiclesFeature>();
+  const [selectedFeature, setSelectedFeature] =
+    useState<MobilityVehiclesFeature>();
 
   const fetchMobility = () => {
     request<MobilityVehiclesResponse>(
@@ -310,22 +311,21 @@ const MobilityLayer = () => {
     };
   }, [activeFeature]);
 
+  // Popup showing the position the user clicked
+  const popupElement = document.createElement("div");
+  popupElement.style.backgroundColor = "white";
+  popupElement.style.padding = "10px";
+  popupElement.style.borderRadius = "5px";
+  popupElement.style.border = "1px solid black";
+  popupElement.style.display = "none";
+  document.body.appendChild(popupElement);
 
-// Popup showing the position the user clicked
-const popupElement = document.createElement('div');
-popupElement.style.backgroundColor = 'white';
-popupElement.style.padding = '10px';
-popupElement.style.borderRadius = '5px';
-popupElement.style.border = '1px solid black';
-popupElement.style.display = 'none';
-document.body.appendChild(popupElement);
+  const popup = new Overlay({
+    element: popupElement,
+  });
+  map.addOverlay(popup);
 
-const popup = new Overlay({
-  element: popupElement,
-});
-map.addOverlay(popup);
-
-map.on("click", function (evt) {
+  map.on("click", function (evt) {
     const resolution = map.getView().getResolution();
     if (!checked || !resolution || resolution > 100) {
       return;
@@ -335,12 +335,12 @@ map.on("click", function (evt) {
     });
 
     if (feature?.getProperties().id) {
-        setSelectedFeature(feature);
-        // Show the popup here
-        const coordinate = evt.coordinate;
-        popup.setPosition(coordinate);
-        const currentRangeKm = feature.getProperties().currentRangeMeters / 1000;
-        popupElement.innerHTML = `
+      setSelectedFeature(feature);
+      // Show the popup here
+      const coordinate = evt.coordinate;
+      popup.setPosition(coordinate);
+      const currentRangeKm = feature.getProperties().currentRangeMeters / 1000;
+      popupElement.innerHTML = `
           <span>
             <h2>${feature.getProperties().system.name.translation[0].value}</h2>
             <p>Status: ${feature.getProperties().isDisabled ? "Disabled" : "Not disabled"}</p>
@@ -349,12 +349,12 @@ map.on("click", function (evt) {
             <p>Current Range (Kilometers): ${currentRangeKm}</p>
           </span>
         `;
-        popupElement.style.display = 'block';
-      }
+      popupElement.style.display = "block";
+    }
   });
-  
-  map.on('pointermove', function () {
-    popupElement.style.display = 'none';
+
+  map.on("pointermove", function () {
+    popupElement.style.display = "none";
   });
   useLayer(mobilityLayer, true);
 
