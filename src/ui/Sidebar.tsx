@@ -18,6 +18,7 @@ import ResetIcon from "./icons/ResetIcon";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { MapContext } from "../modules/map/mapContext";
 import { EiendomCheckbox } from "../modules/layers/eiendommer/EiendomLayerCheckbox";
+import Drawing from "../modules/drawing/Drawing";
 
 export default function Sidebar() {
   const { loadingQueue } = useContext(MapContext);
@@ -130,7 +131,7 @@ export default function Sidebar() {
           </div>
         </div>
         <div
-          className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "settingsContent" && "bg-gray-200 inner-shadow !text-black"}`}
+          className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 text-gray-700 hover:text-black transition duration-300`}
           onClick={() => {
             handleReset();
           }}
@@ -256,9 +257,14 @@ function DataLayerContent() {
 
 function DrawingContent() {
   return (
-    <>
-      <h2>Tegning</h2>
-    </>
+    <div className={"text-gray-800 flex justify-center flex-wrap"}>
+      <h2
+        className={"text-2xl tracking-tight font-semibold pb-2 text-zinc-800"}
+      >
+        Tegning
+      </h2>
+      <Drawing />
+    </div>
   );
 }
 
