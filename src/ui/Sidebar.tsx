@@ -71,7 +71,7 @@ export default function Sidebar() {
 
   return (
     <>
-      <div className="h-full fixed top-0 z-30 flex flex-col w-16 items-center bg-white border-r">
+      <div className="h-full fixed top-0 z-30 flex flex-col items-center bg-white border-r" style={{width: "80px"}}>
         <div className="w-full flex flex-col">
           <div
             className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === "search" && "bg-gray-200 inner-shadow !text-black"}`}
