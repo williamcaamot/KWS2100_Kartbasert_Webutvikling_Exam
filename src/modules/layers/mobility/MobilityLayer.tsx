@@ -218,42 +218,6 @@ const MobilityLayer = () => {
     }
   }
 
-  const overlayContainerRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const overlay = new Overlay({
-      element: overlayContainerRef.current!,
-      autoPan: true,
-    });
-    map.addOverlay(overlay);
-  }, [map]);
-
-  function handleSingleClick(e: ol.MapBrowserEvent<MouseEvent>) {
-    const features: FeatureLike[] = [];
-    map.forEachFeatureAtPixel(e.pixel, (f) => features.push(f), {
-      hitTolerance: 5,
-      layerFilter: (l) => l === mobilityLayer,
-    });
-    if (features.length === 1) {
-      const feature = features[0] as ol.Feature;
-      // Update the content of the overlay
-      if (overlayContainerRef.current) {
-        overlayContainerRef.current.innerHTML = JSON.stringify(
-          feature.getProperties(),
-        );
-      }
-      // Set the position of the overlay to the coordinate of the clicked feature
-      map.getOverlays().item(0).setPosition(e.coordinate);
-    }
-  }
-
-  useEffect(() => {
-    if (checked) {
-      map?.on("singleclick", handleSingleClick);
-    }
-    return () => map?.un("singleclick", handleSingleClick);
-  }, [checked]);
-
   useEffect(() => {
     if (checked) {
       map?.on("pointermove", handlePointerMove);
@@ -372,15 +336,6 @@ const MobilityLayer = () => {
         <div className={"flex-1"}></div>
         <Switch checked={checked} onChange={setChecked} />
       </div>
-      <div
-        ref={overlayContainerRef}
-        style={{
-          display: "flex",
-          backgroundColor: "white",
-          padding: "10px",
-          maxWidth: "200px",
-        }}
-      ></div>
       <div
         style={{
           display: "flex",
