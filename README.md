@@ -35,6 +35,7 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - **COMMENT:** We have done our best with the time available to create a clean and structured project though consistancy, good naming and clean functions.
 - [x] You can click on a feature to display an Overlay with properties of the features
 - [x] You display an Overview map
+- **COMMENT:** Overview map must be expanded in the bottom left corner. The overlay map will also change when baselayer maps are changed.
 
 ### A:
 
