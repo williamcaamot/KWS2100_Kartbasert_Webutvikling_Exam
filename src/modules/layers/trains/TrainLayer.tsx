@@ -243,9 +243,6 @@ export function TrainLayer() {
   }
 
   const popupElement = document.createElement("div");
-  popupElement.style.backgroundColor = "white";
-  popupElement.style.padding = "10px";
-  popupElement.style.borderRadius = "5px";
   popupElement.style.border = "1px solid black";
   popupElement.style.display = "none";
   document.body.appendChild(popupElement);
@@ -271,6 +268,7 @@ export function TrainLayer() {
       const lastUpdated = new Date(feature.getProperties().lastUpdated);
       const formattedDate = `${lastUpdated.toLocaleDateString("en-GB")}, ${lastUpdated.toLocaleTimeString("no-NB")}`;
       popupElement.innerHTML = `
+<div class="w-full h-full dark:bg-slate-900 border-slate-950 bg-white text-black dark:text-white p-4 rounded">
           <span>
             <p>Line: ${feature.getProperties().line.lineRef}</p>
             <p>Last updated: ${formattedDate}</p>
@@ -278,6 +276,7 @@ export function TrainLayer() {
             <p>Vehicle status: ${!feature.getProperties().vehicleStatus ? "Unknown" : feature.getProperties().vehicleStatus}</p>
             <p>Current speed: ${!feature.getProperties().speed ? "Unknown" : feature.getProperties().speed}</p>
           </span>
+          </div>
         `;
       popupElement.style.display = "block";
     }

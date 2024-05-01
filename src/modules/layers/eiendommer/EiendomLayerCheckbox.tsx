@@ -32,8 +32,9 @@ export function EiendomCheckbox() {
     popup.setPosition(coordinate);
     if (featuresAtCoordinate?.getProperties().matrikkelenhetid) {
       popupElement.innerHTML = `
+<div class="w-full h-full dark:bg-slate-900 border-slate-950 bg-white text-black dark:text-white p-4 rounded">
           <span>
-          <div class="w-full flex justify-center pb-2 underline"><h3 class="font-bold">Eiendom/Teig informasjon</h3></div>
+          <div class="w-full flex justify-center pb-2 underline"><h3 class="font-bold">Eiendom/teig informasjon</h3></div>
           <ul>
             <li><span class="font-bold">MatrikkelenhetID:</span> ${featuresAtCoordinate?.getProperties().matrikkelenhetid}</li>
             <li><span class="font-bold">Kommunenummer:</span> ${featuresAtCoordinate?.getProperties().matrikkel_kommunenummer}</li>
@@ -43,15 +44,13 @@ export function EiendomCheckbox() {
             <li><span class="font-bold">Enhetstype:</span> ${featuresAtCoordinate?.getProperties().matrikkelenhetstype}</li>
             </ul>
           </span>
+          </div>
         `;
       popupElement.style.display = "block";
     }
   }
 
   const popupElement = document.createElement("div");
-  popupElement.style.backgroundColor = "white";
-  popupElement.style.padding = "10px";
-  popupElement.style.borderRadius = "5px";
   popupElement.style.border = "1px solid black";
   popupElement.style.display = "none";
   document.body.appendChild(popupElement);
