@@ -61,7 +61,7 @@ export function Application() {
         }
       });
 
-      map?.setTarget(mapRef.current);
+    map?.setTarget(mapRef.current);
   }, []);
 
   const [view, setView] = useState(new View({ center: [10, 59], zoom: 8 }));
@@ -139,13 +139,12 @@ export function Application() {
     map.setLayers(allLayers);
   }, [allLayers]);
 
-
   useEffect(() => map?.setTarget(mapRef.current), []);
 
   useEffect(() => {
     setTimeout(() => {
       map?.getView().animate({ center: [10, 59], zoom: 8.4 });
-    },150)
+    }, 150);
   }, []);
 
   return (
