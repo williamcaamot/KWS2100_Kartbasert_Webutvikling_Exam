@@ -40,33 +40,33 @@ export default function Search() {
 
     // Create a point geometry at your location
     const point = new Point([
-        item.representasjonspunkt.lon,
-        item.representasjonspunkt.lat,
-      ]);
+      item.representasjonspunkt.lon,
+      item.representasjonspunkt.lat,
+    ]);
 
-      // Create a feature with the point geometry
-      const feature = new Feature(point);
+    // Create a feature with the point geometry
+    const feature = new Feature(point);
 
-      // Create a style for the feature
-      const style = new Style({
-        image: new Circle({
-          radius: 14,
-          fill: new Fill({ color: "rgba(0, 0, 230, 0.7)" }),
-          stroke: new Stroke({
-            color: "white",
-            width: 4,
-          }),
+    // Create a style for the feature
+    const style = new Style({
+      image: new Circle({
+        radius: 14,
+        fill: new Fill({ color: "rgba(0, 0, 230, 0.7)" }),
+        stroke: new Stroke({
+          color: "white",
+          width: 4,
         }),
-        text: new Text({
-          text: item.adressetekst,
-          offsetY: -30,
-          fill: new Fill({ color: "black" }),
-          stroke: new Stroke({ color: "white", width: 5 }),
-        }),
-      });
+      }),
+      text: new Text({
+        text: item.adressetekst,
+        offsetY: -30,
+        fill: new Fill({ color: "black" }),
+        stroke: new Stroke({ color: "white", width: 5 }),
+      }),
+    });
 
-      // Set the style of the feature
-      feature.setStyle(style);
+    // Set the style of the feature
+    feature.setStyle(style);
   }
 
   //Debounce functionality
