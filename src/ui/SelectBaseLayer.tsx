@@ -5,7 +5,6 @@ import { MapContext } from "../modules/map/mapContext";
 import { MVT } from "ol/format";
 import {
   loadFlyfotoLayer,
-  loadWtmsSource,
   loadKartverketLayer,
   loadPolar,
   ortoPhotoLayer,
