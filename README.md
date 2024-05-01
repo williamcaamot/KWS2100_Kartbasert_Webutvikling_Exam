@@ -23,7 +23,7 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - - [x] OGCVector layer (VERY basic Vector tyle with styling saved to localstorage)
 - [x] Polar layer with correct projection
 - [x] Fix reset button in navigation
-- [X] Make matbutikklayer images scale better when zooming in close
+- [x] Make matbutikklayer images scale better when zooming in close
 - [x] Loading icon for between API fetch and result is applied to map (loading spinner)
 - [x] Add custom zoom component
 - [ ] Style improvmenet for mobility & train
