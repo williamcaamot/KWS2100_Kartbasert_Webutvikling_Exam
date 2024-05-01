@@ -104,7 +104,7 @@ export function AdresseLayerCheckbox() {
   popupElement.style.backgroundColor = "white";
   popupElement.style.border = "1px solid black";
   popupElement.style.display = "none";
-  popupElement.className="dark:bg-gray-800";
+  popupElement.className = "dark:bg-gray-800";
   document.body.appendChild(popupElement);
 
   const popup = new Overlay({
