@@ -5,7 +5,7 @@ import { MapContext } from "../map/mapContext";
 
 const Settings = () => {
   const { settings, setSettings } = useContext(MapContext);
-  const [isDarkMode, setIsDarkMode] = useState(localStorage.theme === "dark");
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const switchToLightMode = () => {
     localStorage.setItem("theme", "light");
@@ -19,22 +19,17 @@ const Settings = () => {
     setIsDarkMode(true);
   };
 
-  const toggleTheme = () => {
-    if (isDarkMode) {
-      switchToLightMode();
-    } else {
-      switchToDarkMode();
-    }
-  };
-
   useEffect(() => {
     const handleStorageChange = () => {
       setIsDarkMode(localStorage.theme === "dark");
     };
 
+    const isDark = document.documentElement.classList.contains("dark");
+    setIsDarkMode(isDark);
+
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+  }, [isDarkMode]);
 
   const toggleZoomSlider = () => {
     setSettings((prevSettings) => ({
@@ -42,6 +37,7 @@ const Settings = () => {
       showZoomSlider: !prevSettings.showZoomSlider,
     }));
   };
+
   const toggleMiniMap = () => {
     setSettings((prevSettings) => ({
       ...prevSettings,
@@ -53,6 +49,18 @@ const Settings = () => {
       ...prevSettings,
       showScaleline: !prevSettings.showScaleline,
     }));
+  };
+
+  const toggleTheme = () => {
+    setIsDarkMode((prevSettings) => {
+      const newMode = !prevSettings;
+      if (newMode) {
+        switchToDarkMode();
+      } else {
+        switchToLightMode();
+      }
+      return newMode;
+    });
   };
 
   return (
@@ -75,7 +83,10 @@ const Settings = () => {
       <div className={"flex w-full justify-around p-1"}>
         <p>Dark mode</p>
         <div className={"flex-1"}></div>
-        <Switch checked={isDarkMode} onChange={toggleTheme} />
+        <Switch
+          checked={document.documentElement.classList.contains("dark")}
+          onChange={toggleTheme}
+        />{" "}
       </div>
     </>
   );

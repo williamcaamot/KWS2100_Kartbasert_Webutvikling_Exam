@@ -21,12 +21,14 @@ export const MapContext = React.createContext<{
     showZoomSlider: boolean;
     showMiniMap: boolean;
     showScaleline: boolean;
+    isDarkMode: boolean;
   };
   setSettings: Dispatch<
     SetStateAction<{
       showZoomSlider: boolean;
       showMiniMap: boolean;
       showScaleline: boolean;
+      isDarkMode: boolean;
     }>
   >;
 }>({
@@ -34,6 +36,11 @@ export const MapContext = React.createContext<{
   setVectorLayers: () => {},
   vectorLayers: [],
   setBaseLayer: () => {},
-  settings: { showZoomSlider: true, showMiniMap: true, showScaleline: false },
+  settings: {
+    showZoomSlider: true,
+    showMiniMap: true,
+    showScaleline: false,
+    isDarkMode: true,
+  },
   setSettings: () => {},
 });
