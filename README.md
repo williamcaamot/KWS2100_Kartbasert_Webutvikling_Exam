@@ -103,3 +103,7 @@ This application is designed to explore neighbourhoods and local offerings. It c
 ## Other information
 
 - Since everyone on the group already was familiar with Tailwind CSS we used this because we think it improves our development speed.
+
+## Known bugs:
+- When selecting addres layer, then eiendom layer, only overlay information on eiendom layer works.
+- Saving circles to localstorage doesn't work
