@@ -21,6 +21,7 @@ import CustomZoomAndLocation from "../../ui/CustomZoomAndLocation";
 import useLocalStorageState from "use-local-storage-state";
 import TileSource from "ol/source/Tile";
 import { OverviewMap, ScaleLine } from "ol/control";
+import MatbutikkAside from "../layers/foodStores/MatbutikkAside";
 
 // TODO: Fikse at kart lastes inn umiddelbart slik man slipper å "dra" på kartet litt før det laster
 export function Application() {
@@ -170,6 +171,7 @@ export function Application() {
           style={{ width: "83px", height: "100%", backgroundColor: "white" }}
         />
         <div ref={mapRef} style={{ height: "100%", width: "100%" }}></div>
+        <MatbutikkAside />
       </main>
     </MapContext.Provider>
   );

@@ -59,5 +59,5 @@ export function useActiveFeatures<FEATURE extends Feature>(
     };
   }, [layer]);
 
-  return { activeFeatures, setActiveFeatures };
+  return { activeFeatures, setActiveFeatures, layer };
 }
