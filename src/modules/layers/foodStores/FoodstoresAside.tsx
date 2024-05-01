@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import {
-  MatbutikkFeature,
-  MatbutikkLayerType,
-  MatbutikkProperties,
-} from "./MatbutikkLayer";
+  FoodstoreFeature,
+  FoodstoreLayerType,
+  FoodstoreProperties,
+} from "./FoodstoreLayer";
 import { Fill, Stroke, Style, Text } from "ol/style";
 import { FeatureLike } from "ol/Feature";
 import { MapContext } from "../../map/mapContext";
@@ -11,8 +11,8 @@ import { Polygon } from "ol/geom";
 import { getCenter } from "ol/extent";
 import useLocalStorageState from "use-local-storage-state";
 import { Coordinate } from "ol/coordinate";
-export function selectedMatbutikkStyle(feature: FeatureLike) {
-  const matbutikkFeature = feature.getProperties() as MatbutikkProperties;
+export function FoodstoreSelectedFeatureStyle(feature: FeatureLike) {
+  const foodstoreFeature = feature.getProperties() as FoodstoreProperties;
 
   return new Style({
     stroke: new Stroke({
@@ -23,7 +23,7 @@ export function selectedMatbutikkStyle(feature: FeatureLike) {
       color: "rgba(0, 255, 0, 0.1)",
     }),
     text: new Text({
-      text: matbutikkFeature.name, // Display the kommunenavn
+      text: foodstoreFeature.name, // Display the kommunenavn
       overflow: true,
       font: "bold 15px sans-serif",
       fill: new Fill({ color: "black" }),
@@ -32,13 +32,13 @@ export function selectedMatbutikkStyle(feature: FeatureLike) {
   });
 }
 
-export function useMatbutikklayer() {
+export function useFoodstoreLayer() {
   const { map, vectorLayers } = useContext(MapContext);
   const layer = vectorLayers.find(
     (l) => l.getClassName() === "MatbutikkerLayer",
-  ) as MatbutikkLayerType;
+  ) as FoodstoreLayerType;
 
-  const [features, setFeatures] = useState<MatbutikkFeature[]>();
+  const [features, setFeatures] = useState<FoodstoreFeature[]>();
   const [viewExtent, setViewExtent] = useState(
     map.getView().getViewStateAndExtent().extent,
   );
@@ -82,13 +82,13 @@ export function useMatbutikklayer() {
   };
 }
 
-const MatbutikkAside = ({
-  matbutikkAsideVisible,
+const FoodstoresAside = ({
+  foodstoreAsideVisible,
 }: {
-  matbutikkAsideVisible: boolean;
+  foodstoreAsideVisible: boolean;
 }) => {
   const { map } = useContext(MapContext);
-  const { visibleFeatures } = useMatbutikklayer();
+  const { visibleFeatures } = useFoodstoreLayer();
   const currentView = map.getView();
   const currentCenter = currentView.getCenter();
   const currentZoom = currentView.getZoom();
@@ -97,10 +97,10 @@ const MatbutikkAside = ({
     zoom: number;
   } | null>("saved-view");
   const [selectedStore, setSelectedStore] = useState<
-    MatbutikkFeature | undefined
+    FoodstoreFeature | undefined
   >();
 
-  const goToStore = (feature: MatbutikkFeature) => {
+  const goToStore = (feature: FoodstoreFeature) => {
     if (currentCenter && currentZoom) {
       setSavedView({
         center: currentCenter,
@@ -125,7 +125,7 @@ const MatbutikkAside = ({
     setSavedView(null);
   };
 
-  if (!matbutikkAsideVisible) return null;
+  if (!foodstoreAsideVisible) return null;
 
   return (
     <aside
@@ -144,7 +144,7 @@ const MatbutikkAside = ({
           className="bg-teal-600 text-white rounded-lg p-2 w-full mb-2"
           onClick={goToSavedView}
         >
-          Go back to previous view
+          Gå tilbake til tidligere visning
         </button>
       )}
       {visibleFeatures?.map((b) => (
@@ -174,4 +174,4 @@ const MatbutikkAside = ({
   );
 };
 
-export default MatbutikkAside;
+export default FoodstoresAside;

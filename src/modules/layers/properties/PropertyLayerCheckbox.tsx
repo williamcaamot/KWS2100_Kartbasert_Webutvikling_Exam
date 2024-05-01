@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MapContext } from "../../map/mapContext";
 import Switch from "../../../ui/switch";
-import { EiendomFeature, EiendomLayer } from "./EiendomLayer";
+import { PropertyFeature, PropertyLayer } from "./PropertyLayer";
 import { MapBrowserEvent, Overlay } from "ol";
 import { useLayer } from "../../map/useLayer";
 import useLocalStorageState from "use-local-storage-state";
-import { TrainFeature } from "../trains/TrainFeature";
-import { AdresseFeature } from "../adresser/AdresseLayer";
 
-export function EiendomCheckbox() {
+export function PropertyCheckbox() {
   const { map } = useContext(MapContext);
   const [checked, setChecked] = useLocalStorageState("eiendom-layer-checked", {
     defaultValue: false,
@@ -23,7 +21,7 @@ export function EiendomCheckbox() {
     var featuresAtCoordinate = map.forEachFeatureAtPixel(
       e.pixel,
       function (feature) {
-        return feature as EiendomFeature;
+        return feature as PropertyFeature;
       },
     );
 
@@ -73,7 +71,7 @@ export function EiendomCheckbox() {
     return () => map?.un("click", handleClick);
   }, [checked]);
 
-  useLayer(EiendomLayer, checked);
+  useLayer(PropertyLayer, checked);
 
   return (
     <div className={"flex w-full justify-around p-1"}>

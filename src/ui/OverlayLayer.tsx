@@ -32,7 +32,7 @@ export function OverlayLayer() {
     },
     {
       id: "stadia_dark",
-      name: "Stadia (dark)",
+      name: "Stadia (mørk))",
       layer: new TileLayer({
         source: new StadiaMaps({
           layer: "alidade_smooth_dark",
@@ -45,7 +45,7 @@ export function OverlayLayer() {
     },
     {
       id: "satellite",
-      name: "Satellite",
+      name: "Global flyfoto",
       layer: new TileLayer({
         source: new XYZ({
           attributions:
@@ -116,7 +116,8 @@ export function OverlayLayer() {
           );
         })}
         <div>
-          <h3>Change the opacity</h3>
+          <div className={"w-full flex justify-center flex-wrap py-2"}>
+          <h3>Endre gjennomsiktighet</h3>
           <input
             type="range"
             min="0"
@@ -125,6 +126,7 @@ export function OverlayLayer() {
             value={opacity}
             onChange={(e) => setOpacity(Number(e.target.value))}
           />
+          </div>
         </div>
       </div>
     </>

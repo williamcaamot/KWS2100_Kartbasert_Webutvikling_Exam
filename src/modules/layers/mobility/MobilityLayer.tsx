@@ -331,7 +331,7 @@ const MobilityLayer = () => {
           width: "100%",
         }}
       >
-        <p>Hent mobility</p>
+        <p>Vis mobility (scootere)</p>
         <div className={"flex-1"}></div>
         <Switch checked={checked} onChange={setChecked} />
       </div>

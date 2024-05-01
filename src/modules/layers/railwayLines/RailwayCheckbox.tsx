@@ -66,7 +66,7 @@ export function RailwayLayerCheckbox() {
 
   return (
     <div className={"flex w-full justify-around p-1"}>
-      <p>Railwaylines N50</p>
+      <p>Vis toglinjer N50</p>
       <div className={"flex-1"}></div>
       <Switch checked={checked} onChange={setChecked} />
     </div>

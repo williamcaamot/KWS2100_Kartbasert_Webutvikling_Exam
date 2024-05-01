@@ -93,7 +93,7 @@ export function SelectBaseLayer() {
     },
     {
       id: "stadia_dark",
-      name: "Stadia (dark)",
+      name: "Stadia (mørk)",
       layer: new TileLayer({
         source: new StadiaMaps({
           layer: "alidade_smooth_dark",
@@ -113,7 +113,7 @@ export function SelectBaseLayer() {
     },
     {
       id: "ortophoto",
-      name: "Flyfoto",
+      name: "Norge Flyfoto",
       preload: Infinity,
       layer: ortoPhotoLayer,
       imageUrl: flyfotoLayerImage,
@@ -121,7 +121,7 @@ export function SelectBaseLayer() {
 
     {
       id: "satellite",
-      name: "Satellite",
+      name: "Global flyfoto",
       layer: new TileLayer({
         source: new XYZ({
           attributions:

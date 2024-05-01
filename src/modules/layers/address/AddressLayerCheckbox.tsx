@@ -3,12 +3,12 @@ import { MapBrowserEvent, Overlay } from "ol";
 import { useLayer } from "../../map/useLayer";
 import { MapContext } from "../../map/mapContext";
 import {
-  AdresseFeature,
-  AdresseLayer,
-  AdresseProperties,
-  adresseStyle,
-  hoverAdresseStyle,
-} from "./AdresseLayer";
+  AddressFeature,
+  AddressLayer,
+  AddressProperties,
+  addressStyle,
+  addressHoverStyle,
+} from "./AddressLayer";
 import Switch from "../../../ui/switch";
 import useLocalStorageState from "use-local-storage-state";
 import {
@@ -16,25 +16,12 @@ import {
   mobilityStyle,
 } from "../mobility/MobilityFeature";
 
-export function AdresseLayerCheckbox() {
+export function AddressLayerCheckbox() {
   const [checked, setChecked] = useLocalStorageState("adresse-layer-checked", {
     defaultValue: false,
   });
 
   const { map } = useContext(MapContext);
-
-  function handleFocusAdresse(adresse: any) {
-    // Want to maybe select a teig here? And get all teig details?
-    map.getView().animate({
-      center: [
-        adresse.values_.geometry.flatCoordinates[0],
-        adresse.values_.geometry.flatCoordinates[1],
-      ],
-      zoom: 20,
-    });
-  }
-
-  function setActiveFeatureInformation(react: React.JSX.Element) {}
 
   function handleClick(e: MapBrowserEvent<MouseEvent>) {
     const resolution = map.getView().getResolution();
@@ -45,7 +32,7 @@ export function AdresseLayerCheckbox() {
     var featuresAtCoordiante = map.forEachFeatureAtPixel(
       e.pixel,
       function (feature) {
-        return feature as AdresseFeature;
+        return feature as AddressFeature;
       },
     );
     const coordinate = e.coordinate;
@@ -57,9 +44,9 @@ export function AdresseLayerCheckbox() {
     if (featuresAtCoordiante?.getProperties().features.length === 1) {
       //console.log("Adding single feature")
       const singleFeature = featuresAtCoordiante?.getProperties()
-        .features[0] as AdresseFeature;
+        .features[0] as AddressFeature;
       const singleFeatureProperties =
-        singleFeature.getProperties() as AdresseProperties;
+        singleFeature.getProperties() as AddressProperties;
       popupElement.innerHTML = `
 <div class="w-full h-full dark:bg-slate-900 border-slate-950 bg-white text-black dark:text-white p-4 rounded">
             <span>
@@ -112,7 +99,7 @@ export function AdresseLayerCheckbox() {
   });
   map.addOverlay(popup);
 
-  let selected: AdresseFeature;
+  let selected: AddressFeature;
 
   const [activeFeature, setActiveFeature] = useState();
 
@@ -129,7 +116,7 @@ export function AdresseLayerCheckbox() {
     return () => map?.un("click", handleClick);
   }, [checked]);
 
-  useLayer(AdresseLayer, checked);
+  useLayer(AddressLayer, checked);
 
   return (
     <div className={"flex w-full justify-around p-1"}>

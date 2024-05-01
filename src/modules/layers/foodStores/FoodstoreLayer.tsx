@@ -8,16 +8,13 @@ import { Style } from "ol/style.js";
 import { Extent } from "ol/extent";
 import { Projection } from "ol/proj";
 
-import { useActiveFeatures } from "../../map/useActiveFeatures";
-import { useContext } from "react";
-import { MapContext, map } from "../../map/mapContext";
 
-export type MatbutikkLayerType = VectorLayer<VectorSource<MatbutikkFeature>>;
-export type MatbutikkFeature = {
-  getProperties(): MatbutikkProperties;
+export type FoodstoreLayerType = VectorLayer<VectorSource<FoodstoreFeature>>;
+export type FoodstoreFeature = {
+  getProperties(): FoodstoreProperties;
 } & Feature<Polygon>;
 
-export interface MatbutikkProperties {
+export interface FoodstoreProperties {
   id: string;
   group_name: string;
   name: string;
@@ -31,18 +28,18 @@ export interface MatbutikkProperties {
   opening_hours: Object; //TODO create openin hours interface
 }
 
-export const MatbutikkerLayer = new VectorLayer({
+export const FoodstoreLayer = new VectorLayer({
   className: "MatbutikkerLayer",
   source: new VectorSource({
     strategy: (extent, resolution) => (resolution < 0.001 ? [extent] : []),
     loader: function (extent, resolution, projection) {
-      loadMatbutikkDataLayer(this, extent, resolution, projection);
+      loadFoodstoreLayer(this, extent, resolution, projection);
     },
   }),
-  style: matbutikkStyleFunction,
+  style: foodstoreStyleFunction,
 });
 
-async function loadMatbutikkDataLayer(
+async function loadFoodstoreLayer(
   source: VectorSource<Feature<Geometry>> | VectorTile,
   extent: Extent,
   resolution: number,
@@ -69,7 +66,7 @@ async function loadMatbutikkDataLayer(
   }
 }
 
-export function matbutikkStyleFunction(feature: any, resolution: any): Style {
+export function foodstoreStyleFunction(feature: any, resolution: any): Style {
   const properties = feature.getProperties();
   const logoUrl = properties.logo;
 
@@ -84,7 +81,7 @@ export function matbutikkStyleFunction(feature: any, resolution: any): Style {
   });
 }
 
-export function hoverMatbutikkStyleFunction(
+export function FoodstoreHoverStyleFunction(
   feature: any,
   resolution: any,
 ): Style {

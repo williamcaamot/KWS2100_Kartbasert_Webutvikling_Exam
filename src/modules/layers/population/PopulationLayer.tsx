@@ -83,7 +83,7 @@ export function PopulationLayer() {
 
   return (
     <div className={"flex w-full justify-around p-1"}>
-      <p>Show population</p>
+      <p>Vis befolknignstetthet</p>
       <div className={"flex-1"}></div>
       <Switch checked={checked} onChange={setChecked} />
     </div>

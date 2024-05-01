@@ -8,12 +8,12 @@ import { Extent } from "ol/extent";
 import { Fill, Stroke, Style } from "ol/style";
 import { FeatureLike } from "ol/Feature";
 
-export type EiendomLayerType = VectorLayer<VectorSource<EiendomFeature>>;
-export type EiendomFeature = {
-  getProperties(): EiendomProperties;
+export type PropertyLayerType = VectorLayer<VectorSource<PropertyFeature>>;
+export type PropertyFeature = {
+  getProperties(): PropertyProperties;
 } & Feature<Polygon>;
 
-export interface EiendomProperties {
+export interface PropertyProperties {
   matrikkelenhetid: string;
   matrikkel_kommunenummer: string;
   gardsnummer: string;
@@ -22,18 +22,18 @@ export interface EiendomProperties {
   kommunenavn: string;
 }
 
-export const EiendomLayer = new VectorLayer({
+export const PropertyLayer = new VectorLayer({
   className: "EiendomLayer",
   source: new VectorSource({
     strategy: (extent, resolution) => (resolution < 0.00002 ? [extent] : []),
     loader: function (extent, resolution, projection) {
-      loadEiendomDataLayer(this, extent, resolution, projection);
+      loadPropertyLayer(this, extent, resolution, projection);
     },
   }),
-  style: eiendomStyleFunction,
+  style: propertyStyleFunction,
 });
 
-function eiendomStyleFunction(f: FeatureLike) {
+function propertyStyleFunction(f: FeatureLike) {
   if (f.getProperties().matrikkelenhetstype !== "GRUNNEIENDOM") {
     return new Style({
       fill: new Fill({ color: "rgba(245, 40, 145, 0.1)" }),
@@ -46,7 +46,7 @@ function eiendomStyleFunction(f: FeatureLike) {
   });
 }
 
-async function loadEiendomDataLayer(
+async function loadPropertyLayer(
   source: VectorSource<Feature<Geometry>> | VectorTile,
   extent: Extent,
   resolution: number,

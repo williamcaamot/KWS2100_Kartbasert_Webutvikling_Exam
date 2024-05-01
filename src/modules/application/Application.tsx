@@ -21,7 +21,7 @@ import CustomZoomAndLocation from "../../ui/CustomZoomAndLocation";
 import useLocalStorageState from "use-local-storage-state";
 import TileSource from "ol/source/Tile";
 import { OverviewMap, ScaleLine } from "ol/control";
-import MatbutikkAside from "../layers/foodStores/MatbutikkAside";
+import FoodstoresAside from "../layers/foodStores/FoodstoresAside";
 
 export function Application() {
   useGeographic();
@@ -168,7 +168,7 @@ export function Application() {
           style={{ width: "83px", height: "100%", backgroundColor: "white" }}
         />
         <div ref={mapRef} style={{ height: "100%", width: "100%" }}></div>
-        <MatbutikkAside matbutikkAsideVisible={matbutikkAsideVisible} />
+        <FoodstoresAside foodstoreAsideVisible={matbutikkAsideVisible} />
       </main>
     </MapContext.Provider>
   );

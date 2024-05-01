@@ -6,7 +6,7 @@ import DataLayerIcon from "./icons/DataLayerIcon";
 import DrawIcon from "../ui/icons/DrawIcon";
 import { SelectBaseLayer } from "./SelectBaseLayer";
 import SettingsIcon from "./icons/SettingsIcon";
-import { AdresseLayerCheckbox } from "../modules/layers/adresser/AdresseLayerCheckbox";
+import { AddressLayerCheckbox } from "../modules/layers/address/AddressLayerCheckbox";
 import { PopulationLayer } from "../modules/layers/population/PopulationLayer";
 import { MatbutikkerCheckbox } from "../modules/layers/foodStores/MatbutikkLayerCheckbox";
 import { OverlayLayer } from "./OverlayLayer";
@@ -14,11 +14,12 @@ import MobilityLayer from "../modules/layers/mobility/MobilityLayer";
 import TrainLayer from "../modules/layers/trains/TrainLayer";
 import Settings from "../modules/userSettings/Settings";
 import ResetIcon from "./icons/ResetIcon";
-import { EiendomCheckbox } from "../modules/layers/eiendommer/EiendomLayerCheckbox";
+import {PropertyCheckbox} from "../modules/layers/properties/PropertyLayerCheckbox";
 import Drawing from "../modules/drawing/Drawing";
 import { KommuneLayerCheckbox } from "../modules/layers/kommuner/KommuneLayerCheckbox";
 import { RailwayLayerCheckbox } from "../modules/layers/railwayLines/RailwayCheckbox";
 import useReset from "./useReset";
+import {PropertyLayer} from "../modules/layers/properties/PropertyLayer";
 
 export default function Sidebar({
   setMatbutikkAsideVisible,
@@ -219,8 +220,8 @@ function DataLayerContent({
         Data layers
       </h2>
       <PopulationLayer />
-      <EiendomCheckbox />
-      <AdresseLayerCheckbox />
+      <PropertyCheckbox />
+      <AddressLayerCheckbox />
       <MatbutikkerCheckbox
         setMatbutikkAsideVisible={setMatbutikkAsideVisible}
       />

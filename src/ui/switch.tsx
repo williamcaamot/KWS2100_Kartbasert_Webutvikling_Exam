@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+//
+
 interface SwitchProperties {
   onChange: (checked: boolean) => void;
   checked: boolean;

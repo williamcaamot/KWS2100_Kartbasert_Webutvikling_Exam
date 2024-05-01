@@ -10,12 +10,12 @@ import { Extent } from "ol/extent";
 import { Projection } from "ol/proj";
 import { FeatureLike } from "ol/Feature";
 
-export type AdresseLayerType = VectorLayer<VectorSource<AdresseFeature>>;
-export type AdresseFeature = {
-  getProperties(): AdresseProperties;
+export type AddressLayerType = VectorLayer<VectorSource<AddressFeature>>;
+export type AddressFeature = {
+  getProperties(): AddressProperties;
 } & Feature<Polygon>;
 
-export interface AdresseProperties {
+export interface AddressProperties {
   geometry: any;
   features: any;
   objid: string;
@@ -47,19 +47,19 @@ const clusterSource = new Cluster({
   source: new VectorSource({
     strategy: (extent, resolution) => (resolution < 0.0001 ? [extent] : []),
     loader: function (extent, resolution, projection) {
-      loadAdresseLayer(this, extent, resolution, projection);
+      loadAddressLayer(this, extent, resolution, projection);
     },
   }),
 });
 
-export const AdresseLayer = new VectorLayer({
+export const AddressLayer = new VectorLayer({
   className: "AdresseLayer",
 
   source: clusterSource,
-  style: adresseStyle,
+  style: addressStyle,
 });
 
-async function loadAdresseLayer(
+async function loadAddressLayer(
   source: VectorSource<Feature<Geometry>> | VectorTile,
   extent: Extent,
   resolution: number,
@@ -88,8 +88,8 @@ async function loadAdresseLayer(
   }
 }
 
-export function adresseStyle(f: FeatureLike) {
-  const feature = f as AdresseFeature;
+export function addressStyle(f: FeatureLike) {
+  const feature = f as AddressFeature;
 
   const size = feature.get("features").length;
 
@@ -105,8 +105,8 @@ export function adresseStyle(f: FeatureLike) {
   });
 }
 
-export function hoverAdresseStyle(f: FeatureLike) {
-  const feature = f as AdresseFeature;
+export function addressHoverStyle(f: FeatureLike) {
+  const feature = f as AddressFeature;
 
   const size = feature.get("features").length;
 
@@ -123,7 +123,7 @@ export function hoverAdresseStyle(f: FeatureLike) {
   });
 }
 
-function styleText(size: number, feature: AdresseFeature) {
+function styleText(size: number, feature: AddressFeature) {
   if (size === 1) {
     return new Text({
       text: feature.getProperties().features[0].values_.adressetekst.toString(),
@@ -143,7 +143,7 @@ function styleText(size: number, feature: AdresseFeature) {
 }
 
 //more info on colors: https://www.w3schools.com/html/html_colors_rgb.asp
-function styleFill(featureLength: number, feature: AdresseFeature) {
+function styleFill(featureLength: number, feature: AddressFeature) {
   if (featureLength === 1) {
     const kommunenavn = feature.getProperties().features[0].values_.kommunenavn;
     // Zoom in on the border between these kommuner to see the difference
