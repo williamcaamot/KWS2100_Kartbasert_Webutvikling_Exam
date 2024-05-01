@@ -242,7 +242,6 @@ export function TrainLayer() {
     }
   }
 
-  // Popup showing the position the user clicked
   const popupElement = document.createElement("div");
   popupElement.style.backgroundColor = "white";
   popupElement.style.padding = "10px";
