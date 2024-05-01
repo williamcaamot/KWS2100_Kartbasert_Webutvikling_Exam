@@ -50,7 +50,7 @@ export default function Search() {
     // Create a point geometry with the coordinates of the item
     const point = new Point([
       item.representasjonspunkt.lon,
-      item.representasjonspunkt.lat,
+      item.representasjonspunkt.lat - 0.00005,
     ]);
     // Create a feature with the point geometry
     const feature = new Feature(point);
@@ -66,7 +66,7 @@ export default function Search() {
         }),
       }),
       text: new Text({
-        text: item.adressetekst,
+        text: "Valgt sted",
         offsetY: -30,
         fill: new Fill({ color: "black" }),
         stroke: new Stroke({ color: "white", width: 5 }),
