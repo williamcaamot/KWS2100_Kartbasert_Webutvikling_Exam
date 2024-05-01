@@ -7,6 +7,25 @@ const Settings = () => {
   const { settings, setSettings } = useContext(MapContext);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    function detectSystemColorScheme(): string {
+      if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        setDarkMode(true);
+        return "dark";
+      } else {
+        setDarkMode(false);
+        return "light";
+      }
+    }
+    const systemColorScheme = detectSystemColorScheme();
+    console.log("System color scheme:", systemColorScheme);
+  }, []);
+
   const switchToLightMode = () => {
     localStorage.setItem("theme", "light");
     document.documentElement.classList.remove("dark");
@@ -59,6 +78,7 @@ const Settings = () => {
       } else {
         switchToLightMode();
       }
+      setDarkMode(newMode); // Also update the darkMode state
       return newMode;
     });
   };
@@ -83,10 +103,7 @@ const Settings = () => {
       <div className={"flex w-full justify-around p-1"}>
         <p>Dark mode</p>
         <div className={"flex-1"}></div>
-        <Switch
-          checked={document.documentElement.classList.contains("dark")}
-          onChange={toggleTheme}
-        />{" "}
+        <Switch checked={darkMode} onChange={toggleTheme} />{" "}
       </div>
     </>
   );
