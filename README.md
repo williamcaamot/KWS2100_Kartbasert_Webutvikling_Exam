@@ -60,24 +60,20 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - [x] Layer selection is saved in localstorage on refresh.
 - [x] Refresh button to reset selected layers
 - [x] Darkmode & lightmode (from system settings)
+  - [x] Possible to toggle dark/light mode from settings too
 - [x] Shift+create selection on map => zoom to that selection
 
 ## To-do (try have high priority at top of list)
 
-- [ ] Fix bug for circles not saving to localstorage
 - [x] Add color selection for drawing
 - [ ] Add interaction (onclick) on the map for different features
 - - [ ] Generic overlay component to display information when clicking
 - [ ] Vector tile layer with styling
 - - [x] OGCVector layer (VERY basic Vector tyle with styling saved to localstorage)
-- [x] Polar layer with correct projection
-- [x] Fix reset button in navigation
-- [x] Make matbutikklayer images scale better when zooming in close
-- [x] Loading icon for between API fetch and result is applied to map (loading spinner)
 - [x] Add custom zoom component
 - [ ] Style improvmenet for mobility & train
+  - [x] Partially styled
 - [x] Overview map with controls in settings https://openlayers.org/en/latest/examples/overviewmap.html
-- [x] Settings for zoom slider, scale line
 
 ### Data sources
 
@@ -87,6 +83,7 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - Matbutikker (Inserted data from API into postgis database: https://kassal.app/api)
 - Kommuner: https://www.eriksmistad.no/norges-fylker-og-kommuner-i-geojson-format/
 - Adresse søk via Kartverket API (https://ws.geonorge.no/adresser/v1/)
+- Populasjon: https://kart.ssb.no/
 
 ### Background layers with sources:
 
@@ -103,3 +100,8 @@ This application is designed to explore neighbourhoods and local offerings. It c
 ## Other information
 
 - Since everyone on the group already was familiar with Tailwind CSS we used this because we think it improves our development speed.
+
+## Known bugs:
+
+- When selecting addres layer, then eiendom layer, only overlay information on eiendom layer works.
+- Saving circles to localstorage doesn't work
