@@ -10,7 +10,7 @@ URL: https://kristiania-kws2100-2024.github.io/kws2100-exam-williamcaamot/
 
 ## About this application
 
-This application is designed to explore neighbourhoods and local offerings. It can be used to explore where you live, where you want to go, or where you want to live. The application provides information about transportation (trains & scooters), addresses, properties and food stores (++). See thr feature descriptions below for more information.
+This application is designed to explore neighbourhoods and local offerings. It can be used to explore where you live, where you want to go, or where you want to live. The application provides information about transportation (trains & scooters), addresses, properties and food stores (++). See the feature descriptions below for more information.
 
 # Features for grades
 
@@ -46,12 +46,12 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - [x] Combine several Tile Layers by using Layer opacity and let the user choose and combine layers. At least one of the background layers should be a vector tile layer. The background layers should be in more than one geographic projection
 - - **COMMENT:** Arctic layer changes projection. User can select layer opacity on the overlay layer.
 - [x] Create a fully styled vector tiled background map using Mapzen. You can use the OpenLayers Mapzen example at https://openlayers.org/en/latest/examples/osmvector-tiles.html as inspiration. You must style at least 5 different types of features (object collection or kind) and you must incorporate texts into the styling. For double points, incorporate pointer interaction, e.g. display bus routes when hovering over them
-  - **COMMENT:** We had difficulties finding maps here. We have two different tile layers that can be styled (MapTiler Streets & ogcVectorTile). The style is saved to localstorage.
+  - **COMMENT:** We had difficulties finding maps here. We have two different tile layers that can be styled (MapTiler Streets & ogcVectorTile). The style for OGC is saved to localstorage.
 - [x] Let the user draw and modify features with at least two types of geometries, including circles with a radius in meters. Store the features in localStorage so that when the user refreshes, the features remain on the map. The user should be able to modify the geometry of the feature and properties that should be reflected in the style of the feature
   - **COMMENT:** Saving circles does not work. "Lagre" button must be pressed to persist the features in localstorage.
 - [x] Interaction between data in a sidebar and the view on the map: Show a sidebar with a list of a type of feature displayed on the map, filtered to the visible features. When clicking on a feature on the sidebar, the map should zoom to feature. Since there's only one feature visible, the sidebar can be hidden - but it should be easy to zoom back to the previous view. To "go back", store in sessionStorage the view center and zoom before zooming to a feature.
 
-  - **COMMENT:** Matbutikker has a sidebar with the matbutikker that is in the extent.
+  - **COMMENT:** Matbutikker has a sidebar with the matbutikker that is in the extent. You can click a store in the sidebar to be taken closer to the store, and return with the button that appears over the list of stores.
 
 - We onclick overlays for the following features: Mobility(Scooters), trains, adresses (only for single features, clicking cluster zooms to it.) and eiendommer.
 
@@ -59,24 +59,14 @@ This application is designed to explore neighbourhoods and local offerings. It c
 
 - [x] Search for address and click on address to go to it
 - [x] Settings section for enabling & disabling overview map, scaleline & zoomslider. Works with localstorage.
-- [x] Layer selection is saved in localstorage on refresh.
-- [x] Refresh button to reset selected layers
+- [x] Most settings are stored in LS. All Data layers, OGC VectorTileLayer, Drawings(except Circles) and user settings. 
+- [x] Refresh button to reset selected layers 
 - [x] Darkmode & lightmode (from system settings)
   - [x] Possible to toggle dark/light mode from settings too
 - [x] Shift+create selection on map => zoom to that selection
 - [x] Mobile friendly design
-
-## To-do (try have high priority at top of list)
-
-- [x] Add color selection for drawing
-- [ ] Add interaction (onclick) on the map for different features
-- - [ ] Generic overlay component to display information when clicking
-- [ ] Vector tile layer with styling
-- - [x] OGCVector layer (VERY basic Vector tyle with styling saved to localstorage)
-- [x] Add custom zoom component
-- [ ] Style improvmenet for mobility & train
-  - [x] Partially styled
-- [x] Overview map with controls in settings https://openlayers.org/en/latest/examples/overviewmap.html
+- [x] All Vectorlayers and backgroundlayers have pre-loading set to infinity for a smooth experience.
+- [x] Stadia-maps are activated with a API-key.
 
 ### Data sources
 
@@ -87,6 +77,7 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - Kommuner: https://www.eriksmistad.no/norges-fylker-og-kommuner-i-geojson-format/
 - Adresse søk via Kartverket API (https://ws.geonorge.no/adresser/v1/)
 - Populasjon: https://kart.ssb.no/
+- Jernbanelinjer: https://kart.dsb.no/ > Jernbanelinjer N50
 
 ### Background layers with sources:
 
@@ -102,9 +93,11 @@ This application is designed to explore neighbourhoods and local offerings. It c
 
 ## Other information
 
-- Since everyone on the group already was familiar with Tailwind CSS we used this because we think it improves our development speed.
+- Since everyone on the group already was familiar with Tailwind CSS we used this because we think it improves our development speed. We also choose to combine styles with regular CSS as well. 
+- We have committed an equal amount of code and all participated equally, in some cases we have worked together on one computer, for example the initial commit.
 
 ## Known bugs:
 
-- When selecting addres layer, then eiendom layer, only overlay information on eiendom layer works.
-- Saving circles to localstorage doesn't work
+- When selecting address layer, then eiendom layer, only overlay information on eiendom layer works.
+- Due to low intervalls from Entur, the trains with an updated location update every 5-10 seconds. Easier to see if zoomed out a bit, than you can see the trains that receive updates, move. 
+- Saving circles to localstorage doesn't work due to the geometric object type. 
