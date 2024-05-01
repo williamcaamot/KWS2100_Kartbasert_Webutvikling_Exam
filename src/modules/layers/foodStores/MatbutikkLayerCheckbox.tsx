@@ -9,7 +9,7 @@ export function MatbutikkerCheckbox({
 }: {
   setMatbutikkAsideVisible: (value: boolean) => void;
 }) {
-  const [checked, setMatbutikker] = useLocalStorageState(
+  const [checked, setChecked] = useLocalStorageState(
     "matbutikk-layer-checked",
     {
       defaultValue: false,
@@ -23,10 +23,13 @@ export function MatbutikkerCheckbox({
   }, [checked]);
 
   return (
-    <div className={"flex w-full justify-around p-1"}>
+    <div className="flex w-full justify-around p-1 flex-col">
+    <div className={"flex w-full justify-around"}>
       <p>Vis matbutikker</p>
       <div className={"flex-1"}></div>
-      <Switch checked={checked} onChange={setMatbutikker} />
+      <Switch checked={checked} onChange={setChecked} />
+    </div>
+      <p className="text-yellow-500">{checked ? "(Obs! Krever zoom)" : undefined}</p>
     </div>
   );
 }
