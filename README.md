@@ -13,7 +13,9 @@ URL: https://kristiania-kws2100-2024.github.io/kws2100-exam-williamcaamot/
 This application is designed to explore neighbourhoods and local offerings. It can be used to explore where you live, where you want to go, or where you want to live. The application provides information about transportation (trains & scooters), addresses, properties and food stores (++). See thr feature descriptions below for more information.
 
 # Features for grades
+
 #### See the description for each feature requirement.
+
 ### E:
 
 - [x] If you deploy a React application that displays a map with OpenLayers on GitHub pages, you will pass. If you fail to deploy correctly, but your code indicates that you could have achieved a C, you will also pass
