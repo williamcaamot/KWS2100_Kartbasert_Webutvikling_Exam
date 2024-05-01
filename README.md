@@ -10,11 +10,44 @@ URL: https://kristiania-kws2100-2024.github.io/kws2100-exam-williamcaamot/
 
 ## About this application
 
-This application is designed to explore neighbourhoods and local offerings. It can be used to explore where you live, where you want to go, or where you want to live.
+This application is designed to explore neighbourhoods and local offerings. It can be used to explore where you live, where you want to go, or where you want to live. The application provides information about transportation (trains & scooters), addresses, properties and food stores. As well as kommuner
+
+# Features for grades
+### E:
+- [X] If you deploy a React application that displays a map with OpenLayers on GitHub pages, you will pass. If you fail to deploy correctly, but your code indicates that you could have achieved a C, you will also pass
+### D:
+- [X] Your map must contain some vector data and some interaction
+### C:
+- [X] The interactions, data sources or styling is beyond what was expected for the assignment. You need to display data sources that was not used in the lectures or assignment with at least two types of geometries (point, linestring, polygon)
+### B:
+- [X] You can display both polygon and point geometries from at least 4 data sources 
+- [X] Your code is structured to make it easy to find the code corresponding to each data source and in order to make it easy to add more features
+- [X] You can click on a feature to display an Overlay with properties of the features 
+- [X] You display an Overview map 
+### A:
+- [X] Display moving data on a map using a GraphQL data source. You can use Entur's GraphQL vehicle data (not protobuf) or find a GraphQL websocket dataset on your own
+- [X] Display a Clustered vector data source with OpenLayers. The style of a cluster of features should reflect the size of the cluster. Display a single-feature cluster with a separate style using icons that vary based on a property of the feature. NOTE: The usefulness and design ofyour styles will affect your grade
+- - **COMMENT:** Adresser is displayed as a clustered feature. Single features in kommuner of Asker, Oslo and Bærum have different styling as per the requirement.
+- [X] Deploy your own GIS API to a hosted service and display a huge dataset from a PostGlS database to a map, limited to the extent displayed to the user. You can use Express on https://heroku.com or pick your own backend technology for the server (you get free credits for Heroku with GitHub Student Pack). You must check in the code for the server to the repository
+- **COMMENT:** 3 different layers. Addresser and teig/eiendommer are huge datasets (only displays when zoomed in enough). Matbutikker is also fetched through our API.
+- [X] Combine several Tile Layers by using Layer opacity and let the user choose and combine layers. At least one of the background layers should be a vector tile layer. The background layers should be in more than one geographic projection
+- - **COMMENT:** Arctic layer changes projection. User can select layer opacity on the overlay layer.
+- [X] Create a fully styled vector tiled background map using Mapzen. You can use the OpenLayers Mapzen example at https://openlayers.org/en/latest/examples/osmvector-tiles.html as inspiration. You must style at least 5 different types of features (object collection or kind) and you must incorporate texts into the styling. For double points, incorporate pointer interaction, e.g. display bus routes when hovering over them
+  - **COMMENT:** We had difficulties finding maps here. We have two different tile layers that can be styled (MapTiler Streets & ogcVectorTile). The style is saved to localstorage.
+- [X] Let the user draw and modify features with at least two types of geometries, including circles with a radius in meters. Store the features in localStorage so that when the user refreshes, the features remain on the map. The user should be able to modify the geometry of the feature and properties that should be reflected in the style of the feature
+  - **COMMENT:** Saving circles does not work. "Lagre" button must be pressed to persist the features in localstorage. 
+- [X] Interaction between data in a sidebar and the view on the map: Show a sidebar with a list of a type of feature displayed on the map, filtered to the visible features. When clicking on a feature on the sidebar, the map should zoom to feature. Since there's only one feature visible, the sidebar can be hidden - but it should be easy to zoom back to the previous view. To "go back", store in sessionStorage the view center and zoom before zooming to a feature.
+
+## Extra features
+- [X] Search for address and click on address to go to it
+- [X] Settings section for enabling & disabling overview map, scaleline & zoomslider. Works with localstorage.
+- [X] Layer selection is saved in localstorage on refresh.
+- [X] Refresh button to reset selected layers
+- [X] Darkmode & lightmode (from system settings)
+- [X] Shift+create selection on map => zoom to that selection
 
 ## To-do (try have high priority at top of list)
 
-- [x] Tegning med lagring til localstorage
 - [ ] Fix bug for circles not saving to localstorage
 - [x] Add color selection for drawing
 - [ ] Add interaction (onclick) on the map for different features
@@ -30,13 +63,6 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - [x] Overview map with controls in settings https://openlayers.org/en/latest/examples/overviewmap.html
 - [x] Settings for zoom slider, scale line
 
-## Application Features
-
-#### Adresser with clustering:
-
-- Cluster color and size is based of the amount of addresses inside of it.
-- Single point addresses inside kommuner of Oslo, Asker and Bærum has different colors, as per the requirement to have "single-feature cluster with a seperatre style using icons that vary based on a property of the feature."
-
 ### Data features with sources:
 
 - Adresse søk via Kartverket API (https://ws.geonorge.no/adresser/v1/)
@@ -49,16 +75,6 @@ This application is designed to explore neighbourhoods and local offerings. It c
 
 - LIST ALL BACKGROUND LAYERS WITH SOURCES HERE
 
-### Other features
-
-- Shift + make selection on map => zoom to that selection
-
 ## Other information
 
 - Since everyone on the group already was familiar with Tailwind CSS and prefer this over normal CSS we decided to use this because we work faster with it.
-
-## Features for A:
-
-- [x] Display moving data on a map using GraphQL data source.
-- [x] Display a clustered vector data source with open layers. Both size and color of the cluster is based on the size of it. This is adresse layer.
-- [x] Deploy your own GIS API to a hosted service and display a huge dataset from PostGIS database to a map. This is hosted on Heroku. Displaying both teig(eiendommer) & addresses, as well as foodstores in Norway.
