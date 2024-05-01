@@ -16,7 +16,7 @@ export const jernbaneLinjerStyle = (feature: FeatureLike) => {
   const jernbaneLinje = feature.getProperties() as jernbanelinjerProperties;
   return new Style({
     stroke: new Stroke({
-      color: jernbaneLinje.sporantall === "E" ? "#0d14f2" : "#8100cc",
+      color: jernbaneLinje.sporantall === "E" ? "#0F172A" : "#0D9488",
       width: 3,
     }),
   });
@@ -26,7 +26,7 @@ export const activeJernbanelinjerStyle = (feature: FeatureLike) => {
   const jernbaneLinje = feature.getProperties() as jernbanelinjerProperties;
   return new Style({
     stroke: new Stroke({
-      color: jernbaneLinje.sporantall === "E" ? "#0d14f2" : "#8100cc",
+      color: jernbaneLinje.sporantall === "E" ? "#94A3B8" : "#0D9488",
       width: 3,
     }),
     text: new Text({

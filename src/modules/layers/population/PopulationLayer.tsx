@@ -23,15 +23,23 @@ const populationLayer = new VectorLayer({
 });
 type PopulationProperties = {
   pop_tot: number;
+  pop_mal: number;
+  pop_fem: number;
+  pop_ave2: number;
 };
 
 type PopulationFeature = {
   getProperties(): PopulationProperties;
 } & Feature<MultiPolygon>;
 
-function populationStyle(f: FeatureLike) {
+export function populationStyle(f: FeatureLike) {
   const feature = f as PopulationFeature;
-  const population = feature.getProperties().pop_tot;
+  const {
+    pop_tot: population,
+    pop_mal: male,
+    pop_fem: female,
+    pop_ave2: average,
+  } = feature.getProperties();
 
   let color;
   if (population > 19000) {
@@ -46,9 +54,21 @@ function populationStyle(f: FeatureLike) {
     color = "rgba(255, 255, 0, 0.5)";
   }
 
-  return new Style({
+  const style = new Style({
     fill: new Fill({ color: color }),
+    text: new Text({
+      text: `Population: ${population}\n
+            Male: ${male}\n
+            Female: ${female}\n
+            Average Age: ${average}`,
+      font: "bold 12px sans-serif",
+      stroke: new Stroke({ color: "white", width: 2 }),
+      fill: new Fill({ color: "black" }),
+      offsetY: -10,
+    }),
   });
+
+  return style;
 }
 
 export function PopulationLayer() {
@@ -60,33 +80,7 @@ export function PopulationLayer() {
     },
   );
 
-  const [activeFeature, setActiveFeature] = useState<PopulationFeature>();
-
-  function handlePointerMove(e: MapBrowserEvent<MouseEvent>) {
-    const resolution = map.getView().getResolution();
-    if (!resolution || resolution > 100) {
-      return;
-    }
-    const features: FeatureLike[] = [];
-    map.forEachFeatureAtPixel(e.pixel, (f) => features.push(f), {
-      hitTolerance: 5,
-      layerFilter: (l) => l === populationLayer,
-    });
-    if (features.length === 1) {
-      setActiveFeature(features[0] as PopulationFeature);
-    } else {
-      setActiveFeature(undefined);
-    }
-  }
-
   useLayer(populationLayer, checked);
-
-  useEffect(() => {
-    if (checked) {
-      map?.on("pointermove", handlePointerMove);
-    }
-    return () => map?.un("pointermove", handlePointerMove);
-  }, [checked]);
 
   return (
     <div className={"flex w-full justify-around p-1"}>
