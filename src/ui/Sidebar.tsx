@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState } from "react";
 import MapLayerIcon from "./icons/MapLayerIcon";
 import SearchIcon from "./icons/SearchIcon";
 import Search from "./Search";
@@ -13,12 +13,12 @@ import { OverlayLayer } from "./OverlayLayer";
 import MobilityLayer from "../modules/layers/mobility/MobilityLayer";
 import TrainLayer from "../modules/layers/trains/TrainLayer";
 import Settings from "../modules/userSettings/Settings";
-import useLocalStorageState from "use-local-storage-state";
 import ResetIcon from "./icons/ResetIcon";
 import { EiendomCheckbox } from "../modules/layers/eiendommer/EiendomLayerCheckbox";
 import Drawing from "../modules/drawing/Drawing";
 import { KommuneLayerCheckbox } from "../modules/layers/kommuner/KommuneLayerCheckbox";
 import { RailwayLayerCheckbox } from "../modules/layers/railwayLines/RailwayCheckbox";
+import useReset from "./useReset";
 
 export default function Sidebar({
   setMatbutikkAsideVisible,
@@ -28,35 +28,7 @@ export default function Sidebar({
   const [isOpen, setIsOpen] = useState(false);
   const [activeContent, setActiveContent] = useState(undefined);
 
-  const [, setMobility] = useLocalStorageState("mobility-layer-checked", {
-    defaultValue: false,
-  });
-  const [, setAddress] = useLocalStorageState("adresse-layer-checked", {
-    defaultValue: false,
-  });
-  const [, setPopulation] = useLocalStorageState("population-layer-checked", {
-    defaultValue: false,
-  });
-  const [, setTrain] = useLocalStorageState("train-layer-checked", {
-    defaultValue: false,
-  });
-  const [, setMatbutikker] = useLocalStorageState("matbutikk-layer-checked", {
-    defaultValue: false,
-  });
-  const [, setKommuner] = useLocalStorageState("kommuner-layer-checked", {
-    defaultValue: false,
-  });
-  const [, setOgcVectorTileColor] = useLocalStorageState("ogc-vector-styles", {
-    defaultValue: {
-      background: "#d1d1d1",
-      strokeWidth: 0.8,
-      strokeColor: "#8c8b8b",
-      fillColor: "#f7f7e9",
-    },
-  });
-  const [, setRailways] = useLocalStorageState("railway-layer-checked", {
-    defaultValue: false,
-  });
+  const {handleReset} = useReset();
 
   function handleContentChange(content: any) {
     if (content === activeContent) {
@@ -66,24 +38,6 @@ export default function Sidebar({
       setIsOpen(true);
       setActiveContent(content);
     }
-  }
-
-  function handleReset() {
-    setMobility(false);
-    setAddress(false);
-    setPopulation(false);
-    setTrain(false);
-    setMatbutikker(false);
-    setKommuner(false);
-
-    setOgcVectorTileColor({
-      background: "#d1d1d1",
-      strokeWidth: 0.8,
-      strokeColor: "#8c8b8b",
-      fillColor: "#f7f7e9",
-    });
-    setRailways(false);
-    window.location.reload();
   }
 
   const topMenuItems = [
