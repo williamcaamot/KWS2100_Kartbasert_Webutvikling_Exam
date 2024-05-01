@@ -51,7 +51,7 @@ export function AdresseLayerCheckbox() {
     const coordinate = e.coordinate;
     popup.setPosition(coordinate);
     //console.log(`amount of features: ${featuresAtCoordiante?.getProperties().features.length}`)
-    if(!featuresAtCoordiante?.getProperties().features){
+    if (!featuresAtCoordiante?.getProperties().features) {
       return;
     }
     if (featuresAtCoordiante?.getProperties().features.length === 1) {
