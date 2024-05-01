@@ -78,7 +78,7 @@ const Settings = () => {
       } else {
         switchToLightMode();
       }
-      setDarkMode(newMode); // Also update the darkMode state
+      setDarkMode(newMode);
       return newMode;
     });
   };
