@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { useLayer } from "../../map/useLayer";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { GeoJSON } from "ol/format";
-import { Circle, Fill, Stroke, Style, Text } from "ol/style";
-import { Feature, MapBrowserEvent } from "ol";
+import { Fill, Stroke, Style, Text } from "ol/style";
+import { Feature } from "ol";
 import { MultiPolygon } from "ol/geom";
 import { FeatureLike } from "ol/Feature";
 import { MapContext } from "../../map/mapContext";
@@ -57,14 +57,13 @@ export function populationStyle(f: FeatureLike) {
   const style = new Style({
     fill: new Fill({ color: color }),
     text: new Text({
-      text: `Population: ${population}\n
+      text: ` Population: ${population}\n
             Male: ${male}\n
             Female: ${female}\n
             Average Age: ${average}`,
       font: "bold 12px sans-serif",
-      stroke: new Stroke({ color: "white", width: 2 }),
+      stroke: new Stroke({ color: "white", width: 1.5 }),
       fill: new Fill({ color: "black" }),
-      offsetY: -10,
     }),
   });
 

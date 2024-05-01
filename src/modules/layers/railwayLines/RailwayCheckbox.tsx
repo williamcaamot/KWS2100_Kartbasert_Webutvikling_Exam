@@ -13,6 +13,7 @@ import {
   activeRailwayStyle,
   railwayStyle,
 } from "./RailwayFeature";
+import useLocalStorageState from "use-local-storage-state";
 
 const railwayLayer = new VectorLayer({
   source: new VectorSource({
@@ -26,7 +27,9 @@ const railwayLayer = new VectorLayer({
 export function RailwayLayerCheckbox() {
   const { map } = useContext(MapContext);
 
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useLocalStorageState("railway-layer-checked", {
+    defaultValue: false,
+  });
 
   const [activeFeature, setActiveFeature] = useState<RailwayFeature>();
 
