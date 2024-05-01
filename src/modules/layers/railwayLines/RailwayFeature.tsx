@@ -30,7 +30,7 @@ export const activeRailwayStyle = (feature: FeatureLike) => {
       width: 3,
     }),
     text: new Text({
-      text: railway.sporantall + " " + railway.medium,
+      text: railway.sporantall === "F" ? "Flerspor" : "Enkeltspor",
       font: "bold 14px sans-serif",
       stroke: new Stroke({ color: "white", width: 2 }),
       fill: new Fill({ color: "black" }),
