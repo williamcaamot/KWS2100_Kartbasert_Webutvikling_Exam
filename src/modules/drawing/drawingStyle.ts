@@ -3,6 +3,8 @@ import CircleStyle from "ol/style/Circle";
 import { Fill, Stroke, Style, Text } from "ol/style";
 
 export function drawingStyle(f: FeatureLike) {
+  // https://openlayers.org/en/latest/examples/draw-features-style.html how to sytle different styles inspired from here
+
   if (f.getGeometry()?.getType() === "Point") {
     return new Style({
       image: new CircleStyle({
