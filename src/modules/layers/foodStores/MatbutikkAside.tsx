@@ -1,22 +1,14 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { useVectorFeatures } from "../../map/useVectorFeatures";
 import {
   MatbutikkFeature,
   MatbutikkLayerType,
   MatbutikkProperties,
-  hoverMatbutikkStyleFunction,
 } from "./MatbutikkLayer";
-import { useActiveFeatures } from "../../map/useActiveFeatures";
 import { Fill, Stroke, Style, Text } from "ol/style";
 import { FeatureLike } from "ol/Feature";
 import { MapContext } from "../../map/mapContext";
-import { containsCoordinate } from "ol/extent";
-import * as ol from "ol";
-import { Layer } from "ol/layer";
-import { Coordinate } from "ol/coordinate";
 import { Polygon } from "ol/geom";
 import { getCenter } from "ol/extent";
-
 export function selectedMatbutikkStyle(feature: FeatureLike) {
   const matbutikkFeature = feature.getProperties() as MatbutikkProperties;
 
@@ -113,16 +105,18 @@ const MatbutikkAside = ({
     <aside
       className={
         visibleFeatures?.length
-          ? "visible w-[30%] h-auto flex flex-col justify-start overflow-y-scroll pb-4 px-4"
+          ? "dark:bg-slate-900 dark:border-r-slate-950 bg-white border-l visible w-[30%] h-auto flex flex-col justify-start overflow-y-scroll pb-4 px-4"
           : "hidden"
       }
       style={{ maxHeight: "100vh", overflow: "auto" }}
     >
-      <h2 className="text-xl font-bold">Synlige matbutikker</h2>
+      <h2 className="dark:text-gray-200 text-gray-800 text-xl font-bold py-4">
+        Synlige matbutikker
+      </h2>
       {visibleFeatures?.map((b) => (
         <div
           key={b.getProperties().id}
-          className={`dark:bg-slate-800 flex flex-row items-center justify-between py-1 px-4 my-1 w-full h-16 shadow ${selectedStore?.getProperties().id === b.getProperties().id ? "border-2 border-teal-600" : ""} rounded-lg`}
+          className={`dark:bg-slate-800 flex dark:text-gray-200 text-gray-800 flex-row items-center justify-between py-1 px-4 my-1 w-full h-16 shadow ${selectedStore?.getProperties().id === b.getProperties().id ? "border-2 border-teal-600" : ""} rounded-lg`}
           role="button"
           tabIndex={0}
           onClick={() => {
