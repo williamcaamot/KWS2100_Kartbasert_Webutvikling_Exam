@@ -103,3 +103,4 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - When selecting address layer, then eiendom layer, only overlay information on eiendom layer works.
 - Due to low intervalls from Entur, the trains with an updated location update every 5-10 seconds. Easier to see if zoomed out a bit, than you can see the trains that receive updates, move .
 - Saving circles to localstorage doesn't work due to the geometric object type.
+- Checkbox for darkmode doesn't follow system theme on page load, however it works fine to toggle modes after initial lode.
