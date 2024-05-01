@@ -59,8 +59,8 @@ This application is designed to explore neighbourhoods and local offerings. It c
 
 - [x] Search for address and click on address to go to it
 - [x] Settings section for enabling & disabling overview map, scaleline & zoomslider. Works with localstorage.
-- [x] Most settings are stored in LS. All Data layers, OGC VectorTileLayer, Drawings(except Circles) and user settings. 
-- [x] Refresh button to reset selected layers 
+- [x] Most settings are stored in LS. All Data layers, OGC VectorTileLayer, Drawings(except Circles) and user settings.
+- [x] Refresh button to reset selected layers
 - [x] Darkmode & lightmode (from system settings)
   - [x] Possible to toggle dark/light mode from settings too
 - [x] Shift+create selection on map => zoom to that selection
@@ -93,11 +93,11 @@ This application is designed to explore neighbourhoods and local offerings. It c
 
 ## Other information
 
-- Since everyone on the group already was familiar with Tailwind CSS we used this because we think it improves our development speed. We also choose to combine styles with regular CSS as well. 
+- Since everyone on the group already was familiar with Tailwind CSS we used this because we think it improves our development speed. We also choose to combine styles with regular CSS as well.
 - We have committed an equal amount of code and all participated equally, in some cases we have worked together on one computer, for example the initial commit.
 
 ## Known bugs:
 
 - When selecting address layer, then eiendom layer, only overlay information on eiendom layer works.
-- Due to low intervalls from Entur, the trains with an updated location update every 5-10 seconds. Easier to see if zoomed out a bit, than you can see the trains that receive updates, move. 
-- Saving circles to localstorage doesn't work due to the geometric object type. 
+- Due to low intervalls from Entur, the trains with an updated location update every 5-10 seconds. Easier to see if zoomed out a bit, than you can see the trains that receive updates, move.
+- Saving circles to localstorage doesn't work due to the geometric object type.
