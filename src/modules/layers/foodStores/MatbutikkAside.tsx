@@ -92,17 +92,20 @@ const MatbutikkAside = ({
   const currentView = map.getView();
   const currentCenter = currentView.getCenter();
   const currentZoom = currentView.getZoom();
-  const [savedView, setSavedView] = useLocalStorageState<{ center: Coordinate; zoom: number } | null>("saved-view",);
+  const [savedView, setSavedView] = useLocalStorageState<{
+    center: Coordinate;
+    zoom: number;
+  } | null>("saved-view");
   const [selectedStore, setSelectedStore] = useState<
     MatbutikkFeature | undefined
   >();
 
   const goToStore = (feature: MatbutikkFeature) => {
     if (currentCenter && currentZoom) {
-    setSavedView({
+      setSavedView({
         center: currentCenter,
         zoom: currentZoom,
-        });
+      });
     }
     const geometry = feature.getGeometry() as Polygon;
     const extent = geometry.getExtent();
@@ -111,18 +114,18 @@ const MatbutikkAside = ({
     map.getView().animate({ center: [longitude, latitude], zoom: 18 });
   };
 
-const goToSavedView = () => {
+  const goToSavedView = () => {
     const position = savedView as { center: Coordinate; zoom: number };
-    const center = position.center.map(coord => coord as unknown as number);
+    const center = position.center.map((coord) => coord as unknown as number);
     map.getView().animate({
-        center: center,
-        zoom: position.zoom,
+      center: center,
+      zoom: position.zoom,
     });
     setSelectedStore(undefined);
     setSavedView(null);
-}
+  };
 
-if (!matbutikkAsideVisible) return null;
+  if (!matbutikkAsideVisible) return null;
 
   return (
     <aside
@@ -138,9 +141,11 @@ if (!matbutikkAsideVisible) return null;
       </h2>
       {savedView && (
         <button
-            className="bg-teal-600 text-white rounded-lg p-2 w-full mb-2"
-            onClick={goToSavedView}
-        >Go back to previous view</button>
+          className="bg-teal-600 text-white rounded-lg p-2 w-full mb-2"
+          onClick={goToSavedView}
+        >
+          Go back to previous view
+        </button>
       )}
       {visibleFeatures?.map((b) => (
         <div
