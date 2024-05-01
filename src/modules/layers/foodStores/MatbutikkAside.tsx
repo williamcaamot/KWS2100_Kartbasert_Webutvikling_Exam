@@ -116,7 +116,7 @@ const MatbutikkAside = ({
       {visibleFeatures?.map((b) => (
         <div
           key={b.getProperties().id}
-          className={`dark:bg-slate-800 flex dark:text-gray-200 text-gray-800 flex-row items-center justify-between py-1 px-4 my-1 w-full h-16 shadow ${selectedStore?.getProperties().id === b.getProperties().id ? "border-2 border-teal-600" : ""} rounded-lg`}
+          className={`hover:bg-teal-600 dark:bg-slate-800 flex dark:text-gray-200 text-gray-800 flex-row items-center justify-between py-1 px-4 my-1 w-full h-16 shadow ${selectedStore?.getProperties().id === b.getProperties().id ? "border-2 border-teal-600" : ""} rounded-lg`}
           role="button"
           tabIndex={0}
           onClick={() => {
