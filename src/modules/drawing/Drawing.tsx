@@ -26,25 +26,25 @@ export default function Drawing() {
   const [enableDrawingLayer, setEnableDrawingLayer] = useState<boolean>(false);
   const [enableDrawning, setEnableDrawning] = useState<boolean>(false);
   const [drawingType, setDrawingType] = useState<DrawingType>("Circle");
-  const [source, setSource] = useState(new VectorSource());
-  const [vector, setVector] = useState(
+  const [drawSource, setDrawSource] = useState(new VectorSource());
+  const [drawLayer, setDrawLayer] = useState(
     new VectorLayer({
-      source: source,
+      source: drawSource,
       style: drawingStyle,
     }),
   );
 
-  useLayer(vector, enableDrawingLayer);
+  useLayer(drawLayer, enableDrawingLayer);
   const { map } = useContext(MapContext);
 
   // Make the code below into a custom hook if possible and enough time!
-  const modify = new Modify({ source: source });
+  const modify = new Modify({ source: drawSource });
   const draw = new Draw({
-    source: source,
+    source: drawSource,
     type: drawingType,
     style: drawingStyle,
   });
-  const snap = new Snap({ source: source });
+  const snap = new Snap({ source: drawSource });
 
   draw.on("drawend", function (event) {
     event.feature.setProperties({
@@ -88,7 +88,7 @@ export default function Drawing() {
         const geojson = new GeoJSON();
         const featuresGeoJSON = geojson.readFeatures(featuresObj);
         featuresGeoJSON.forEach((feature) => {
-          vector.getSource()?.addFeature(feature);
+          drawLayer.getSource()?.addFeature(feature);
         });
       }
     } catch (e) {}
@@ -96,7 +96,7 @@ export default function Drawing() {
 
   function handleSaveToLocalStorage() {
     try {
-      const features = source.getFeatures();
+      const features = drawSource.getFeatures();
       const geojsonFormat = new GeoJSON();
       if (features && features.length > 0) {
         const featuresJSON = geojsonFormat.writeFeatures(features);
@@ -108,6 +108,7 @@ export default function Drawing() {
         alert("Endringene ble lagret!");
       } else {
         window.localStorage.removeItem("drawing-features");
+        alert("Fjernet alle elementer fra localstorage!");
       }
     } catch (e) {
       console.error("Failed to save features to localStorage", e);
@@ -115,7 +116,7 @@ export default function Drawing() {
   }
 
   function handleDeleteFeature(ol_uid: number) {
-    const featureToRemove = source
+    const featureToRemove = drawSource
       .getFeatures()
       .find(
         (
@@ -123,7 +124,7 @@ export default function Drawing() {
         ) => feature.ol_uid === ol_uid,
       );
     if (featureToRemove) {
-      source.removeFeature(featureToRemove);
+      drawSource.removeFeature(featureToRemove);
       setUpdatedCounter((updatedCounter) => updatedCounter + 1);
     } else {
       console.log("No feature found with the specified property value");
@@ -143,7 +144,7 @@ export default function Drawing() {
         <Switch checked={enableDrawning} onChange={setEnableDrawning} />
       </div>
 
-      {/*Radio select source https://flowbite.com/docs/forms/radio/*/}
+      {/*Radio select drawSource https://flowbite.com/docs/forms/radio/*/}
       <h3 className="mb-4 font-semibold text-gray-900 dark:text-white">
         Figur type
       </h3>
@@ -190,7 +191,7 @@ export default function Drawing() {
         <h3 className="mb-4 font-semibold text-gray-900 dark:text-white">
           Features som er tegnet inn:
         </h3>
-        {source.getFeatures().map((feature) => {
+        {drawSource.getFeatures().map((feature) => {
           return (
             <Feature
               feature={feature}
