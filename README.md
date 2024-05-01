@@ -31,8 +31,8 @@ This application is designed to explore neighbourhoods and local offerings. It c
 ### B:
 
 - [x] You can display both polygon and point geometries from at least 4 data sources
-- [x] Your code is structured to make it easy to find the code corresponding to each data source and in order to make it easy to add more features 
- - **COMMENT:** We have done our best with the time available to create a clean and structured project though consistancy, good naming and clean functions. 
+- [x] Your code is structured to make it easy to find the code corresponding to each data source and in order to make it easy to add more features
+- **COMMENT:** We have done our best with the time available to create a clean and structured project though consistancy, good naming and clean functions.
 - [x] You can click on a feature to display an Overlay with properties of the features
 - [x] You display an Overview map
 
