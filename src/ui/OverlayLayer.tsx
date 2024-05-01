@@ -7,8 +7,6 @@ import satelliteLayerImage from "../assets/images/satelliteLayerImage.png";
 import osmLayerImage from "../assets/images/openLayerstreetMapImage.png";
 import stadiaLayerImage from "../assets/images/stadiaLayerImage.png";
 import stadiaDarkLayerImage from "../assets/images/stadiaDarkLayerImage.png";
-import kartverketLayerImage from "../assets/images/kartverketLayerImage.png";
-import flyfotoLayerImage from "../assets/images/flyfotoLayerImage.png";
 
 export function OverlayLayer() {
   const { map } = useContext(MapContext);
@@ -63,7 +61,8 @@ export function OverlayLayer() {
 
   const [selectedExtraLayer, setSelectedExtraLayer] = useState<
     (typeof extraLayerOptions)[0] | null
-  >(extraLayerOptions[0]);
+  >(null);
+
   const [opacity, setOpacity] = useState(0.3);
 
   useEffect(() => {
@@ -121,8 +120,8 @@ export function OverlayLayer() {
           <input
             type="range"
             min="0"
-            max="1"
             step="0.05"
+            max="1"
             value={opacity}
             onChange={(e) => setOpacity(Number(e.target.value))}
           />

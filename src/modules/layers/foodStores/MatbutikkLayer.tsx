@@ -10,7 +10,7 @@ import { Projection } from "ol/proj";
 
 import { useActiveFeatures } from "../../map/useActiveFeatures";
 import { useContext } from "react";
-import { MapContext } from "../../map/mapContext";
+import { MapContext, map } from "../../map/mapContext";
 
 export type MatbutikkLayerType = VectorLayer<VectorSource<MatbutikkFeature>>;
 export type MatbutikkFeature = {
@@ -34,21 +34,20 @@ export interface MatbutikkProperties {
 export const MatbutikkerLayer = new VectorLayer({
   className: "MatbutikkerLayer",
   source: new VectorSource({
-    strategy: (extent, resolution) => [extent],
+    strategy: (extent, resolution) => (resolution < 0.001 ? [extent] : []),
     loader: function (extent, resolution, projection) {
-      loadEiendomDataLayer(this, extent, resolution, projection);
+      loadMatbutikkDataLayer(this, extent, resolution, projection);
     },
   }),
   style: matbutikkStyleFunction,
 });
 
-async function loadEiendomDataLayer(
+async function loadMatbutikkDataLayer(
   source: VectorSource<Feature<Geometry>> | VectorTile,
   extent: Extent,
   resolution: number,
   projection: Projection,
 ) {
-  console.log("fethcing food stores");
   const url = `https://kartbasert-f2ca5a90ebbf.herokuapp.com/api/v1/datalayers/matbutikker?extent=${JSON.stringify(extent)}&resolution=${resolution}`;
   const response = await fetch(url);
   if (!response.ok) {

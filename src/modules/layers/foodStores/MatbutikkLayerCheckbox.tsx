@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Switch from "../../../ui/switch";
 import { MatbutikkerLayer } from "./MatbutikkLayer";
 import { useLayer } from "../../map/useLayer";
 import useLocalStorageState from "use-local-storage-state";
 
-export function MatbutikkerCheckbox() {
+export function MatbutikkerCheckbox({
+  setMatbutikkAsideVisible,
+}: {
+  setMatbutikkAsideVisible: (value: boolean) => void;
+}) {
   const [checked, setMatbutikker] = useLocalStorageState(
     "matbutikk-layer-checked",
     {
@@ -13,6 +17,11 @@ export function MatbutikkerCheckbox() {
   );
 
   useLayer(MatbutikkerLayer, checked);
+
+  useEffect(() => {
+    setMatbutikkAsideVisible(checked);
+  }, [checked]);
+
   return (
     <div className={"flex w-full justify-around p-1"}>
       <p>Show matbutikker</p>

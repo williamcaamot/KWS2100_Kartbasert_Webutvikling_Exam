@@ -36,6 +36,10 @@ export function Application() {
     },
   });
 
+  const [matbutikkAsideVisible, setMatbutikkAsideVisible] = useState(false);
+
+  // UseEffect som sjekker om brukeren har satt dark mode som preferanse og om systemet er satt til dark mode
+  // TODO: Fikse at den huker av riktig knapp i settings ut ifra hvilken theme som er satt i localstorage når man laster inn siden
   useEffect(() => {
     if (
       window.matchMedia &&
@@ -149,7 +153,7 @@ export function Application() {
       }}
     >
       <nav>
-        <Sidebar />
+        <Sidebar setMatbutikkAsideVisible={setMatbutikkAsideVisible} />
         <CustomZoomAndLocation />
       </nav>
       <main style={{ display: "flex", width: "100%", height: "100%" }}>
@@ -158,7 +162,7 @@ export function Application() {
           style={{ width: "83px", height: "100%", backgroundColor: "white" }}
         />
         <div ref={mapRef} style={{ height: "100%", width: "100%" }}></div>
-        <MatbutikkAside />
+        <MatbutikkAside matbutikkAsideVisible={matbutikkAsideVisible} />
       </main>
     </MapContext.Provider>
   );
