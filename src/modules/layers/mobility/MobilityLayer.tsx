@@ -277,9 +277,6 @@ const MobilityLayer = () => {
 
   // Popup showing the position the user clicked
   const popupElement = document.createElement("div");
-  popupElement.style.backgroundColor = "white";
-  popupElement.style.padding = "10px";
-  popupElement.style.borderRadius = "5px";
   popupElement.style.border = "1px solid black";
   popupElement.style.display = "none";
   document.body.appendChild(popupElement);
@@ -305,6 +302,7 @@ const MobilityLayer = () => {
       popup.setPosition(coordinate);
       const currentRangeKm = feature.getProperties().currentRangeMeters / 1000;
       popupElement.innerHTML = `
+<div class="w-full h-full dark:bg-slate-900 border-slate-950 bg-white text-black dark:text-white p-4 rounded">
           <span>
             <h2>${feature.getProperties().system.name.translation[0].value}</h2>
             <p>Status: ${feature.getProperties().isDisabled ? "Disabled" : "Not disabled"}</p>
@@ -312,6 +310,7 @@ const MobilityLayer = () => {
             <p>Pricing Plan: ${feature.getProperties().pricingPlan.description.translation[0].value}</p>
             <p>Current Range (Kilometers): ${currentRangeKm}</p>
           </span>
+          </div>
         `;
       popupElement.style.display = "block";
     }

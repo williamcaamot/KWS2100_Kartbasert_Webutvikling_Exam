@@ -61,6 +61,7 @@ export function AdresseLayerCheckbox() {
       const singleFeatureProperties =
         singleFeature.getProperties() as AdresseProperties;
       popupElement.innerHTML = `
+<div class="w-full h-full dark:bg-slate-900 border-slate-950 bg-white text-black dark:text-white p-4 rounded">
             <span>
             <div class="w-full flex justify-center pb-2 underline"><h3 class="font-bold">Adresse informasjon</h3></div>
           <ul>
@@ -77,6 +78,7 @@ export function AdresseLayerCheckbox() {
             <li><span class="font-bold">Bruksnummer:</span> ${singleFeature?.getProperties().matrikkelnummeradresse_bruksnummer}</li>
             </ul>
           </span>
+          </div>
             `;
       popupElement.style.display = "block";
     } else if (featuresAtCoordiante?.getProperties().features.length > 1) {
@@ -100,10 +102,9 @@ export function AdresseLayerCheckbox() {
 
   const popupElement = document.createElement("div");
   popupElement.style.backgroundColor = "white";
-  popupElement.style.padding = "10px";
-  popupElement.style.borderRadius = "5px";
   popupElement.style.border = "1px solid black";
   popupElement.style.display = "none";
+  popupElement.className = "dark:bg-gray-800";
   document.body.appendChild(popupElement);
 
   const popup = new Overlay({
