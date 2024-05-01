@@ -33,6 +33,7 @@ export function Application() {
       showZoomSlider: true,
       showMiniMap: true,
       showScaleline: false,
+      isDarkMode: true,
     },
   });
 
