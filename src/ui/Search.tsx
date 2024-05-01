@@ -36,25 +36,25 @@ export default function Search() {
 
   let lastLayer: VectorLayer<VectorSource<Feature<Point>>> | null = null;
 
-function handleFocusSearchResult(item: any, map: Map) {
+  function handleFocusSearchResult(item: any, map: Map) {
     if (lastLayer !== null) {
       map.removeLayer(lastLayer);
     }
-  
+
     // Animate the map view to the center of the feature
     map.getView().animate({
       center: [item.representasjonspunkt.lon, item.representasjonspunkt.lat],
       zoom: 18,
     });
-  
+
     // Create a point geometry with the coordinates of the item
     const point = new Point([
-        item.representasjonspunkt.lon,
-        item.representasjonspunkt.lat,
-      ]);  
+      item.representasjonspunkt.lon,
+      item.representasjonspunkt.lat,
+    ]);
     // Create a feature with the point geometry
     const feature = new Feature(point);
-  
+
     // Create a style for the feature
     const style = new Style({
       image: new Circle({
@@ -72,23 +72,23 @@ function handleFocusSearchResult(item: any, map: Map) {
         stroke: new Stroke({ color: "white", width: 5 }),
       }),
     });
-  
+
     // Set the style of the feature
     feature.setStyle(style);
-  
+
     // Create a vector source and add the feature to it
     const source = new VectorSource({
       features: [feature],
     });
-  
+
     // Create a vector layer with the vector source
     const layer = new VectorLayer({
       source: source,
     });
-  
+
     // Add the layer to the map
     map.addLayer(layer);
-  
+
     // Update the last layer
     lastLayer = layer;
   }
