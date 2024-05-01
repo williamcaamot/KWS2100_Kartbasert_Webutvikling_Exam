@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Switch from "../../../ui/switch";
-import {FoodstoreLayer} from "./FoodstoreLayer";
+import { FoodstoreLayer } from "./FoodstoreLayer";
 import { useLayer } from "../../map/useLayer";
 import useLocalStorageState from "use-local-storage-state";
 

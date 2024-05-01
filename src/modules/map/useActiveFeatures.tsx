@@ -4,11 +4,10 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { MapContext } from "./mapContext";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-
 import {
-  hoverMatbutikkStyleFunction,
-  matbutikkStyleFunction,
-} from "../../modules/layers/foodStores/MatbutikkLayer";
+  foodstoreHoverStyleFunction,
+  foodstoreStyleFunction,
+} from "../layers/foodStores/FoodstoreLayer";
 
 export function useActiveFeatures<FEATURE extends Feature>(
   predicate: (l: Layer) => boolean,
@@ -32,11 +31,11 @@ export function useActiveFeatures<FEATURE extends Feature>(
       ?.getSource()
       ?.getFeatures()
       .forEach((feature) => {
-        feature.setStyle(matbutikkStyleFunction);
+        feature.setStyle(foodstoreStyleFunction);
       });
 
     features?.forEach((feature) => {
-      feature.setStyle(hoverMatbutikkStyleFunction);
+      feature.setStyle(foodstoreHoverStyleFunction);
     });
 
     setActiveFeatures((old) => {

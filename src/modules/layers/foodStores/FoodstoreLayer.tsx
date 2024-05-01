@@ -8,7 +8,6 @@ import { Style } from "ol/style.js";
 import { Extent } from "ol/extent";
 import { Projection } from "ol/proj";
 
-
 export type FoodstoreLayerType = VectorLayer<VectorSource<FoodstoreFeature>>;
 export type FoodstoreFeature = {
   getProperties(): FoodstoreProperties;
@@ -81,7 +80,7 @@ export function foodstoreStyleFunction(feature: any, resolution: any): Style {
   });
 }
 
-export function FoodstoreHoverStyleFunction(
+export function foodstoreHoverStyleFunction(
   feature: any,
   resolution: any,
 ): Style {

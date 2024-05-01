@@ -117,15 +117,15 @@ export function OverlayLayer() {
         })}
         <div>
           <div className={"w-full flex justify-center flex-wrap py-2"}>
-          <h3>Endre gjennomsiktighet</h3>
-          <input
-            type="range"
-            min="0"
-            step="0.05"
-            max="1"
-            value={opacity}
-            onChange={(e) => setOpacity(Number(e.target.value))}
-          />
+            <h3>Endre gjennomsiktighet</h3>
+            <input
+              type="range"
+              min="0"
+              step="0.05"
+              max="1"
+              value={opacity}
+              onChange={(e) => setOpacity(Number(e.target.value))}
+            />
           </div>
         </div>
       </div>

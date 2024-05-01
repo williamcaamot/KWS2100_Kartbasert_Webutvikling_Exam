@@ -14,12 +14,12 @@ import MobilityLayer from "../modules/layers/mobility/MobilityLayer";
 import TrainLayer from "../modules/layers/trains/TrainLayer";
 import Settings from "../modules/userSettings/Settings";
 import ResetIcon from "./icons/ResetIcon";
-import {PropertyCheckbox} from "../modules/layers/properties/PropertyLayerCheckbox";
+import { PropertyCheckbox } from "../modules/layers/properties/PropertyLayerCheckbox";
 import Drawing from "../modules/drawing/Drawing";
 import { KommuneLayerCheckbox } from "../modules/layers/kommuner/KommuneLayerCheckbox";
 import { RailwayLayerCheckbox } from "../modules/layers/railwayLines/RailwayCheckbox";
 import useReset from "./useReset";
-import {PropertyLayer} from "../modules/layers/properties/PropertyLayer";
+import { PropertyLayer } from "../modules/layers/properties/PropertyLayer";
 
 export default function Sidebar({
   setMatbutikkAsideVisible,
