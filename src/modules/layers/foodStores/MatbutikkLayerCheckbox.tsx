@@ -24,12 +24,14 @@ export function MatbutikkerCheckbox({
 
   return (
     <div className="flex w-full justify-around p-1 flex-col">
-    <div className={"flex w-full justify-around"}>
-      <p>Vis matbutikker</p>
-      <div className={"flex-1"}></div>
-      <Switch checked={checked} onChange={setChecked} />
-    </div>
-      <p className="text-yellow-500">{checked ? "(Obs! Krever zoom)" : undefined}</p>
+      <div className={"flex w-full justify-around"}>
+        <p>Vis matbutikker</p>
+        <div className={"flex-1"}></div>
+        <Switch checked={checked} onChange={setChecked} />
+      </div>
+      <p className="text-yellow-500">
+        {checked ? "(Obs! Krever zoom)" : undefined}
+      </p>
     </div>
   );
 }
