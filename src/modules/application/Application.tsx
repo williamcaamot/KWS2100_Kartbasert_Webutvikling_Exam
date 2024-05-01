@@ -153,7 +153,7 @@ export function Application() {
       }}
     >
       <nav>
-        <Sidebar setMatbutikkAsideVisible={setMatbutikkAsideVisible}/>
+        <Sidebar setMatbutikkAsideVisible={setMatbutikkAsideVisible} />
         <CustomZoomAndLocation />
       </nav>
       <main style={{ display: "flex", width: "100%", height: "100%" }}>
@@ -162,7 +162,7 @@ export function Application() {
           style={{ width: "83px", height: "100%", backgroundColor: "white" }}
         />
         <div ref={mapRef} style={{ height: "100%", width: "100%" }}></div>
-        <MatbutikkAside matbutikkAsideVisible={matbutikkAsideVisible}/>
+        <MatbutikkAside matbutikkAsideVisible={matbutikkAsideVisible} />
       </main>
     </MapContext.Provider>
   );

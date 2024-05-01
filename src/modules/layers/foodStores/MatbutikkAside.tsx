@@ -70,7 +70,7 @@ export function useMatbutikklayer() {
   useEffect(() => {
     const view = map.getView();
     const handleViewChange = () => {
-        setViewExtent(map.getView().getViewStateAndExtent().extent);
+      setViewExtent(map.getView().getViewStateAndExtent().extent);
     };
     view.on("change:center", handleViewChange);
     view.on("change:resolution", handleViewChange);
@@ -80,15 +80,26 @@ export function useMatbutikklayer() {
     };
   }, [map, handleViewChange]);
 
-  return { matbutikkLayer: layer, features, visibleFeatures, clearVisibleFeatures: () => setFeatures([])};
+  return {
+    matbutikkLayer: layer,
+    features,
+    visibleFeatures,
+    clearVisibleFeatures: () => setFeatures([]),
+  };
 }
 
-const MatbutikkAside = ({matbutikkAsideVisible} : {matbutikkAsideVisible: boolean}) => {
+const MatbutikkAside = ({
+  matbutikkAsideVisible,
+}: {
+  matbutikkAsideVisible: boolean;
+}) => {
   const { map } = useContext(MapContext);
   const { visibleFeatures } = useMatbutikklayer();
 
-    const [selectedStore, setSelectedStore] = useState<MatbutikkFeature | undefined>();
-    const goToStore = (feature: MatbutikkFeature) => {
+  const [selectedStore, setSelectedStore] = useState<
+    MatbutikkFeature | undefined
+  >();
+  const goToStore = (feature: MatbutikkFeature) => {
     const geometry = feature.getGeometry() as Polygon;
     const extent = geometry.getExtent();
 
@@ -100,33 +111,37 @@ const MatbutikkAside = ({matbutikkAsideVisible} : {matbutikkAsideVisible: boolea
 
   return (
     <aside
-      className={visibleFeatures?.length ? "visible w-[30%] h-auto flex flex-col justify-start overflow-y-scroll pb-4 px-4" : "hidden"}
+      className={
+        visibleFeatures?.length
+          ? "visible w-[30%] h-auto flex flex-col justify-start overflow-y-scroll pb-4 px-4"
+          : "hidden"
+      }
       style={{ maxHeight: "100vh", overflow: "auto" }}
     >
-        <h2 className="text-xl font-bold">Synlige matbutikker</h2>
-        {visibleFeatures?.map((b) => (
-         <div
-              key={b.getProperties().id}
-              className={`dark:bg-slate-800 flex flex-row items-center justify-between py-1 px-4 my-1 w-full h-16 shadow ${selectedStore?.getProperties().id === b.getProperties().id ? "border-2 border-teal-600" : ""} rounded-lg`}
-              role="button"
-              tabIndex={0}
-              onClick={() =>
-                {setSelectedStore(
-                    visibleFeatures.find((v) => b.getProperties().id === v.getProperties().id)
-                  );
-                    goToStore(b);
-                }
-              }
-            >
-              <div className="mr-2.5">{b.getProperties().name}</div>
-              <img
-                src={b.getProperties().logo}
-                className="h-15 w-15 max-h-full max-w-full cursor-pointer"
-                alt="Layer Thumbnail"
-              />
-            </div>
-        ))}
-
+      <h2 className="text-xl font-bold">Synlige matbutikker</h2>
+      {visibleFeatures?.map((b) => (
+        <div
+          key={b.getProperties().id}
+          className={`dark:bg-slate-800 flex flex-row items-center justify-between py-1 px-4 my-1 w-full h-16 shadow ${selectedStore?.getProperties().id === b.getProperties().id ? "border-2 border-teal-600" : ""} rounded-lg`}
+          role="button"
+          tabIndex={0}
+          onClick={() => {
+            setSelectedStore(
+              visibleFeatures.find(
+                (v) => b.getProperties().id === v.getProperties().id,
+              ),
+            );
+            goToStore(b);
+          }}
+        >
+          <div className="mr-2.5">{b.getProperties().name}</div>
+          <img
+            src={b.getProperties().logo}
+            className="h-15 w-15 max-h-full max-w-full cursor-pointer"
+            alt="Layer Thumbnail"
+          />
+        </div>
+      ))}
     </aside>
   );
 };

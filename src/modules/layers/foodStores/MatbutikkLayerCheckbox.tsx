@@ -4,7 +4,11 @@ import { MatbutikkerLayer } from "./MatbutikkLayer";
 import { useLayer } from "../../map/useLayer";
 import useLocalStorageState from "use-local-storage-state";
 
-export function MatbutikkerCheckbox({setMatbutikkAsideVisible} : {setMatbutikkAsideVisible: (value: boolean) => void;}) {
+export function MatbutikkerCheckbox({
+  setMatbutikkAsideVisible,
+}: {
+  setMatbutikkAsideVisible: (value: boolean) => void;
+}) {
   const [checked, setMatbutikker] = useLocalStorageState(
     "matbutikk-layer-checked",
     {

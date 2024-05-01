@@ -20,7 +20,11 @@ import Drawing from "../modules/drawing/Drawing";
 import { KommuneLayerCheckbox } from "../modules/layers/kommuner/KommuneLayerCheckbox";
 import { RailwayLayerCheckbox } from "../modules/layers/railwayLines/RailwayCheckbox";
 
-export default function Sidebar({setMatbutikkAsideVisible} : {setMatbutikkAsideVisible: (value: boolean) => void}) {
+export default function Sidebar({
+  setMatbutikkAsideVisible,
+}: {
+  setMatbutikkAsideVisible: (value: boolean) => void;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeContent, setActiveContent] = useState(undefined);
 
@@ -162,7 +166,9 @@ export default function Sidebar({setMatbutikkAsideVisible} : {setMatbutikkAsideV
               display: activeContent === "dataLayers" ? "block" : "none",
             }}
           >
-            <DataLayerContent setMatbutikkAsideVisible={setMatbutikkAsideVisible}/>
+            <DataLayerContent
+              setMatbutikkAsideVisible={setMatbutikkAsideVisible}
+            />
           </div>
           <div
             style={{
@@ -221,7 +227,11 @@ function LayerContent() {
   );
 }
 
-function DataLayerContent({setMatbutikkAsideVisible} : {setMatbutikkAsideVisible: (value: boolean) => void;}) {
+function DataLayerContent({
+  setMatbutikkAsideVisible,
+}: {
+  setMatbutikkAsideVisible: (value: boolean) => void;
+}) {
   return (
     <div
       className={
@@ -234,7 +244,9 @@ function DataLayerContent({setMatbutikkAsideVisible} : {setMatbutikkAsideVisible
       <PopulationLayer />
       <EiendomCheckbox />
       <AdresseLayerCheckbox />
-      <MatbutikkerCheckbox setMatbutikkAsideVisible={setMatbutikkAsideVisible}/>
+      <MatbutikkerCheckbox
+        setMatbutikkAsideVisible={setMatbutikkAsideVisible}
+      />
       <MobilityLayer />
       <TrainLayer />
       <RailwayLayerCheckbox />

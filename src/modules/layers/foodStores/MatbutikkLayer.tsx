@@ -34,7 +34,7 @@ export interface MatbutikkProperties {
 export const MatbutikkerLayer = new VectorLayer({
   className: "MatbutikkerLayer",
   source: new VectorSource({
-    strategy: (extent, resolution) => resolution < 0.001 ? [extent] : [],
+    strategy: (extent, resolution) => (resolution < 0.001 ? [extent] : []),
     loader: function (extent, resolution, projection) {
       loadMatbutikkDataLayer(this, extent, resolution, projection);
     },

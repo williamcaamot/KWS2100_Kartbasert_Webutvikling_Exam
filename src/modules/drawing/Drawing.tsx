@@ -152,7 +152,10 @@ export default function Drawing() {
         {drawingTypes.map((type) => {
           return (
             <>
-              <li className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600" key={type.name}>
+              <li
+                className="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600"
+                key={type.name}
+              >
                 <div
                   className="flex items-center ps-3"
                   onClick={() => setDrawingType(type.type)}
