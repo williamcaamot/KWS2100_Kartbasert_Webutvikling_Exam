@@ -82,7 +82,7 @@ export default function Sidebar({
     window.location.reload();
   }
 
-  const menuItems = [
+  const topMenuItems = [
     {
       id: "search",
       handleOnClick: () => handleContentChange("search"),
@@ -106,25 +106,48 @@ export default function Sidebar({
       handleOnClick: () => handleContentChange("drawingContent"),
       icon: <DrawIcon />,
       text: "Tegning",
-    },
+    }
+  ];
+  const bottomMenuItems = [
+      {
+        id: "reset",
+        handleOnClick: () => handleReset(),
+        icon: <ResetIcon />,
+        text: "Reset",
+      },
     {
       id: "settingsContent",
       handleOnClick: () => handleContentChange("settingsContent"),
       icon: <SettingsIcon />,
       text: "Innstillinger",
-    },
-    {
-      id: "reset",
-      handleOnClick: () => handleReset(),
-      icon: <ResetIcon />,
-      text: "Reset",
-    },
+    }
   ];
+
+
+
+
 
   return (
     <>
       <div className="dark:bg-slate-900 h-full w-[80px] fixed top-0 z-30 flex flex-col items-center bg-white border-r dark:border-r-slate-950">
-        {menuItems.map((menuItem) => {
+        {topMenuItems.map((menuItem) => {
+          return (
+            <>
+              <div
+                className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 dark:hover:bg-slate-700 dark:hover:text-white dark:text-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === menuItem.id && "bg-gray-200 dark:bg-slate-800 shadow-inner text-black !dark:text-white "}`}
+                onClick={menuItem.handleOnClick}
+                key={menuItem.id}
+              >
+                <div className={"w-full flex justify-center"}>
+                  {menuItem.icon}
+                </div>
+                <h2 className={"text-xs"}>{menuItem.text}</h2>
+              </div>
+            </>
+          );
+        })}
+        <div className="flex w-full h-full"></div>
+        {bottomMenuItems.map((menuItem) => {
           return (
             <>
               <div
