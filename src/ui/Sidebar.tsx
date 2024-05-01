@@ -106,26 +106,22 @@ export default function Sidebar({
       handleOnClick: () => handleContentChange("drawingContent"),
       icon: <DrawIcon />,
       text: "Tegning",
-    }
+    },
   ];
   const bottomMenuItems = [
-      {
-        id: "reset",
-        handleOnClick: () => handleReset(),
-        icon: <ResetIcon />,
-        text: "Reset",
-      },
+    {
+      id: "reset",
+      handleOnClick: () => handleReset(),
+      icon: <ResetIcon />,
+      text: "Reset",
+    },
     {
       id: "settingsContent",
       handleOnClick: () => handleContentChange("settingsContent"),
       icon: <SettingsIcon />,
       text: "Innstillinger",
-    }
+    },
   ];
-
-
-
-
 
   return (
     <>
