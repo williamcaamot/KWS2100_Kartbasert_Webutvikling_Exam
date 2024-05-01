@@ -31,14 +31,15 @@ This application is designed to explore neighbourhoods and local offerings. It c
 ### B:
 
 - [x] You can display both polygon and point geometries from at least 4 data sources
-- [x] Your code is structured to make it easy to find the code corresponding to each data source and in order to make it easy to add more features
+- [x] Your code is structured to make it easy to find the code corresponding to each data source and in order to make it easy to add more features 
+ - **COMMENT:** We have done our best with the time available to create a clean and structured project though consistancy, good naming and clean functions. 
 - [x] You can click on a feature to display an Overlay with properties of the features
 - [x] You display an Overview map
 
 ### A:
 
 - [x] Display moving data on a map using a GraphQL data source. You can use Entur's GraphQL vehicle data (not protobuf) or find a GraphQL websocket dataset on your own
-  - **COMMENT:** Trains(tog) are live data though a GraphQL data source. Scooters (mobility) are also from GraphQL data suorce, but they are not live.
+  - **COMMENT:** Trains(tog) are live data though a GraphQL subscription data source. Scooters (mobility) are also from GraphQL data source, but they are not live.
 - [x] Display a Clustered vector data source with OpenLayers. The style of a cluster of features should reflect the size of the cluster. Display a single-feature cluster with a separate style using icons that vary based on a property of the feature. NOTE: The usefulness and design ofyour styles will affect your grade
 - - **COMMENT:** Adresser is displayed as a clustered feature. Single features in kommuner of Asker, Oslo and Bærum have different styling as per the requirement.
 - [x] Deploy your own GIS API to a hosted service and display a huge dataset from a PostGlS database to a map, limited to the extent displayed to the user. You can use Express on https://heroku.com or pick your own backend technology for the server (you get free credits for Heroku with GitHub Student Pack). You must check in the code for the server to the repository
@@ -64,9 +65,9 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - [x] Darkmode & lightmode (from system settings)
   - [x] Possible to toggle dark/light mode from settings too
 - [x] Shift+create selection on map => zoom to that selection
-- [x] Mobile friendly design
+- [x] Mobile- and user-friendly design
 - [x] All Vectorlayers and backgroundlayers have pre-loading set to infinity for a smooth experience.
-- [x] Stadia-maps are activated with a API-key.
+- [x] Stadia-maps are activated with a API-key
 
 ### Data sources
 
@@ -99,5 +100,5 @@ This application is designed to explore neighbourhoods and local offerings. It c
 ## Known bugs:
 
 - When selecting address layer, then eiendom layer, only overlay information on eiendom layer works.
-- Due to low intervalls from Entur, the trains with an updated location update every 5-10 seconds. Easier to see if zoomed out a bit, than you can see the trains that receive updates, move.
+- Due to low intervalls from Entur, the trains with an updated location update every 5-10 seconds. Easier to see if zoomed out a bit, than you can see the trains that receive updates, move .
 - Saving circles to localstorage doesn't work due to the geometric object type.
