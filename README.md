@@ -76,18 +76,27 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - [x] Overview map with controls in settings https://openlayers.org/en/latest/examples/overviewmap.html
 - [x] Settings for zoom slider, scale line
 
-### Data features with sources:
+### Data sources
 
-- Adresse søk via Kartverket API (https://ws.geonorge.no/adresser/v1/)
-- Adresser with clustering (https://kartkatalog.geonorge.no/metadata/matrikkelen-adresse/f7df7a18-b30f-4745-bd64-d0863812350c?search=adresser)
+- Adresser (https://kartkatalog.geonorge.no/metadata/matrikkelen-adresse/f7df7a18-b30f-4745-bd64-d0863812350c?search=adresser)
 - Eiendommer / teig (https://kartkatalog.geonorge.no/metadata/matrikkelen-eiendomskart-teig/74340c24-1c8a-4454-b813-bfe498e80f16?search=eiendommer)
 - Forsvaret støy (https://kartkatalog.geonorge.no/metadata/stoeysoner-for-tunge-vaapen-i-forsvarets-skyte--og-vingsfelt/f59e922b-a2b1-4f1a-a13e-efe72bfe7378)
 - Matbutikker (Inserted data from API into postgis database: https://kassal.app/api)
+- Kommuner: https://www.eriksmistad.no/norges-fylker-og-kommuner-i-geojson-format/
+- Adresse søk via Kartverket API (https://ws.geonorge.no/adresser/v1/)
 
 ### Background layers with sources:
 
-- LIST ALL BACKGROUND LAYERS WITH SOURCES HERE
+- Open Street Map: https://www.openstreetmap.org/#map=5/65.401/17.864
+- Stadia Map light: https://stadiamaps.com/
+- Stadia Map Dark: https://stadiamaps.com/
+- Kartverket: https://opencache.statkart.no/gatekeeper/gk/gk.open_wmts?request=GetCapabilities&service=WMS
+- Flyfoto: https://opencache.statkart.no/gatekeeper/gk/gk.open_nib_web_mercator_wmts_v2?SERVICE=WMTS&REQUEST=GetCapabilities
+- Satellite/global flyfoto/XYZ map: https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x} 
+- Arctic: https://geoportal.arctic-sdi.org/
+- MapTiler Streets: https://api.maptiler.com/tiles/v3/{z}/{x}/{y}.pbf?key=TnrB96NpsTO149dXrCgI
+- OGCVectorTile: https://maps.gnosis.earth/ogcapi/collections/NaturalEarth:cultural:ne_10m_admin_0_countries/tiles/WebMercatorQuad
 
 ## Other information
 
-- Since everyone on the group already was familiar with Tailwind CSS and prefer this over normal CSS we decided to use this because we work faster with it.
+- Since everyone on the group already was familiar with Tailwind CSS we used this because we think it improves our development speed.
