@@ -7,17 +7,17 @@ const Settings = () => {
   const { settings, setSettings } = useContext(MapContext);
   const [isDarkMode, setIsDarkMode] = useState(localStorage.theme === "dark");
 
-  function switchToLightMode() {
-    localStorage.theme = "light";
+  const switchToLightMode = () => {
+    localStorage.setItem("theme", "light");
     document.documentElement.classList.remove("dark");
     setIsDarkMode(false);
-  }
+  };
 
-  function switchToDarkMode() {
-    localStorage.theme = "dark";
+  const switchToDarkMode = () => {
+    localStorage.setItem("theme", "dark");
     document.documentElement.classList.add("dark");
     setIsDarkMode(true);
-  }
+  };
 
   const toggleTheme = () => {
     if (isDarkMode) {
