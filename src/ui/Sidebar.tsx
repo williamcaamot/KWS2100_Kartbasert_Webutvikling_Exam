@@ -18,7 +18,7 @@ import ResetIcon from "./icons/ResetIcon";
 import { EiendomCheckbox } from "../modules/layers/eiendommer/EiendomLayerCheckbox";
 import Drawing from "../modules/drawing/Drawing";
 import { KommuneLayerCheckbox } from "../modules/layers/kommuner/KommuneLayerCheckbox";
-import { JernbaneLinjerLayerCheckbox } from "../modules/layers/jernbanelinjer/jernbaneLinjerCheckbox";
+import { RailwayLayerCheckbox } from "../modules/layers/railwayLines/RailwayCheckbox";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -236,7 +236,7 @@ function DataLayerContent() {
       <MatbutikkerCheckbox />
       <MobilityLayer />
       <TrainLayer />
-      <JernbaneLinjerLayerCheckbox />
+      <RailwayLayerCheckbox />
       <KommuneLayerCheckbox />
     </div>
   );
