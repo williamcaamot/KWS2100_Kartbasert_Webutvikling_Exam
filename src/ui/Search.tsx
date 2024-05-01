@@ -85,17 +85,16 @@ export default function Search() {
             results.map((item: any) => {
               return (
                 <div
-                  className="w-full p-3 flex items-center hover:bg-gray-200 rounded-lg cursor-pointer transition-colors duration-150 ease-in-out"
+                  className="w-full p-3 flex items-center hover:bg-teal-600 rounded-lg cursor-pointer transition-colors duration-150 ease-in-out"
                   onClick={() => {
                     handleFocusSearchResult(item);
                   }}
                   key={item.id}
                 >
-                  <div className="mr-2">
-                    <MapResultIcon size={20} color="#4B5563" />{" "}
-                    {/* Replace LocationIcon with your actual icon component */}
+                  <div className="mr-2 text-zinc-400">
+                    <MapResultIcon size={20} />
                   </div>
-                  <p className="m-0 text-gray-800 font-medium">
+                  <p className="m-0 font-medium dark:text-gray-50">
                     {item.adressetekst} {item.postnummer} {item.poststed}
                   </p>
                 </div>
