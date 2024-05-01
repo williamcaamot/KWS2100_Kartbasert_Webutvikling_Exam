@@ -20,7 +20,7 @@ import Drawing from "../modules/drawing/Drawing";
 import { KommuneLayerCheckbox } from "../modules/layers/kommuner/KommuneLayerCheckbox";
 import { RailwayLayerCheckbox } from "../modules/layers/railwayLines/RailwayCheckbox";
 
-export default function Sidebar() {
+export default function Sidebar({setMatbutikkAsideVisible} : {setMatbutikkAsideVisible: (value: boolean) => void}) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeContent, setActiveContent] = useState(undefined);
 
@@ -126,6 +126,7 @@ export default function Sidebar() {
               <div
                 className={`cursor-pointer pb-2 pt-2 w-full flex flex-wrap justify-center hover:bg-gray-200 dark:hover:bg-slate-700 dark:hover:text-white dark:text-gray-200 text-gray-700 hover:text-black transition duration-300 ease-in-out ${activeContent === menuItem.id && "bg-gray-200 dark:bg-slate-800 shadow-inner text-black !dark:text-white "}`}
                 onClick={menuItem.handleOnClick}
+                key={menuItem.id}
               >
                 <div className={"w-full flex justify-center"}>
                   {menuItem.icon}
@@ -161,7 +162,7 @@ export default function Sidebar() {
               display: activeContent === "dataLayers" ? "block" : "none",
             }}
           >
-            <DataLayerContent />
+            <DataLayerContent setMatbutikkAsideVisible={setMatbutikkAsideVisible}/>
           </div>
           <div
             style={{
@@ -220,7 +221,7 @@ function LayerContent() {
   );
 }
 
-function DataLayerContent() {
+function DataLayerContent({setMatbutikkAsideVisible} : {setMatbutikkAsideVisible: (value: boolean) => void;}) {
   return (
     <div
       className={
@@ -233,7 +234,7 @@ function DataLayerContent() {
       <PopulationLayer />
       <EiendomCheckbox />
       <AdresseLayerCheckbox />
-      <MatbutikkerCheckbox />
+      <MatbutikkerCheckbox setMatbutikkAsideVisible={setMatbutikkAsideVisible}/>
       <MobilityLayer />
       <TrainLayer />
       <RailwayLayerCheckbox />

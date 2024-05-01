@@ -89,6 +89,7 @@ export default function Search() {
                   onClick={() => {
                     handleFocusSearchResult(item);
                   }}
+                  key={item.id}
                 >
                   <div className="mr-2">
                     <MapResultIcon size={20} color="#4B5563" />{" "}
