@@ -50,6 +50,8 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - [x] Interaction between data in a sidebar and the view on the map: Show a sidebar with a list of a type of feature displayed on the map, filtered to the visible features. When clicking on a feature on the sidebar, the map should zoom to feature. Since there's only one feature visible, the sidebar can be hidden - but it should be easy to zoom back to the previous view. To "go back", store in sessionStorage the view center and zoom before zooming to a feature.
   - **COMMENT:** Matbutikker has a sidebar with the matbutikker that is in the extent.
 
+- We onclick overlays for the following features: Mobility(Scooters), trains, adresses (only for single features, clicking cluster zooms to it.) and eiendommer.
+
 ## Extra features
 
 - [x] Search for address and click on address to go to it
@@ -92,7 +94,7 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - Stadia Map Dark: https://stadiamaps.com/
 - Kartverket: https://opencache.statkart.no/gatekeeper/gk/gk.open_wmts?request=GetCapabilities&service=WMS
 - Flyfoto: https://opencache.statkart.no/gatekeeper/gk/gk.open_nib_web_mercator_wmts_v2?SERVICE=WMTS&REQUEST=GetCapabilities
-- Satellite/global flyfoto/XYZ map: https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x} 
+- Satellite/global flyfoto/XYZ map: https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}
 - Arctic: https://geoportal.arctic-sdi.org/
 - MapTiler Streets: https://api.maptiler.com/tiles/v3/{z}/{x}/{y}.pbf?key=TnrB96NpsTO149dXrCgI
 - OGCVectorTile: https://maps.gnosis.earth/ogcapi/collections/NaturalEarth:cultural:ne_10m_admin_0_countries/tiles/WebMercatorQuad
