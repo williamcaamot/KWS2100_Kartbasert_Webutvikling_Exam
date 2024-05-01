@@ -60,11 +60,11 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - [x] Layer selection is saved in localstorage on refresh.
 - [x] Refresh button to reset selected layers
 - [x] Darkmode & lightmode (from system settings)
+  - [x] Possible to toggle dark/light mode from settings too
 - [x] Shift+create selection on map => zoom to that selection
 
 ## To-do (try have high priority at top of list)
 
-- [ ] Fix bug for circles not saving to localstorage
 - [x] Add color selection for drawing
 - [ ] Add interaction (onclick) on the map for different features
 - - [ ] Generic overlay component to display information when clicking
@@ -76,6 +76,7 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - [x] Loading icon for between API fetch and result is applied to map (loading spinner)
 - [x] Add custom zoom component
 - [ ] Style improvmenet for mobility & train
+  - [x] Partially styled
 - [x] Overview map with controls in settings https://openlayers.org/en/latest/examples/overviewmap.html
 - [x] Settings for zoom slider, scale line
 
@@ -87,6 +88,7 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - Matbutikker (Inserted data from API into postgis database: https://kassal.app/api)
 - Kommuner: https://www.eriksmistad.no/norges-fylker-og-kommuner-i-geojson-format/
 - Adresse søk via Kartverket API (https://ws.geonorge.no/adresser/v1/)
+- Populasjon: https://kart.ssb.no/
 
 ### Background layers with sources:
 

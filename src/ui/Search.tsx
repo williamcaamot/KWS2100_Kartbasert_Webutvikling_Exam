@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import MapResultIcon from "./icons/MapResultIcon";
 import { map, MapContext } from "../modules/map/mapContext";
+import { Point } from "ol/geom";
+import { Feature } from "ol";
+import { Circle, Fill, Stroke, Style, Text } from "ol/style";
 
 export default function Search() {
   const { map } = useContext(MapContext);
@@ -34,6 +37,36 @@ export default function Search() {
       center: [item.representasjonspunkt.lon, item.representasjonspunkt.lat],
       zoom: 18,
     });
+
+    // Create a point geometry at your location
+    const point = new Point([
+      item.representasjonspunkt.lon,
+      item.representasjonspunkt.lat,
+    ]);
+
+    // Create a feature with the point geometry
+    const feature = new Feature(point);
+
+    // Create a style for the feature
+    const style = new Style({
+      image: new Circle({
+        radius: 14,
+        fill: new Fill({ color: "rgba(0, 0, 230, 0.7)" }),
+        stroke: new Stroke({
+          color: "white",
+          width: 4,
+        }),
+      }),
+      text: new Text({
+        text: item.adressetekst,
+        offsetY: -30,
+        fill: new Fill({ color: "black" }),
+        stroke: new Stroke({ color: "white", width: 5 }),
+      }),
+    });
+
+    // Set the style of the feature
+    feature.setStyle(style);
   }
 
   //Debounce functionality
