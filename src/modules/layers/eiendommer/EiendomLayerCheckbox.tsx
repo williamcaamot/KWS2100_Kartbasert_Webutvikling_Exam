@@ -33,6 +33,7 @@ export function EiendomCheckbox() {
     if (featuresAtCoordinate?.getProperties().matrikkelenhetid) {
       popupElement.innerHTML = `
           <span>
+          <div class="w-full flex justify-center pb-2 underline"><h3 class="font-bold">Eiendom/Teig informasjon</h3></div>
           <ul>
             <li><span class="font-bold">MatrikkelenhetID:</span> ${featuresAtCoordinate?.getProperties().matrikkelenhetid}</li>
             <li><span class="font-bold">Kommunenummer:</span> ${featuresAtCoordinate?.getProperties().matrikkel_kommunenummer}</li>
@@ -64,15 +65,16 @@ export function EiendomCheckbox() {
     popupElement.style.display = "none";
   });
 
-  useLayer(EiendomLayer, checked);
-
   // Effect for adding and removing onclick
+
   useEffect(() => {
     if (checked) {
       map?.on("click", handleClick);
     }
     return () => map?.un("click", handleClick);
   }, [checked]);
+
+  useLayer(EiendomLayer, checked);
 
   return (
     <div className={"flex w-full justify-around p-1"}>
