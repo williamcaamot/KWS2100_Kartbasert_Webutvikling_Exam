@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import MapResultIcon from "./icons/MapResultIcon";
-import { map, MapContext } from "../modules/map/mapContext";
+import { MapContext } from "../modules/map/mapContext";
 import { Point } from "ol/geom";
-import { Feature } from "ol";
+import { Feature, Map } from "ol";
 import { Circle, Fill, Stroke, Style, Text } from "ol/style";
+import VectorSource from "ol/source/Vector";
+import VectorLayer from "ol/layer/Vector";
+import { fromLonLat } from "ol/proj";
 
 export default function Search() {
   const { map } = useContext(MapContext);
@@ -31,19 +34,24 @@ export default function Search() {
     } catch (e) {}
   }
 
-  function handleFocusSearchResult(item: any) {
-    //console.log(item);
+  let lastLayer: VectorLayer<VectorSource<Feature<Point>>> | null = null;
+
+  function handleFocusSearchResult(item: any, map: Map) {
+    if (lastLayer !== null) {
+      map.removeLayer(lastLayer);
+    }
+
+    // Animate the map view to the center of the feature
     map.getView().animate({
       center: [item.representasjonspunkt.lon, item.representasjonspunkt.lat],
       zoom: 18,
     });
 
-    // Create a point geometry at your location
+    // Create a point geometry with the coordinates of the item
     const point = new Point([
       item.representasjonspunkt.lon,
       item.representasjonspunkt.lat,
     ]);
-
     // Create a feature with the point geometry
     const feature = new Feature(point);
 
@@ -67,6 +75,22 @@ export default function Search() {
 
     // Set the style of the feature
     feature.setStyle(style);
+
+    // Create a vector source and add the feature to it
+    const source = new VectorSource({
+      features: [feature],
+    });
+
+    // Create a vector layer with the vector source
+    const layer = new VectorLayer({
+      source: source,
+    });
+
+    // Add the layer to the map
+    map.addLayer(layer);
+
+    // Update the last layer
+    lastLayer = layer;
   }
 
   //Debounce functionality
@@ -120,7 +144,7 @@ export default function Search() {
                 <div
                   className="w-full p-3 flex items-center hover:bg-teal-600 rounded-lg cursor-pointer transition-colors duration-150 ease-in-out"
                   onClick={() => {
-                    handleFocusSearchResult(item);
+                    handleFocusSearchResult(item, map);
                   }}
                   key={item.id}
                 >
