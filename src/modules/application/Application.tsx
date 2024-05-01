@@ -23,10 +23,8 @@ import TileSource from "ol/source/Tile";
 import { OverviewMap, ScaleLine } from "ol/control";
 import MatbutikkAside from "../layers/foodStores/MatbutikkAside";
 
-// TODO: Fikse at kart lastes inn umiddelbart slik man slipper å "dra" på kartet litt før det laster
 export function Application() {
   useGeographic();
-  //Heihei
   const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
   const mapInstance = useRef<Map | null>(null);
   const [settings, setSettings] = useLocalStorageState("settings", {
@@ -38,28 +36,20 @@ export function Application() {
     },
   });
 
-  // UseEffect som sjekker om brukeren har satt dark mode som preferanse og om systemet er satt til dark mode
-  // TODO: Fikse at den huker av riktig knapp i settings ut ifra hvilken theme som er satt i localstorage når man laster inn siden
   useEffect(() => {
-    // Check if the user has a dark mode preference and it's set to dark
     if (
       window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches
     ) {
-      // Add the 'dark' class to the root element
       document.documentElement.classList.add("dark");
     } else {
-      // Remove the 'dark' class from the root element
       document.documentElement.classList.remove("dark");
     }
 
-    // Listen for changes to the user's dark mode preference
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", (e) => {
         const newColorScheme = e.matches ? "dark" : "light";
-
-        // Add or remove the 'dark' class based on the new color scheme
         if (newColorScheme === "dark") {
           document.documentElement.classList.add("dark");
         } else {
@@ -105,11 +95,8 @@ export function Application() {
   );
 
   const predicate = (l: Layer) => vectorLayers.includes(l);
-  const { activeFeatures, setActiveFeatures } = useActiveFeatures(predicate);
 
   useEffect(() => {
-    // Removing all controls and adding new was the only way I could get to work to change the source of the overview map... -W
-    // Probably not ideal for performance, will have to try to fix this later if enough time
     const controls = map.getControls().getArray();
     controls.slice().forEach((control) => {
       map.removeControl(control);
@@ -130,7 +117,7 @@ export function Application() {
     }
     if (settings.showZoomSlider) {
       const zoomslider = new ZoomSlider();
-      map.addControl(zoomslider); // These also have to be applied every time
+      map.addControl(zoomslider);
     }
     if (overviewMapControl instanceof OverviewMap && settings.showMiniMap) {
       map?.addControl(overviewMapControl);
