@@ -54,6 +54,9 @@ export default function Sidebar({
       fillColor: "#f7f7e9",
     },
   });
+  const [, setRailways] = useLocalStorageState("railway-layer-checked", {
+    defaultValue: false,
+  });
 
   function handleContentChange(content: any) {
     if (content === activeContent) {
@@ -79,6 +82,7 @@ export default function Sidebar({
       strokeColor: "#8c8b8b",
       fillColor: "#f7f7e9",
     });
+    setRailways(false);
     window.location.reload();
   }
 
