@@ -28,7 +28,7 @@ export default function Sidebar({
   const [isOpen, setIsOpen] = useState(false);
   const [activeContent, setActiveContent] = useState(undefined);
 
-  const {handleReset} = useReset();
+  const { handleReset } = useReset();
 
   function handleContentChange(content: any) {
     if (content === activeContent) {
