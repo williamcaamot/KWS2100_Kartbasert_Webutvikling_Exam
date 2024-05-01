@@ -24,25 +24,25 @@ export interface TrainProperties {
 }
 
 export const trainStyle = (feature: FeatureLike) => {
-    const train = feature.getProperties() as TrainProperties;
-    return [
-      new Style({
-        image: new Circle({
-          radius: 14, // adjust this as needed
-          fill: new Fill({ color: 'grey' }), // this is the background color
-        }),
+  const train = feature.getProperties() as TrainProperties;
+  return [
+    new Style({
+      image: new Circle({
+        radius: 14, // adjust this as needed
+        fill: new Fill({ color: "grey" }), // this is the background color
       }),
-      new Style({
-        image: new Icon({
-          src: "/kws2100-exam-williamcaamot/img/vecteezy_transport-train-icon-sign-design_10155649.png",
-          scale: 0.004,
-          anchor: [0.5, 0.5],
-          anchorXUnits: "fraction",
-          anchorYUnits: "fraction",
-        }),
+    }),
+    new Style({
+      image: new Icon({
+        src: "/kws2100-exam-williamcaamot/img/trainIcon.png",
+        scale: 0.004,
+        anchor: [0.5, 0.5],
+        anchorXUnits: "fraction",
+        anchorYUnits: "fraction",
       }),
-    ];
-  };
+    }),
+  ];
+};
 
 export const activeTrainStyle = (feature: FeatureLike) => {
   const train = feature.getProperties() as TrainProperties;
