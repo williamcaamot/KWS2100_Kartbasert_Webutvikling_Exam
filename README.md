@@ -48,6 +48,7 @@ This application is designed to explore neighbourhoods and local offerings. It c
 - [x] Let the user draw and modify features with at least two types of geometries, including circles with a radius in meters. Store the features in localStorage so that when the user refreshes, the features remain on the map. The user should be able to modify the geometry of the feature and properties that should be reflected in the style of the feature
   - **COMMENT:** Saving circles does not work. "Lagre" button must be pressed to persist the features in localstorage.
 - [x] Interaction between data in a sidebar and the view on the map: Show a sidebar with a list of a type of feature displayed on the map, filtered to the visible features. When clicking on a feature on the sidebar, the map should zoom to feature. Since there's only one feature visible, the sidebar can be hidden - but it should be easy to zoom back to the previous view. To "go back", store in sessionStorage the view center and zoom before zooming to a feature.
+
   - **COMMENT:** Matbutikker has a sidebar with the matbutikker that is in the extent.
 
 - We onclick overlays for the following features: Mobility(Scooters), trains, adresses (only for single features, clicking cluster zooms to it.) and eiendommer.
